@@ -1,0 +1,96 @@
+name: Crear APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'android/**'
+      - 'capacitor/**'
+      - 'icons/**'
+      - 'offline.html'
+      - '.github/workflows/apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Preparar la app
+        run: |
+          set -e
+          mkdir -p app/www app/assets
+          cp index.html manifest.webmanifest sw.js eventos.json offline.html app/www/
+          cp -r vendor icons app/www/
+          echo "window.DIA_CONFIG={owner:'${{ github.repository_owner }}',repo:'${{ github.event.repository.name }}',branch:'${{ github.ref_name }}'};" > app/www/config.js
+          cp capacitor/package.json app/
+          OWNER='${{ github.repository_owner }}'
+          SITE="https://${OWNER,,}.github.io/${{ github.event.repository.name }}/"
+          echo "La app cargará desde $SITE"
+          SITE="$SITE" python3 -c "import json,os;c=json.load(open('capacitor/capacitor.config.json'));c.setdefault('server',{});c['server']['url']=os.environ['SITE'];c['server']['errorPath']='offline.html';json.dump(c,open('app/capacitor.config.json','w'),ensure_ascii=False,indent=2)"
+          cat app/capacitor.config.json
+          cp icons/icon-1024.png app/assets/icon-only.png
+          cp icons/icon-fg-1024.png app/assets/icon-foreground.png
+          cp icons/icon-bg-1024.png app/assets/icon-background.png
+          cd app
+          npm install --no-audit --no-fund
+          npx cap add android
+          npx cap sync android
+
+      - name: Icono de la app
+        working-directory: app
+        continue-on-error: true
+        run: npx @capacitor/assets generate --android --iconBackgroundColor '#0A0A0B' --iconBackgroundColorDark '#0A0A0B' --splashBackgroundColor '#0A0A0B' --splashBackgroundColorDark '#0A0A0B'
+
+      - name: Widget y permisos
+        run: |
+          set -e
+          D=app/android/app/src/main
+          mkdir -p $D/java/es/diaadia/app $D/res/layout $D/res/xml $D/res/drawable
+          cp android/java/*.java $D/java/es/diaadia/app/
+          cp android/res/layout/*.xml $D/res/layout/
+          cp android/res/xml/*.xml $D/res/xml/
+          cp android/res/drawable/*.xml $D/res/drawable/
+          python3 android/patch_manifest.py $D/AndroidManifest.xml
+          mkdir -p ~/.android
+          cp android/debug.keystore ~/.android/debug.keystore
+
+      - name: Compilar
+        working-directory: app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+          cp app/build/outputs/apk/debug/app-debug.apk ../../dia-a-dia.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dia-a-dia-apk
+          path: dia-a-dia.apk
+
+      - name: Publicar para descargar
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk
+          name: Día a día para Android
+          body: Abre esta página desde el móvil, toca dia-a-dia.apk y instálala.
+          files: dia-a-dia.apk
+          make_latest: true
