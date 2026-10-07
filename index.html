@@ -376,6 +376,11 @@ a.mini{display:inline-flex;align-items:center;text-decoration:none;color:var(--i
 .pin.pend.sel .b{stroke:var(--ink)}
 .pick{display:inline-block;font-size:11.5px;font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:8px;padding:1px 7px;margin-right:6px;vertical-align:1px}
 .pickr{margin:6px 0 0;font-size:13.5px;color:var(--accent)}
+.pv{transition:background .2s,color .2s}
+html.privado .pv{background:color-mix(in srgb,var(--ink) 13%,transparent);border-radius:.35em;cursor:pointer;-webkit-user-select:none;user-select:none}
+html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none!important}
+.eye{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);display:grid;place-items:center;padding:0;color:var(--muted)}
+.eye[aria-pressed="true"]{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media (min-width:520px){.cell{height:70px}}
 </style>
@@ -435,13 +440,13 @@ a.mini{display:inline-flex;align-items:center;text-decoration:none;color:var(--i
 
   <section id="v-cuentas" hidden>
     <button class="back" data-act="mas-back" id="cuentas-back">‹ Más</button>
-    <header class="head" id="cuentas-head"><h1 class="title">Cuentas</h1><div class="navs"><button class="pill" data-act="add-acc">Añadir</button></div></header>
+    <header class="head" id="cuentas-head"><h1 class="title">Cuentas</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-acc">Añadir</button></div></header>
     <div id="cuentas-body"></div>
   </section>
 
   <section id="v-sum" hidden>
     <header class="head two">
-      <div class="hrow"><span class="hyr" id="sum-year"></span><div class="navs">
+      <div class="hrow"><span class="hyr" id="sum-year"></span><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button>
         <button class="iconbtn" data-act="prev" aria-label="Mes anterior"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
         <button class="pill" data-act="today">Hoy</button>
         <button class="iconbtn" data-act="next" aria-label="Mes siguiente"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
@@ -569,6 +574,7 @@ const fmtRating=v=>(Math.round(v*10)/10).toLocaleString('es-ES');
 const pct=x=>(x>0?'+':'')+(x*100).toLocaleString('es-ES',{maximumFractionDigits:1})+' %';
 const fmtKm=n=>Math.round(n).toLocaleString('es-ES')+' km';
 function haversine(a,b){const R=6371,r=x=>x*Math.PI/180;const dLat=r(b.lat-a.lat),dLon=r(b.lon-a.lon);const h=Math.sin(dLat/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+const PV=x=>`<span class="pv">${x}</span>`;
 const hasGeo=e=>e&&typeof e.lat==='number'&&typeof e.lon==='number';
 const URLS=new Map();
 const blob=id=>URLS.get(id)||'';
@@ -1044,7 +1050,7 @@ function renderCal(){
     if(o){
       const ks=['cumple','evento','tarea','caducidad','lugar','ocio','traspaso','nota'].filter(k=>o.kinds.has(k)).slice(0,4);
       if(ks.length)inner+=`<span class="dots">${ks.map(k=>`<i class="dot" style="--c:var(--${k})"></i>`).join('')}</span>`;
-      if(Math.abs(o.net)>=0.5)inner+=`<span class="money ${o.net<0?'neg':'pos'}">${o.net<0?'−':'+'}${shortNum(o.net)}</span>`;
+      if(Math.abs(o.net)>=0.5)inner+=`<span class="money ${o.net<0?'neg':'pos pv'}">${o.net<0?'−':'+'}${shortNum(o.net)}</span>`;
       inner+=o.ribs.map(r=>`<i class="rib l${r.lane}${r.s?' s':''}${r.e?' e':''}"></i>`).join('');
     }
     if(S.calMode==='tiempo'){
@@ -1078,9 +1084,9 @@ function itemHTML(o,overdue){
   else if(k==='lugar'&&e.photos&&e.photos.length)lead=`<span class="ic"><img src="${blob(e.photos[0])}" alt="" loading="lazy"></span>`;
   else lead=`<span class="ic" style="--c:var(--${k})">${IC[k]}</span>`;
   if(k==='gasto')right=`<span class="amt neg">−${esc(fmt(e.amount))}</span>`;
-  if(k==='ingreso')right=`<span class="amt pos">+${esc(fmt(e.amount))}</span>`;
+  if(k==='ingreso')right=`<span class="amt pos pv">+${esc(fmt(e.amount))}</span>`;
   if(k==='lugar'&&e.rating)right=`<span class="smini">★ ${fmtRating(e.rating)}</span>`;
-  if(k==='traspaso')right=`<span class="amt" style="color:var(--muted)">${esc(fmt(e.amount))}</span>`;
+  if(k==='traspaso')right=`<span class="amt pv" style="color:var(--muted)">${esc(fmt(e.amount))}</span>`;
   if(k==='ocio'&&e.rating)right=`<span class="smini">★ ${fmtRating(e.rating)}</span>`;
   const meta=overdue?'Era para el '+shortDate(e.date):metaFor(e);
   return `<li class="item${e.done?' done':''}">${lead}<button class="body" data-edit="${e.id}" data-od="${o.date}"><span class="tx"><span class="t">${esc(e.title)}</span>${meta?`<span class="m">${esc(meta)}</span>`:''}</span>${right}</button>${overdue?`<button class="mini" data-totoday="${e.id}">A hoy</button>`:''}</li>`;
@@ -1098,7 +1104,7 @@ function renderDay(){
   const occ=occurrences(s,s);
   const items=occ.filter(o=>o.e.kind!=='viaje').sort((a,b)=>rank(a.e)-rank(b.e)||String(a.e.time||'').localeCompare(String(b.e.time||''))||(a.e.created||0)-(b.e.created||0));
   let net=0;items.forEach(o=>{if(o.e.kind==='gasto')net-=o.e.amount||0;if(o.e.kind==='ingreso')net+=o.e.amount||0});
-  const dn=$('#day-net');dn.textContent=Math.abs(net)>0.004?signed(net):'';dn.className='daynet '+(net<0?'neg':'pos');
+  const dn=$('#day-net');dn.textContent=Math.abs(net)>0.004?signed(net):'';dn.className='daynet '+(net<0?'neg':'pos pv');
   let h='';
   tripsOn(s).forEach(tr=>{
     const n=daysBetween(tr.date,s)+1,tot=daysBetween(tr.date,tr.end||tr.date)+1;
@@ -1999,8 +2005,8 @@ function nwChart(h){
 }
 function accRight(r){
   if(r.bal==null)return `<span class="amt">—</span>`;
-  if(r.a.atype==='inversion'){const inv=investedOf(r.a,todayStr(),r.fl),g=r.bal-inv;return `<span class="rt"><span class="amt">${fmt(r.bal)}</span><span class="gain ${g<-0.004?'neg':'pos'}">${signed(g)}${inv>0?` (${pct(g/inv)})`:''}</span></span>`}
-  return `<span class="amt ${r.bal<-0.004?'neg':''}">${fmt(r.bal)}</span>`;
+  if(r.a.atype==='inversion'){const inv=investedOf(r.a,todayStr(),r.fl),g=r.bal-inv;return `<span class="rt pv"><span class="amt">${fmt(r.bal)}</span><span class="gain ${g<-0.004?'neg':'pos'}">${signed(g)}${inv>0?` (${pct(g/inv)})`:''}</span></span>`}
+  return `<span class="amt pv ${r.bal<-0.004?'neg':''}">${fmt(r.bal)}</span>`;
 }
 function renderCuentas(){
   const box=$('#cuentas-body');
@@ -2009,13 +2015,13 @@ function renderCuentas(){
   const accs=accounts();
   if(!accs.length){box.innerHTML=`<section class="card"><h2>Empieza por tu cuenta principal</h2><p class="sub">Añade cada cuenta con el saldo que tiene hoy: la del banco, la de ahorro, el efectivo, tus inversiones o lo que debes de la tarjeta. A partir de ahí, cada gasto e ingreso que apuntes en el calendario las irá actualizando.</p><div class="btnrow"><button class="pri" data-act="add-acc">Añadir cuenta</button></div></section>`;return}
   const W=worth(),def=defaultAcc();
-  let h=`<section class="balance"><p class="label">Patrimonio hoy</p><p class="big ${W.total<-0.004?'neg':''}">${fmt(W.total)}</p>`;
-  if(Math.abs(W.endTotal-W.total)>0.5)h+=`<p class="lead">Con lo que tienes apuntado, a final de mes tendrás ${fmt(W.endTotal)}.</p>`;
+  let h=`<section class="balance"><p class="label">Patrimonio hoy</p><p class="big ${W.total<-0.004?'neg':''}">${PV(fmt(W.total))}</p>`;
+  if(Math.abs(W.endTotal-W.total)>0.5)h+=`<p class="lead">Con lo que tienes apuntado, a final de mes tendrás ${PV(fmt(W.endTotal))}.</p>`;
   const parts=[['Dinero',W.money,W.hasMoney],['Inversiones',W.inv,W.hasInv],['Deudas',W.debt,W.hasDebt]].filter(x=>x[2]);
-  if(parts.length>1)h+=`<div class="kv">${parts.map(([l,v])=>`<div class="k"><span>${l}</span><b class="${v<-0.004?'neg':''}">${fmt(v)}</b></div>`).join('')}</div>`;
+  if(parts.length>1)h+=`<div class="kv">${parts.map(([l,v])=>`<div class="k"><span>${l}</span><b class="pv ${v<-0.004?'neg':''}">${fmt(v)}</b></div>`).join('')}</div>`;
   h+='</section>';
   h+=`<section class="card"><h2>Cómo cambia tu patrimonio</h2>`;
-  if(W.hist.length>=2){const d=W.hist[W.hist.length-1].v-W.hist[0].v;h+=`<p class="sub">Desde ${monthName(W.hist[0].m)} de ${W.hist[0].y}: <b class="${d<0?'neg':'pos'}">${signed(d)}</b></p>${nwChart(W.hist)}`}
+  if(W.hist.length>=2){const d=W.hist[W.hist.length-1].v-W.hist[0].v;h+=`<p class="sub">Desde ${monthName(W.hist[0].m)} de ${W.hist[0].y}: <b class="pv ${d<0?'neg':'pos'}">${signed(d)}</b></p>${nwChart(W.hist)}`}
   else h+=`<p class="sub">Cuando pase el primer mes, aquí verás cómo evoluciona mes a mes.</p>`;
   h+='</section>';
   [['Dinero',['corriente','ahorro','efectivo']],['Inversiones',['inversion']],['Deudas',['deuda']]].forEach(([title,types])=>{
@@ -2032,11 +2038,11 @@ function renderCuenta(box,a){
   const fl=an.length?accFlows(a,an[0].date,mEnd>t?mEnd:t,def):[];
   const bal=balAt(a,t,fl),end=balAt(a,mEnd,fl);
   let h=`<button class="back" data-act="acc-back">‹ Todas las cuentas</button><h1 class="title t2">${esc(a.title)}</h1><p class="sub" style="margin-top:8px">${esc(ATYPES[a.atype]||'')}${def&&def.id===a.id?', tu cuenta principal':''}</p>`;
-  h+=`<section class="balance"><p class="label">${a.atype==='inversion'?'Valor actual':a.atype==='deuda'?'Saldo (lo que debes)':'Saldo actual'}</p><p class="big ${bal<-0.004?'neg':''}">${bal==null?'—':fmt(bal)}</p>`;
-  if(end!=null&&bal!=null&&Math.abs(end-bal)>0.5)h+=`<p class="lead">A final de mes, con lo previsto: ${fmt(end)}.</p>`;
+  h+=`<section class="balance"><p class="label">${a.atype==='inversion'?'Valor actual':a.atype==='deuda'?'Saldo (lo que debes)':'Saldo actual'}</p><p class="big ${bal<-0.004?'neg':''}">${bal==null?'—':PV(fmt(bal))}</p>`;
+  if(end!=null&&bal!=null&&Math.abs(end-bal)>0.5)h+=`<p class="lead">A final de mes, con lo previsto: ${PV(fmt(end))}.</p>`;
   if(a.atype==='inversion'&&an.length){
     const inv=investedOf(a,t,fl),g=(bal||0)-inv,lv=an[an.length-1];
-    h+=`<div class="kv"><div class="k"><span>Aportado</span><b>${fmt(inv)}</b></div><div class="k"><span>Ganancia</span><b class="${g<-0.004?'neg':'pos'}">${signed(g)}</b>${inv>0?`<small>${pct(g/inv)}</small>`:''}</div></div><p class="note">El último valor que pusiste fue ${fmt(lv.balance)}, el ${esc(shortDate(lv.date))}. Actualízalo cuando quieras para ver cómo va.</p>`;
+    h+=`<div class="kv"><div class="k"><span>Aportado</span><b class="pv">${fmt(inv)}</b></div><div class="k"><span>Ganancia</span><b class="pv ${g<-0.004?'neg':'pos'}">${signed(g)}</b>${inv>0?`<small class="pv">${pct(g/inv)}</small>`:''}</div></div><p class="note">El último valor que pusiste fue ${PV(fmt(lv.balance))}, el ${esc(shortDate(lv.date))}. Actualízalo cuando quieras para ver cómo va.</p>`;
   }
   h+='</section>';
   h+=`<div class="btnrow"><button class="pri" data-act="acc-edit" data-id="${a.id}" data-focus="1">${a.atype==='inversion'?'Actualizar valor':'Ajustar saldo'}</button><button class="sec" data-act="transfer" data-from="${a.id}">Mover dinero</button><button class="sec" data-act="acc-edit" data-id="${a.id}">Editar</button></div>`;
@@ -2047,8 +2053,8 @@ function renderCuenta(box,a){
   h+=`<section class="card"><h2>Movimientos</h2>`;
   if(!fl.length)h+=`<p class="sub">Los gastos, ingresos y traspasos de esta cuenta que apuntes en el calendario aparecerán aquí.</p>`;
   h+=rows.slice(0,60).map(r=>r.anchor
-    ?`<div class="mv"><span class="ic" style="--c:var(--cuenta)">${IC.cuenta}</span><span class="tx"><span class="t">${r.diff==null?'Saldo inicial':(a.atype==='inversion'?'Valor actualizado':'Saldo ajustado')}</span><span class="m">${esc(shortDate(r.date))}${r.diff!=null&&Math.abs(r.diff)>0.004?', '+esc(signed(r.diff)):''}</span></span><span class="rt"><span class="amt">${fmt(r.bal)}</span></span></div>`
-    :`<button class="mv${r.date>t?' plan':''}" data-go="${r.date}"><span class="ic" style="--c:var(--${r.e.kind})">${IC[r.e.kind]}</span><span class="tx"><span class="t">${esc(r.e.title)}</span><span class="m">${esc(shortDate(r.date))}${r.date>t?', previsto':''}</span></span><span class="rt"><span class="amt ${r.v<0?'neg':'pos'}">${signed(r.v)}</span><span class="m">${fmt(r.bal)}</span></span></button>`).join('');
+    ?`<div class="mv"><span class="ic" style="--c:var(--cuenta)">${IC.cuenta}</span><span class="tx"><span class="t">${r.diff==null?'Saldo inicial':(a.atype==='inversion'?'Valor actualizado':'Saldo ajustado')}</span><span class="m">${esc(shortDate(r.date))}${r.diff!=null&&Math.abs(r.diff)>0.004?', '+PV(esc(signed(r.diff))):''}</span></span><span class="rt"><span class="amt pv">${fmt(r.bal)}</span></span></div>`
+    :`<button class="mv${r.date>t?' plan':''}" data-go="${r.date}"><span class="ic" style="--c:var(--${r.e.kind})">${IC[r.e.kind]}</span><span class="tx"><span class="t">${esc(r.e.title)}</span><span class="m">${esc(shortDate(r.date))}${r.date>t?', previsto':''}</span></span><span class="rt"><span class="amt ${r.v<0?'neg':'pos pv'}">${signed(r.v)}</span><span class="m pv">${fmt(r.bal)}</span></span></button>`).join('');
   h+=`</section><div class="btnrow"><button class="ghost danger" data-act="acc-del" data-id="${a.id}">Borrar esta cuenta</button></div>`;
   box.innerHTML=h;
 }
@@ -2137,17 +2143,17 @@ function renderSum(){
   let h=sumSegHTML();
   const bigVal=future?inP-outP:inR-outR;
   const bigLabel=future?`Previsto para ${mn}`:past?`Balance de ${mn}`:`Llevas en ${mn}`;
-  h+=`<section class="balance"><p class="label">${bigLabel}</p><p class="big ${bigVal<-0.004?'neg':''}">${signed(bigVal)}</p>`;
-  h+=`<div class="pair"><div class="stat"><span class="label">${future?'Ingresos previstos':'Ingresado'}</span><b class="pos">${fmt(future?inP:inR)}</b></div><div class="stat"><span class="label">${future?'Gastos previstos':'Gastado'}</span><b class="neg">${fmt(future?outP:outR)}</b></div></div>`;
+  h+=`<section class="balance"><p class="label">${bigLabel}</p><p class="big ${bigVal<-0.004?'neg':''}">${PV(signed(bigVal))}</p>`;
+  h+=`<div class="pair"><div class="stat"><span class="label">${future?'Ingresos previstos':'Ingresado'}</span><b class="pos pv">${fmt(future?inP:inR)}</b></div><div class="stat"><span class="label">${future?'Gastos previstos':'Gastado'}</span><b class="neg">${fmt(future?outP:outR)}</b></div></div>`;
   if(prevOut>0)h+=`<p class="note">En ${monthName(pm.getMonth())} gastaste ${fmt(prevOut)} en total.</p>`;
   h+='</section>';
-  if(accounts().length){const W=worth();h+=`<section class="card"><h2>Patrimonio</h2><p class="sub">Hoy tienes ${fmt(W.total)}${Math.abs(W.endTotal-W.total)>0.5?` y, con lo previsto, a final de mes tendrás ${fmt(W.endTotal)}`:''}.</p><div class="btnrow sm"><button class="sec" data-act="go-cuentas">Ver cuentas</button></div></section>`}
+  if(accounts().length){const W=worth();h+=`<section class="card"><h2>Patrimonio</h2><p class="sub">Hoy tienes ${PV(fmt(W.total))}${Math.abs(W.endTotal-W.total)>0.5?` y, con lo previsto, a final de mes tendrás ${PV(fmt(W.endTotal))}`:''}.</p><div class="btnrow sm"><button class="sec" data-act="go-cuentas">Ver cuentas</button></div></section>`}
   if(!past&&!future){
     if(planned.length){
       planned.sort((a,b)=>a.date<b.date?-1:1);
       const end=inR+inP-outR-outP;
-      h+=`<section class="card"><h2>Lo que queda de mes</h2><p class="sub">Si todo va como lo tienes apuntado, terminarás ${mn} en <b class="${end<0?'neg':'pos'}">${signed(end)}</b>.</p><div class="ups">`;
-      h+=planned.slice(0,6).map(({e,date})=>`<button class="up" data-go="${date}"><span class="ud">${esc(relDay(date))}</span><span class="ic" style="--c:var(--${e.kind})">${IC[e.kind]}</span><span class="ut">${esc(e.title)}</span><span class="um ${e.kind==='gasto'?'neg':'pos'}">${e.kind==='gasto'?'−':'+'}${fmt(e.amount)}</span></button>`).join('');
+      h+=`<section class="card"><h2>Lo que queda de mes</h2><p class="sub">Si todo va como lo tienes apuntado, terminarás ${mn} en <b class="pv ${end<0?'neg':'pos'}">${signed(end)}</b>.</p><div class="ups">`;
+      h+=planned.slice(0,6).map(({e,date})=>`<button class="up" data-go="${date}"><span class="ud">${esc(relDay(date))}</span><span class="ic" style="--c:var(--${e.kind})">${IC[e.kind]}</span><span class="ut">${esc(e.title)}</span><span class="um ${e.kind==='gasto'?'neg':'pos pv'}">${e.kind==='gasto'?'−':'+'}${fmt(e.amount)}</span></button>`).join('');
       if(planned.length>6)h+=`<p class="note">Y ${planned.length-6} más.</p>`;
       h+='</div></section>';
     }
@@ -2191,7 +2197,7 @@ function renderSum(){
   const G=Array(12).fill(0),I=Array(12).fill(0);
   occurrences(`${y}-01-01`,`${y}-12-31`).forEach(({e,date})=>{const mi=+date.slice(5,7)-1;if(e.kind==='gasto')G[mi]+=e.amount||0;else if(e.kind==='ingreso')I[mi]+=e.amount||0});
   const mx=Math.max(1,...G,...I),sumG=G.reduce((a,b)=>a+b,0),sumI=I.reduce((a,b)=>a+b,0);
-  h+=`<section class="card"><h2>El año ${y}</h2><p class="sub">Ingresos ${fmt(sumI)}, gastos ${fmt(sumG)}. Toca un mes para verlo.</p><div class="year">`;
+  h+=`<section class="card"><h2>El año ${y}</h2><p class="sub">Ingresos ${PV(fmt(sumI))}, gastos ${fmt(sumG)}. Toca un mes para verlo.</p><div class="year">`;
   h+=G.map((g,mi)=>`<button class="ycol${mi===m?' cur':''}" data-month="${mi}" aria-label="${esc(cap(monthName(mi)))}: ingresos ${esc(fmt(I[mi]))}, gastos ${esc(fmt(g))}"><span class="ybars"><i class="yb" style="height:${I[mi]?Math.max(3,I[mi]/mx*92):0}px;background:var(--ingreso)"></i><i class="yb" style="height:${g?Math.max(3,g/mx*92):0}px;background:var(--gasto)"></i></span><span class="ylab">${'EFMAMJJASOND'[mi]}</span></button>`).join('');
   h+=`</div><div class="legend"><span><i style="background:var(--ingreso)"></i>Ingresos</span><span><i style="background:var(--gasto)"></i>Gastos</span></div></section>`;
   h+=doneHTML(periodData(from,to),'Lo que has hecho');
@@ -2356,7 +2362,7 @@ function masHome(){
   const stores=Object.keys(priceIndex()).length;
   const W=accounts().length?worth():null;
   const tiles=[
-    ['cuentas','cuenta','Cuentas',W?fmt(W.total):'Tus cuentas e inversiones'],
+    ['cuentas','cuenta','Cuentas',W?'Patrimonio: '+fmt(W.total):'Tus cuentas e inversiones',1],
     ['recibos','recibo','Recibos',rec.length?`${rec.length} ${rec.length===1?'recibo':'recibos'}, ${fmt(mes)} al mes`:'Suscripciones y pagos fijos'],
     ['coche','coche','Coche',fuels?`${fuels} ${fuels===1?'repostaje':'repostajes'} y gasolineras`:'Repostajes y gasolineras'],
     ['precios','precio','Precios',stores?`${stores} ${stores===1?'tienda':'tiendas'} con precios`:'Escanea tus tickets'],
@@ -2365,7 +2371,7 @@ function masHome(){
     ['ocio','ocio','Ocio',vistos?`${vistos} vistos o leídos`:'Pelis, series y libros'],
     ['maletas','maleta','Maletas',trips.length?`Próximo: ${trips[trips.length-1].title}`:'Listas para tus viajes']
   ];
-  let h=askHTML()+`<div style="height:16px"></div><div class="tiles">${tiles.map(([k,ic,n,sub])=>`<button class="tile" data-mas="${k}"><span class="ic" style="--c:var(--accent)">${IC[ic]}</span><b>${esc(n)}</b><span>${esc(sub)}</span></button>`).join('')}`;
+  let h=askHTML()+`<div style="height:16px"></div><div class="tiles">${tiles.map(([k,ic,n,sub,priv])=>`<button class="tile" data-mas="${k}"><span class="ic" style="--c:var(--accent)">${IC[ic]}</span><b>${esc(n)}</b><span${priv?' class="pv"':''}>${esc(sub)}</span></button>`).join('')}`;
   if(typeof openSettings==='function')h+=`<button class="tile" data-act="settings"><span class="ic" style="--c:var(--accent)">${IC.ajustes}</span><b>Ajustes</b><span>Copias, Gemini, avisos y widget</span></button>`;
   return h+'</div>';
 }
@@ -2854,7 +2860,7 @@ function renderSumRange(){
   $('#sum-year').textContent=isW?'SEMANA':'AÑO';
   let h=sumSegHTML();
   const bal=D.inR+D.inP-D.outR-D.outP;
-  h+=`<section class="balance"><p class="label">${isW?'Balance de la semana':'Balance del año'}</p><p class="big ${bal<-0.004?'neg':''}">${signed(bal)}</p><div class="pair"><div class="stat"><span class="label">Ingresado</span><b class="pos">${fmt(D.inR+D.inP)}</b></div><div class="stat"><span class="label">Gastado</span><b class="neg">${fmt(D.outR+D.outP)}</b></div></div>${R.to>t&&(D.outP||D.inP)?`<p class="note">Incluye lo previsto hasta el ${esc(shortDate(R.to))}.</p>`:''}</section>`;
+  h+=`<section class="balance"><p class="label">${isW?'Balance de la semana':'Balance del año'}</p><p class="big ${bal<-0.004?'neg':''}">${PV(signed(bal))}</p><div class="pair"><div class="stat"><span class="label">Ingresado</span><b class="pos pv">${fmt(D.inR+D.inP)}</b></div><div class="stat"><span class="label">Gastado</span><b class="neg">${fmt(D.outR+D.outP)}</b></div></div>${R.to>t&&(D.outP||D.inP)?`<p class="note">Incluye lo previsto hasta el ${esc(shortDate(R.to))}.</p>`:''}</section>`;
   if(isW){
     const days=[];for(let i=0;i<7;i++){const s2=ymd(addDays(parse(R.from),i));let g=0;occurrences(s2,s2).forEach(o=>{if(o.e.kind==='gasto')g+=o.e.amount||0});days.push({s:s2,g})}
     const mx=Math.max(1,...days.map(x=>x.g));
@@ -2942,6 +2948,7 @@ function extrasClick(el,d){
     case 'm-savebase':{const tr=S.entries.get(S.masArg);if(tr){persist({id:'cfg-maleta',kind:'cfg',items:(tr.maleta||[]).map(x=>({t:x.t,c:x.c}))},true);toast('Guardada como tu lista base');renderMas()}return true}
     case 'm-reset':{const tr=S.entries.get(S.masArg);if(tr)maletaSet(tr,(tr.maleta||[]).map(x=>Object.assign({},x,{done:false})));return true}
     case 'ai-per':aiPeriod(d.k);return true;
+    case 'privado':html.classList.toggle('privado');syncEyes();return true;
   }
   return false;
 }
@@ -3412,6 +3419,10 @@ grid.addEventListener('touchstart',e=>{const p=e.changedTouches[0];tx=p.clientX;
 grid.addEventListener('touchend',e=>{if(tx==null)return;const p=e.changedTouches[0],dx=p.clientX-tx,dy=p.clientY-ty;tx=null;if(Math.abs(dx)>60&&Math.abs(dy)<45)shiftMonth(dx<0?1:-1)},{passive:true});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
 
+html.classList.add('privado');
+function syncEyes(){const hid=html.classList.contains('privado');document.querySelectorAll('[data-act="privado"]').forEach(b=>b.setAttribute('aria-pressed',String(!hid)))}
+document.addEventListener('click',ev=>{const t=ev.target.closest&&ev.target.closest('.pv');if(t&&html.classList.contains('privado')){ev.preventDefault();ev.stopPropagation();html.classList.remove('privado');syncEyes()}},true);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){html.classList.add('privado');syncEyes()}});
 renderAdds();render();boot();
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshWeather();if(!S.evAt||Date.now()-S.evAt>3*3600e3){S.evAt=Date.now();refreshEvents()}}});
 })();
