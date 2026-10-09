@@ -1,6 +1,6 @@
 // Guarda la app en el móvil para que abra sin conexión y recibe los cambios en cuanto hay internet.
-const CACHE = 'dia-a-dia-v4';
-const SHELL = ['./', 'index.html', 'config.js', 'manifest.webmanifest', 'offline.html', 'vendor/d3.min.js', 'vendor/topojson-client.min.js', 'vendor/jszip.min.js', 'vendor/xlsx.mini.min.js', 'vendor/jspdf.umd.min.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo.svg'];
+const CACHE = 'dia-a-dia-v5';
+const SHELL = ['./', 'index.html', 'config.js', 'manifest.webmanifest', 'offline.html', 'vendor/d3.min.js', 'vendor/topojson-client.min.js', 'vendor/jszip.min.js', 'vendor/leaflet.js', 'vendor/leaflet.css', 'vendor/xlsx.mini.min.js', 'vendor/jspdf.umd.min.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
