@@ -1,6 +1,65 @@
 {
- "updatedAt": "2026-10-09",
+ "updatedAt": "2026-10-10",
  "eventos": [
+  {
+   "id": "draculina-somnis-teatro-muestra-de-teatro-de-rubielos-2026-10-10",
+   "title": "Draculina - Somnis Teatro (Muestra de Teatro de Rubielos)",
+   "date": "2026-10-10",
+   "place": "Palacio de Congresos, Rubielos de Mora",
+   "zona": "provincia",
+   "cat": "Infantil",
+   "desc": "Musical familiar inspirado en la descendiente del conde Drácula y su sirviente Ígor dentro de la VII Muestra de Teatro. Entrada 5 €.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-bureo-estrenara-en-teruel-el-reverso-de-federico-durante-la-muestra-de-rubielos",
+   "time": "12:00"
+  },
+  {
+   "id": "iii-kodofest-2026-10-10",
+   "title": "III Kodofest",
+   "date": "2026-10-10",
+   "place": "La Codoñera",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Tercera edición del festival centrada en el fuego y la pólvora con un espectáculo de tres collas de correfocs.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura",
+   "time": "19:30"
+  },
+  {
+   "id": "cd-teruel-vs-alcorcon-2026-10-10",
+   "title": "CD Teruel vs Alcorcón",
+   "date": "2026-10-10",
+   "place": "Estadio de Pinilla, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Partido de la séptima jornada de liga en Primera Federación disputado por el CD Teruel en su campo.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/deportes/moraitis-con-rotura-muscular-baja-en-el-cd-teruel-para-los-proximos-partidos-del-equipo"
+  },
+  {
+   "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
+   "title": "Exposición 'Apuntes, estudios y bocetos' de Salvador Gisbert",
+   "date": "2026-10-10",
+   "place": "Museo de Teruel, Teruel",
+   "zona": "ciudad",
+   "cat": "Arte",
+   "desc": "Muestra del cuaderno con cerca de 300 dibujos de Salvador Gisbert y el proceso de restauración de la obra.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
+   "end": "2026-11-15"
+  },
+  {
+   "id": "presentacion-del-disco-jaulas-vacias-de-major-arcana-2026-10-11",
+   "title": "Presentación del disco 'Jaulas Vacías' de Major Arcana",
+   "date": "2026-10-11",
+   "place": "De bat a bat llibres, Calaceite",
+   "zona": "provincia",
+   "cat": "Música",
+   "desc": "Presentación del nuevo álbum de rock del dúo Major Arcana, a beneficio de la protectora de animales y plantas de Alcañiz.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/major-arcana-presenta-en-calaceite-su-disco-jaulas-vacias-con-compromiso-animalista",
+   "time": "19:00"
+  },
   {
    "id": "cd-teruel-alcorcon-2026-10-11",
    "title": "CD Teruel – Alcorcón",
@@ -11,6 +70,17 @@
    "desc": "Primera Federación, jornada 7. Fecha y hora por confirmar.",
    "source": "futboltotal.futbol",
    "url": "https://futboltotal.futbol/partido/teruel-vs-alcorcon-primera-division-rfef-group-2-2026-10-11"
+  },
+  {
+   "id": "ofrenda-de-flores-a-la-virgen-del-pilar-2026-10-12",
+   "title": "Ofrenda de flores a la Virgen del Pilar",
+   "date": "2026-10-12",
+   "place": "Plaza de España, Calanda",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Tradicional ofrenda de flores a la Pilarica con trajes regionales y acompañamiento de la rondalla El Cachirulo.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/calanda-volvera-a-tributar-honores-a-la-pilarica-con-sol-y-flores-el-12-de-octubre"
   },
   {
    "id": "presentacion-de-heroes-de-pagalungan-de-mireia-gimenez-higon-2026-10-13",
@@ -25,6 +95,18 @@
    "time": "19:30"
   },
   {
+   "id": "ciclo-cultural-en-homenaje-a-elvira-de-hidalgo-2026-10-13",
+   "title": "Ciclo cultural en homenaje a Elvira de Hidalgo",
+   "date": "2026-10-13",
+   "place": "Fundación Ibercaja, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Programación cultural con la música y el legado lírico aragonés como protagonistas en homenaje a Elvira de Hidalgo.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/teruel-rinde-homenaje-a-elvira-de-hidalgo-y-a-los-grandes-compositores-en-la-nueva-agenda-cultural-de-fundacion-ibercaja/",
+   "end": "2026-10-17"
+  },
+  {
    "id": "im-pulse-tributo-a-pink-floyd-2026-10-16",
    "title": "IM-PULSE, tributo a Pink Floyd",
    "date": "2026-10-16",
@@ -32,6 +114,18 @@
    "zona": "ciudad",
    "cat": "Música",
    "desc": "Más de dos horas de concierto con montaje audiovisual. De 30 a 38 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:00"
+  },
+  {
+   "id": "im-pulse-pink-floyd-tribute-live-show-2026-10-16",
+   "title": "IM-PULSE Pink Floyd Tribute Live Show",
+   "date": "2026-10-16",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Tributo a Pink Floyd con un espectáculo audiovisual que revive la esencia de la banda británica. Entradas desde 30 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -58,6 +152,18 @@
    "desc": "Festival de música. Malifeta actúa el sábado 17 a las 21:00.",
    "source": "Bandsintown",
    "url": "https://www.bandsintown.com/c/teruel-spain",
+   "end": "2026-10-18"
+  },
+  {
+   "id": "viii-festival-contra-la-despoblacion-2026-10-16",
+   "title": "VIII Festival contra la Despoblación",
+   "date": "2026-10-16",
+   "place": "Allepuz",
+   "zona": "provincia",
+   "cat": "Música",
+   "desc": "Festival reivindicativo con actuaciones de Azero, Eskorzo, Malifeta, Isla Kume y Eduardo Paz.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/allepuz-se-multiplica-por-diez-en-un-festival-que-auna-rock-pop-electronica-y-musica-de-autor",
    "end": "2026-10-18"
   },
   {
@@ -94,6 +200,17 @@
    "url": "https://gotrail.run/en/race/carrera-popular-aragon-sur"
   },
   {
+   "id": "xxii-marcha-senderista-del-maestrazgo-y-iii-feria-de-salud-2026-10-18",
+   "title": "XXII Marcha Senderista del Maestrazgo y III Feria de Salud",
+   "date": "2026-10-18",
+   "place": "Mirambel",
+   "zona": "provincia",
+   "cat": "Deporte",
+   "desc": "Jornada deportiva y comunitaria que aúna la tradicional marcha senderista y la feria de la salud en la localidad.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/mirambel-acoge-la-xxii-marcha-senderista-del-maestrazgo-y-la-iii-feria-de-salud-el-proximo-18-de-octubre/"
+  },
+  {
    "id": "conferencia-la-historia-de-la-aviacion-espanola-2026-10-20",
    "title": "Conferencia: la historia de la aviación española",
    "date": "2026-10-20",
@@ -103,6 +220,30 @@
    "desc": "Con el Ejército del Aire y del Espacio. Entrada libre.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/el-casino-de-teruel-llena-de-historia-y-literatura-el-centro-de-la-capital-con-cuatro-grandes-citas-en-octubre/",
+   "time": "19:00"
+  },
+  {
+   "id": "la-biblioteca-imaginaria-teatro-arbole-2026-10-24",
+   "title": "La Biblioteca Imaginaria - Teatro Arbolé",
+   "date": "2026-10-24",
+   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Infantil",
+   "desc": "Espectáculo infantil a cargo de la compañía Teatro Arbolé. Entrada 6 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "18:00"
+  },
+  {
+   "id": "andre-y-dorine-2026-10-24",
+   "title": "André y Dorine",
+   "date": "2026-10-24",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Obra de teatro de máscaras sin texto. Entradas a 6 € + gastos de gestión.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
   },
   {
@@ -147,21 +288,57 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Cerveza, gastronomía y ambiente festivo.",
+   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
   },
   {
+   "id": "xxix-autoclassic-2026-10-31",
+   "title": "XXIX AutoClassic",
+   "date": "2026-10-31",
+   "place": "Recinto ferial, Alcañiz",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "Feria del Vehículo Clásico con exposición comercial, venta de recambios, vehículos históricos y coleccionismo.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/autoclassic-adelanta-su-celebracion-y-llegara-a-alcaniz-el-31-de-octubre",
+   "end": "2026-11-02"
+  },
+  {
+   "id": "perimenoparty-2026-11-05",
+   "title": "Perimenoparty",
+   "date": "2026-11-05",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Espectáculo teatral y de humor sobre la bienvenida a una etapa vital ineludible. Entrada 18 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:30"
+  },
+  {
+   "id": "kala-la-guru-del-pop-2026-11-07",
+   "title": "Kala - La gurú del Pop",
+   "date": "2026-11-07",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Espectáculo musical con Metamorfosis, un grupo de pop lírico en plena crisis creativa. Entrada 15 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "18:30"
+  },
+  {
    "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
-   "title": "«El lago de los cisnes», International Ballet Company",
+   "title": "El lago de los cisnes - International Ballet Company",
    "date": "2026-11-12",
-   "place": "Teatro Marín",
+   "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "El ballet de Chaikovski.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/el-teatro-marin-de-teruel-desvela-tres-notables-citas-de-su-cartelera-para-este-otono/",
+   "desc": "Representación del clásico ballet de Chaikovski por la International Ballet Company. Entradas desde 25 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
   },
   {
@@ -175,6 +352,64 @@
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/",
    "end": "2026-11-13"
+  },
+  {
+   "id": "promenade-caleidoscopio-teatro-2026-11-14",
+   "title": "Promenade - Caleidoscopio Teatro",
+   "date": "2026-11-14",
+   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Infantil",
+   "desc": "Propuesta escénica para público infantil y familiar a cargo de Caleidoscopio Teatro. Entrada 6 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "18:00"
+  },
+  {
+   "id": "concierto-en-honor-de-santa-cecilia-2026-11-14",
+   "title": "Concierto en honor de Santa Cecilia",
+   "date": "2026-11-14",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto a cargo de la Orquesta Sinfónica y la Camerata Santa Cecilia bajo la dirección de Alberto Navas. Acceso gratuito con invitación.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
+  },
+  {
+   "id": "locuras-paralelas-2026-11-19",
+   "title": "Locuras Paralelas",
+   "date": "2026-11-19",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Propuesta teatral de humor inteligente y sorprendente con un final inesperado. Entrada 18 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:30"
+  },
+  {
+   "id": "concierto-de-hevia-y-la-banda-de-musica-santa-cecilia-2026-11-21",
+   "title": "Concierto de Hevia y la Banda de Música Santa Cecilia",
+   "date": "2026-11-21",
+   "place": "Palacio de Exposiciones y Congresos, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto conjunto del gaitero Hevia y la Banda Santa Cecilia con motivo del 25 aniversario del Platinum Europe Award.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
+  },
+  {
+   "id": "vii-carrera-contra-la-violencia-de-genero-2026-11-22",
+   "title": "VII Carrera Contra la Violencia de Género",
+   "date": "2026-11-22",
+   "place": "Plaza del Torico, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Carrera solidaria y no competitiva (2,5K y 5K) con motivo del 25N. Inscripción 6 € destinada a proyectos de apoyo a víctimas.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/teruel-celebrara-la-vii-carrera-contra-la-violencia-de-genero-el-22-de-noviembre",
+   "time": "12:00"
   },
   {
    "id": "xi-congreso-del-bienestar-y-el-amor-cadena-ser-2026-11-28",
