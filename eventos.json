@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-11",
+ "updatedAt": "2026-10-12",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,29 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "presentacion-del-disco-jaulas-vacias-de-major-arcana-2026-10-11",
-   "title": "Presentación del disco Jaulas Vacías de Major Arcana",
-   "date": "2026-10-11",
-   "place": "De bat a bat llibres, Calaceite",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "El dúo de rock Major Arcana presenta su álbum solidario a beneficio de la protectora de animales del Bajo Aragón.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/major-arcana-presenta-en-calaceite-su-disco-jaulas-vacias-con-compromiso-animalista",
-   "time": "19:00"
-  },
-  {
-   "id": "cd-teruel-alcorcon-2026-10-11",
-   "title": "CD Teruel – Alcorcón",
-   "date": "2026-10-11",
-   "place": "Estadio Pinilla",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Primera Federación, jornada 7. Fecha y hora por confirmar.",
-   "source": "futboltotal.futbol",
-   "url": "https://futboltotal.futbol/partido/teruel-vs-alcorcon-primera-division-rfef-group-2-2026-10-11"
   },
   {
    "id": "ofrenda-de-flores-a-la-virgen-del-pilar-2026-10-12",
@@ -55,6 +32,18 @@
    "zona": "ciudad",
    "cat": "Charlas",
    "desc": "Charla sobre la soprano Elvira de Hidalgo impartida por Juan Villalba dentro del ciclo Turolenses Ilustres. Entrada gratuita.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
+   "time": "19:00"
+  },
+  {
+   "id": "charla-elvira-de-hidalgo-de-prima-donna-a-maestra-de-maria-c-2026-10-13",
+   "title": "Charla: Elvira de Hidalgo: de prima donna a maestra de María Callas",
+   "date": "2026-10-13",
+   "place": "Conservatorio Profesional de Música de Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Conferencia impartida por Juan Villalba dentro del ciclo Turolenses Ilustres de Fundación Ibercaja. Entrada gratuita.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
    "time": "19:00"
@@ -96,6 +85,18 @@
    "time": "19:00"
   },
   {
+   "id": "charla-con-la-soprano-maria-uriz-2026-10-15",
+   "title": "Charla con la soprano María Uriz",
+   "date": "2026-10-15",
+   "place": "Conservatorio Profesional de Música de Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Encuentro con María Uriz, destacada soprano de la lírica española y última alumna de Elvira de Hidalgo, organizado por Fundación Ibercaja.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
+   "time": "19:00"
+  },
+  {
    "id": "im-pulse-tributo-a-pink-floyd-2026-10-16",
    "title": "IM-PULSE, tributo a Pink Floyd",
    "date": "2026-10-16",
@@ -114,7 +115,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Tributo a Pink Floyd con homenaje audiovisual en directo. Entradas desde 30 a 38 euros más gastos de gestión.",
+   "desc": "Homenaje audiovisual en vivo a la banda Pink Floyd a cargo del tributo IM-PULSE. Entradas desde 30 € a 38 € más gastos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -150,9 +151,9 @@
    "place": "Allepuz",
    "zona": "provincia",
    "cat": "Música",
-   "desc": "Festival de música ecléctica con actuaciones de Eskorzo, Azero, Malifeta, Isla Kume y Eduardo Paz en defensa del medio rural.",
+   "desc": "Festival con un cartel ecléctico que abarca rock, pop, música electrónica y canción de autor.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/allepuz-se-multiplica-por-diez-en-un-festival-que-auna-rock-pop-electronica-y-musica-de-autor",
+   "url": "https://www.diariodeteruel.es/cultura",
    "end": "2026-10-18"
   },
   {
@@ -162,7 +163,7 @@
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Concierto para violín y piano a cargo de Alberto Navas y Fran Gallego organizado con el patrocinio de Fundación Ibercaja.",
+   "desc": "Recital de violín y piano a cargo de Alberto Navas y Fran Gallego, dentro del ciclo musical de Fundación Ibercaja.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
    "time": "19:00"
@@ -227,10 +228,10 @@
    "id": "motorland-classic-festival-2026-2026-10-23",
    "title": "Motorland Classic Festival 2026",
    "date": "2026-10-23",
-   "place": "Circuito de velocidad de Motorland Aragón, Alcañiz",
+   "place": "MotorLand Aragón, Alcañiz",
    "zona": "provincia",
-   "cat": "Deporte",
-   "desc": "Encuentro de vehículos históricos con tandas de coches y motos clásicas, copilotajes, charlas y desfile en pista.",
+   "cat": "Ferias",
+   "desc": "Cita para aficionados al motor clásico con tandas en pista, charlas sobre el Citroën AX, copilotajes y desfile popular.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/bajoaragon/motorland-ya-prepara-su-gran-evento-del-ano-de-vehiculo-historico-el-classic-festival-2026",
    "end": "2026-10-25"
@@ -242,9 +243,9 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Obra infantil de aventuras y fomento de la lectura de Teatro Arbolé. Entradas a 6 euros con gastos incluidos.",
+   "desc": "Representación teatral para público infantil a cargo de la compañía Teatro Arbolé. Entradas a 6 € con gastos incluidos.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/la-biblioteca-imaginaria-teatro-arbole",
+   "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
   },
   {
@@ -254,7 +255,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Montaje de teatro de máscaras sin texto. Entradas a 6 euros más gastos de gestión.",
+   "desc": "Obra de teatro de máscaras sin texto. Entradas por 6 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -263,12 +264,12 @@
    "id": "iv-escarbachofest-2026-10-24",
    "title": "IV Escarbachofest",
    "date": "2026-10-24",
-   "place": "Pabellón municipal, Valdealgorfa",
+   "place": "Valdealgorfa",
    "zona": "provincia",
    "cat": "Música",
-   "desc": "Festival de rock en directo con Alfredo Piedrafita (Barricada) y Azero. Entradas a 12 euros anticipada y 15 euros en taquilla.",
+   "desc": "Festival de rock y música en directo en el Bajo Aragón con la participación de Los rescoldos de Barricada.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/los-rescoldos-de-barricada-sonaran-el-dia-24-en-el-iv-escarbachofest",
+   "url": "https://www.diariodeteruel.es/cultura",
    "time": "22:00"
   },
   {
@@ -313,7 +314,7 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Jornada festiva con cerveza, propuestas gastronómicas y ambiente popular.",
+   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -336,8 +337,8 @@
    "date": "2026-11-05",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
-   "cat": "Teatro",
-   "desc": "Espectáculo cómico y teatral sobre una etapa vital ineludible. Entrada: 18 euros con gastos de gestión incluidos.",
+   "cat": "Otros",
+   "desc": "Espectáculo que celebra la bienvenida a una nueva etapa de la vida. Entradas por 18 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -349,19 +350,19 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Espectáculo musical protagonizado por el grupo Metamorfosis. Entradas a 15 euros más gastos de gestión.",
+   "desc": "Kala presenta a Metamorfosis, un grupo de pop lírico en crisis creativa y personal. Entradas por 15 € más gastos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
   },
   {
    "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
-   "title": "El Lago de los Cisnes - International Ballet Company",
+   "title": "El lago de los cisnes - International Ballet Company",
    "date": "2026-11-12",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Representación de la obra de ballet clásico de Tchaikovsky. Entradas desde 25 hasta 38 euros más gastos de gestión.",
+   "desc": "Obra de ballet clásico de Chaikovski a cargo de International Ballet Company. Entradas entre 25 € y 38 € más gastos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -380,12 +381,12 @@
   },
   {
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
-   "title": "Promenade. Caleidoscopio Teatro",
+   "title": "Promenade - Caleidoscopio Teatro",
    "date": "2026-11-14",
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Propuesta teatral dirigida al público infantil y familiar. Entrada: 6 euros con gastos de gestión incluidos.",
+   "desc": "Montaje teatral infantil de Caleidoscopio Teatro. Entradas por 6 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -408,7 +409,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Comedia inteligente, provocadora y con final inesperado. Entrada: 18 euros con gastos de gestión incluidos.",
+   "desc": "Propuesta teatral de humor inteligente y final inesperado. Entradas por 18 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -439,12 +440,12 @@
    "id": "vii-carrera-contra-la-violencia-de-genero-2026-11-22",
    "title": "VII Carrera Contra la Violencia de Género",
    "date": "2026-11-22",
-   "place": "Plaza del Torico, Teruel",
+   "place": "Teruel",
    "zona": "ciudad",
    "cat": "Deporte",
-   "desc": "Carrera solidaria y no competitiva (2,5K y 5K) con motivo del 25N. Inscripción 6 € destinada a proyectos de apoyo a víctimas.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/teruel-celebrara-la-vii-carrera-contra-la-violencia-de-genero-el-22-de-noviembre",
+   "desc": "Séptima edición de la prueba deportiva popular contra la violencia de género en la ciudad de Teruel.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/teruel-celebrara-la-vii-carrera-contra-la-violencia-de-genero-el-22-de-noviembre/",
    "time": "12:00"
   },
   {
