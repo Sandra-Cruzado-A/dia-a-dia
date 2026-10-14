@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-13",
+ "updatedAt": "2026-10-14",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,42 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "conferencia-elvira-de-hidalgo-por-juan-villalba-2026-10-13",
-   "title": "Conferencia Elvira de Hidalgo por Juan Villalba",
-   "date": "2026-10-13",
-   "place": "Conservatorio Profesional de Música de Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Charla sobre la soprano Elvira de Hidalgo impartida por Juan Villalba dentro del ciclo Turolenses Ilustres. Entrada gratuita.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
-  },
-  {
-   "id": "charla-elvira-de-hidalgo-de-prima-donna-a-maestra-de-maria-c-2026-10-13",
-   "title": "Charla: Elvira de Hidalgo: de prima donna a maestra de María Callas",
-   "date": "2026-10-13",
-   "place": "Conservatorio Profesional de Música de Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Conferencia impartida por Juan Villalba dentro del ciclo Turolenses Ilustres, con entrada gratuita.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
-  },
-  {
-   "id": "presentacion-de-heroes-de-pagalungan-de-mireia-gimenez-higon-2026-10-13",
-   "title": "Presentación de «Héroes de Pagalungan», de Mireia Giménez Higón",
-   "date": "2026-10-13",
-   "place": "Casino de Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Novela histórica ambientada en las Filipinas españolas. Entrada libre.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/el-casino-de-teruel-llena-de-historia-y-literatura-el-centro-de-la-capital-con-cuatro-grandes-citas-en-octubre/",
-   "time": "19:30"
   },
   {
    "id": "ciclo-cultural-en-homenaje-a-elvira-de-hidalgo-2026-10-13",
@@ -86,6 +50,19 @@
    "time": "19:00"
   },
   {
+   "id": "encuentro-teruel-mudejar-vivir-entre-dos-mundos-2026-10-16",
+   "title": "Encuentro Teruel Mudéjar: vivir entre dos mundos",
+   "date": "2026-10-16",
+   "place": "Salón de actos del Museo de Teruel, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Jornadas organizadas por el IET con mesa redonda, conferencia y visita guiada que analizan la convivencia de la minoría mudéjar.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-iet-organiza-un-encuentro-teruel-mudejar-que-analizara-la-convivencia-de-los-dos-mundos-que-habitaron-la-ciudad",
+   "end": "2026-10-17",
+   "time": "19:00"
+  },
+  {
    "id": "im-pulse-tributo-a-pink-floyd-2026-10-16",
    "title": "IM-PULSE, tributo a Pink Floyd",
    "date": "2026-10-16",
@@ -104,7 +81,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Tributo a Pink Floyd con un espectáculo audiovisual en directo. Entradas entre 30 € y 38 € más gastos.",
+   "desc": "Tributo a Pink Floyd con homenaje audiovisual en directo. Entradas desde 30 € hasta 38 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -143,6 +120,18 @@
    "desc": "Festival con un cartel ecléctico que abarca rock, pop, música electrónica y canción de autor.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura",
+   "end": "2026-10-18"
+  },
+  {
+   "id": "festival-contra-la-despoblacion-de-allepuz-2026-10-16",
+   "title": "Festival contra la Despoblación de Allepuz",
+   "date": "2026-10-16",
+   "place": "Allepuz",
+   "zona": "provincia",
+   "cat": "Música",
+   "desc": "Octava edición del festival con música folk, rock y electrónica (Ixeya, Eskorzo, Azero). Actos gratuitos salvo comida popular.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/eduardo-paz-se-cae-del-festival-de-allepuz-por-motivos-de-salud",
    "end": "2026-10-18"
   },
   {
@@ -244,7 +233,7 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de la compañía Teatro Arbolé. Entradas a 6 € con gastos de gestión incluidos.",
+   "desc": "Espectáculo infantil a cargo de Teatro Arbolé. Entradas a 6 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -256,7 +245,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Obra de teatro de máscaras sin texto. Entradas a 6 € más gastos de gestión.",
+   "desc": "Teatro de máscaras sin texto. Entradas a 6 € + gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -350,8 +339,8 @@
    "date": "2026-11-05",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
-   "cat": "Teatro",
-   "desc": "Espectáculo humorístico que da la bienvenida a una etapa ineludible de la vida. Entradas a 18 € con gastos incluidos.",
+   "cat": "Otros",
+   "desc": "Espectáculo sobre la bienvenida a una etapa vital. Entradas a 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -363,7 +352,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Kala presenta a Metamorfosis, formación de pop lírico en plena crisis creativa. Entradas a 15 € más gastos de gestión.",
+   "desc": "Espectáculo musical sobre el grupo de pop lírico Metamorfosis en crisis creativa. Entradas a 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -376,6 +365,18 @@
    "zona": "ciudad",
    "cat": "Danza",
    "desc": "Representación del clásico ballet de Tchaikovsky a cargo de International Ballet Company. Entradas entre 25 € y 38 € más gastos.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:00"
+  },
+  {
+   "id": "lago-de-los-cisnes-international-ballet-company-2026-11-12",
+   "title": "Lago de los Cisnes - International Ballet Company",
+   "date": "2026-11-12",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Danza",
+   "desc": "Obra de Tchaikovsky interpretada por la International Ballet Company. Entradas entre 25 € y 38 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -396,10 +397,10 @@
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
    "title": "Promenade - Caleidoscopio Teatro",
    "date": "2026-11-14",
-   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
+   "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo teatral infantil de Caleidoscopio Teatro. Entradas a 6 € con gastos incluidos.",
+   "desc": "Espectáculo teatral para público infantil a cargo de Caleidoscopio Teatro. Entradas a 6 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -422,7 +423,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Comedia inteligente, provocadora y sorprendente con desenlace inesperado. Entradas a 18 € con gastos incluidos.",
+   "desc": "Propuesta de humor inteligente, provocadora y sorprendente con desenlace inesperado. Entradas a 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -456,7 +457,7 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Deporte",
-   "desc": "Séptima edición de la prueba atlética solidaria y de sensibilización contra la violencia de género en Teruel.",
+   "desc": "Séptima edición de la carrera deportiva solidaria en Teruel contra la violencia de género.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/teruel-celebrara-la-vii-carrera-contra-la-violencia-de-genero-el-22-de-noviembre/",
    "time": "12:00"
