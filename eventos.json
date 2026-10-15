@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-14",
+ "updatedAt": "2026-10-15",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -50,13 +50,25 @@
    "time": "19:00"
   },
   {
+   "id": "exposicion-los-que-permanecen-de-javier-aunon-2026-10-15",
+   "title": "Exposición 'Los que permanecen' de Javier Auñón",
+   "date": "2026-10-15",
+   "place": "Claustro del Obispado de Teruel, Teruel",
+   "zona": "ciudad",
+   "cat": "Arte",
+   "desc": "Muestra de doce fotografías de Javier Auñón que ofrece una mirada personal sobre la despoblación en el territorio turolense.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/entrevistas/javier-aunon-fotografo-de-vez-en-cuando-me-doy-el-gustazo-de-tirar-y-revelar-un-carrete-pero-cuesta-un-rinon",
+   "end": "2026-10-23"
+  },
+  {
    "id": "encuentro-teruel-mudejar-vivir-entre-dos-mundos-2026-10-16",
    "title": "Encuentro Teruel Mudéjar: vivir entre dos mundos",
    "date": "2026-10-16",
    "place": "Salón de actos del Museo de Teruel, Teruel",
    "zona": "ciudad",
    "cat": "Charlas",
-   "desc": "Jornadas organizadas por el IET con mesa redonda, conferencia y visita guiada que analizan la convivencia de la minoría mudéjar.",
+   "desc": "Jornadas del IET con mesa redonda, conferencia y visita guiada para conmemorar el 40º aniversario del mudéjar como Patrimonio Mundial.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-iet-organiza-un-encuentro-teruel-mudejar-que-analizara-la-convivencia-de-los-dos-mundos-que-habitaron-la-ciudad",
    "end": "2026-10-17",
@@ -81,7 +93,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Tributo a Pink Floyd con homenaje audiovisual en directo. Entradas desde 30 € hasta 38 €.",
+   "desc": "Espectáculo audiovisual homenaje a Pink Floyd a cargo de la banda tributo IM-PULSE. Entradas desde 30 € hasta 38 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -129,10 +141,22 @@
    "place": "Allepuz",
    "zona": "provincia",
    "cat": "Música",
-   "desc": "Octava edición del festival con música folk, rock y electrónica (Ixeya, Eskorzo, Azero). Actos gratuitos salvo comida popular.",
+   "desc": "Octava edición del festival con conciertos de Ixeya, Malifeta, Eskorzo y Azero, además de actividades y comida popular. Entrada gratuita.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/eduardo-paz-se-cae-del-festival-de-allepuz-por-motivos-de-salud",
    "end": "2026-10-18"
+  },
+  {
+   "id": "charla-el-calvario-de-alloza-un-ideal-llevado-a-la-practica-2026-10-17",
+   "title": "Charla 'El Calvario de Alloza, un ideal llevado a la práctica'",
+   "date": "2026-10-17",
+   "place": "Albergue de Alloza, Alloza",
+   "zona": "provincia",
+   "cat": "Charlas",
+   "desc": "Conferencia impartida por Alfredo Andreu sobre el origen, estructura y simbología del conjunto patrimonial del Calvario de Alloza.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/alloza-impulsa-la-divulgacion-de-la-historia-y-el-patrimonio-de-su-calvario",
+   "time": "18:00"
   },
   {
    "id": "concierto-para-violin-y-piano-de-alberto-navas-y-fran-galleg-2026-10-17",
@@ -233,7 +257,7 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de Teatro Arbolé. Entradas a 6 €.",
+   "desc": "Espectáculo infantil a cargo de la compañía Teatro Arbolé en el Auditorio de San Julián. Entradas a 6 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -245,7 +269,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Teatro de máscaras sin texto. Entradas a 6 € + gastos de gestión.",
+   "desc": "Obra de teatro de máscaras sin texto. Entradas disponibles por 6 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -322,6 +346,18 @@
    "time": "13:00"
   },
   {
+   "id": "fiesta-de-la-cerveza-en-torre-de-las-arcas-2026-10-31",
+   "title": "Fiesta de la Cerveza en Torre de las Arcas",
+   "date": "2026-10-31",
+   "place": "Torre de las Arcas",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo en el municipio de Torre de las Arcas.",
+   "source": "irdeocio.es",
+   "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
+   "time": "13:00"
+  },
+  {
    "id": "xxix-autoclassic-2026-10-31",
    "title": "XXIX AutoClassic",
    "date": "2026-10-31",
@@ -340,7 +376,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo sobre la bienvenida a una etapa vital. Entradas a 18 €.",
+   "desc": "Espectáculo y celebración de bienvenida a una nueva etapa de la vida. Entradas a 18 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -352,7 +388,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Espectáculo musical sobre el grupo de pop lírico Metamorfosis en crisis creativa. Entradas a 15 € + gg.",
+   "desc": "Presentación musical junto a Metamorfosis, un grupo de pop lírico en plena crisis creativa. Entradas a 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -364,7 +400,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Representación del clásico ballet de Tchaikovsky a cargo de International Ballet Company. Entradas entre 25 € y 38 € más gastos.",
+   "desc": "Clásico del ballet con música de Chaikovski interpretado por la International Ballet Company. Entradas desde 25 € hasta 38 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -397,10 +433,10 @@
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
    "title": "Promenade - Caleidoscopio Teatro",
    "date": "2026-11-14",
-   "place": "Auditorio de San Julián, Teruel",
+   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo teatral para público infantil a cargo de Caleidoscopio Teatro. Entradas a 6 €.",
+   "desc": "Función infantil representada por la compañía Caleidoscopio Teatro en el Auditorio de San Julián. Entradas a 6 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -423,7 +459,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta de humor inteligente, provocadora y sorprendente con desenlace inesperado. Entradas a 18 €.",
+   "desc": "Comedia inteligente, provocadora y con final inesperado. Entradas a 18 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
