@@ -77,6 +77,17 @@ Para un widget nuevo (por ejemplo, «Cuentas» con tu patrimonio) se copian esos
 
 **Avisos:** en ⚙ → Avisos los activas y eliges de qué quieres que te avise (eventos, tareas, recibos, caducidades, cumpleaños, viajes y el resumen del domingo).
 
+
+## Novedades: voz, correo, compartir y más
+
+- **Apunta día:** un segundo icono en el móvil. «Ok Google, abre Apunta día» y dicta: gastos, eventos, tareas, recordatorios («recuérdame mañana a las 9…»), sitios con su gasto y su nota, canciones para Spotify, partituras o «borra lo último». También desde el panel de ajustes rápidos y el botón 🎙 de los widgets.
+- **Widgets:** Hoy, Calendario (el mes con los días marcados) y Tareas.
+- **Por revisar:** lo que llega del correo, de las capturas de Trade Republic y de lo que compartes con la app.
+- **Eventos fijos:** lo que se repite cada semana; solo aparece al entrar en el día.
+- **Partituras:** búsqueda en IMSLP de obras para piano solo, con la mejor edición descargable.
+- **Correo:** el script `correo/Codigo.gs` va en script.google.com (ver las instrucciones dentro del archivo).
+- **Google Maps:** pega tu clave en ⚙ → Google Maps.
+
 ## 7. Actualizar la app
 
 **No hace falta reinstalar el APK.** La app del móvil se carga desde tu web de GitHub Pages: cuando cambias `index.html` en GitHub, la próxima vez que abras la app con internet ya tendrás la versión nueva (puede tardar unos minutos en llegar). Sin conexión, abre la última versión que descargó.
