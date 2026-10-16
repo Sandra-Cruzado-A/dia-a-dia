@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-15",
+ "updatedAt": "2026-10-16",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -24,30 +24,6 @@
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/teruel-rinde-homenaje-a-elvira-de-hidalgo-y-a-los-grandes-compositores-en-la-nueva-agenda-cultural-de-fundacion-ibercaja/",
    "end": "2026-10-17"
-  },
-  {
-   "id": "encuentro-con-la-soprano-maria-uriz-2026-10-15",
-   "title": "Encuentro con la soprano María Uriz",
-   "date": "2026-10-15",
-   "place": "Conservatorio Profesional de Música de Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Charla con María Uriz, última alumna de Elvira de Hidalgo, en el marco del 150 aniversario de Fundación Ibercaja.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
-  },
-  {
-   "id": "charla-con-la-soprano-maria-uriz-2026-10-15",
-   "title": "Charla con la soprano María Uriz",
-   "date": "2026-10-15",
-   "place": "Conservatorio Profesional de Música de Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Encuentro con María Uriz, destacada soprano de la lírica española y última alumna de Elvira de Hidalgo.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
   },
   {
    "id": "exposicion-los-que-permanecen-de-javier-aunon-2026-10-15",
