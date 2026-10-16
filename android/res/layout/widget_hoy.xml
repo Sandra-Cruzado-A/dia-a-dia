@@ -36,6 +36,14 @@
             android:shadowDx="0"
             android:shadowDy="1"
             android:shadowRadius="4" />
+
+        <ImageView
+            android:id="@+id/w_mic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_mic_gold"
+            android:contentDescription="Apunta día" />
     </LinearLayout>
 
     <TextView

@@ -1,11 +1,9 @@
 package es.diaadia.app;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.RemoteViews;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,15 +63,14 @@ public class HoyWidget extends AppWidgetProvider {
         int bg = "negro".equals(fondo) ? R.drawable.widget_bg
             : "semi".equals(fondo) ? R.drawable.widget_bg_semi
             : R.drawable.widget_bg_clear;
+        // (los otros widgets usan WidgetUtil.bg)
         v.setInt(R.id.w_root, "setBackgroundResource", bg);
         v.setTextViewText(R.id.w_title, title);
         v.setTextViewText(R.id.w_weather, weather);
         v.setTextViewText(R.id.w_agenda, agenda);
         v.setTextViewText(R.id.w_money, money);
-        Intent open = new Intent(context, MainActivity.class);
-        open.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, open, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        v.setOnClickPendingIntent(R.id.w_root, pi);
+        v.setOnClickPendingIntent(R.id.w_root, WidgetUtil.open(context, null, 10));
+        v.setOnClickPendingIntent(R.id.w_mic, WidgetUtil.open(context, "dictar", 11));
         manager.updateAppWidget(id, v);
     }
 }
