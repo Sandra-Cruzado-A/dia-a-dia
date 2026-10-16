@@ -286,7 +286,7 @@ textarea.field{height:auto;min-height:96px;padding:10px 12px;resize:vertical;lin
 .tabs{display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px;width:100%;max-width:460px}
 .tab{flex:1;min-width:0;height:52px;border:0;border-radius:16px;background:transparent;font-weight:650;font-size:11.5px;color:var(--muted);padding:0 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;line-height:1;white-space:nowrap}
 .tab svg{flex:none}
-.tab[aria-current="page"]{background:var(--accent);color:var(--on-accent)}
+.tab[aria-current="page"]{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,8px);background:var(--ink);color:var(--on-ink);border-radius:14px;padding:10px 12px 10px 16px;display:flex;gap:14px;align-items:center;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:50;width:max-content;max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 .toast button{border:0;background:transparent;color:inherit;font-weight:700;text-decoration:underline;padding:4px}
@@ -394,6 +394,29 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
 .when{font-weight:700;color:var(--accent);margin-right:2px}
 .backrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .backrow .eye{width:36px;height:36px}
+.tab.tadd{flex:0 0 58px;margin:0 4px;border-radius:18px;background:var(--accent);color:var(--on-accent);box-shadow:0 4px 16px color-mix(in srgb,var(--accent) 35%,transparent)}
+.subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px 0 12px;padding-bottom:2px}
+.subnav::-webkit-scrollbar{display:none}
+.subnav button{flex:none;height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--line-2);background:transparent;color:var(--ink);font-weight:650;font-size:13.5px}
+.seg.lug{margin-top:4px}
+.hcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:10px}
+.hcard.gold{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.hcard .wxi{flex:none;display:grid;place-items:center;width:40px}
+.hcard .tx{flex:1;min-width:0}
+.chead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.chead h2{margin:0}
+.link{border:0;background:none;color:var(--accent);font-weight:650;font-size:13.5px;padding:4px 0}
+.tile.sm{min-height:0;padding:12px 14px;flex-direction:row;align-items:center;gap:10px}
+.tile.sm b{font-size:14.5px}
+.addone{width:100%;height:46px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--accent);font-weight:700;font-size:15px}
+.adds.one{display:block}
+.bigmic{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--accent);color:var(--on-accent);border:0;border-radius:20px;padding:16px 18px}
+.bigmic .bm-ic{flex:none;width:44px;height:44px;border-radius:50%;background:rgba(10,10,11,.12);display:grid;place-items:center}
+.bigmic .bm-ic svg{width:24px;height:24px}
+.bigmic b{display:block;font-size:18px}
+.bigmic small{display:block;font-size:13px;opacity:.75;margin-top:2px}
+.apgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
+.apbtn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:16px;border:1px solid var(--line);background:var(--surface);font-weight:650;font-size:12.5px;color:var(--ink)}
 #lmap{position:absolute;inset:0;z-index:0}
 .mapctl{z-index:1000}
 .mapstyle{position:absolute;left:10px;top:10px;z-index:1000;display:flex;gap:2px;background:rgba(10,10,11,.85);border-radius:12px;padding:3px}
@@ -416,28 +439,35 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
 </head>
 <body>
 <main>
-  <section id="v-cal">
+  <section id="v-hoy">
+    <header class="head two"><div class="hrow"><span class="hyr" id="hoy-greet"></span><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="iconbtn" data-act="settings" id="hoy-gear" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v1.6M8 12.6v1.6M1.8 8h1.6M12.6 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1"/></svg></button></div></div><h1 class="title" id="hoy-title"></h1></header>
+    <div id="hoy-body"></div>
+  </section>
+
+  <section id="v-cal" hidden>
     <header class="head two">
-      <div class="hrow"><span class="hleft"><button class="iconbtn" data-act="settings" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v1.6M8 12.6v1.6M1.8 8h1.6M12.6 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1"/></svg></button><span class="hyr" id="cal-year"></span></span><div class="navs"><button class="iconbtn" data-act="dictar" aria-label="Apunta día"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="1.8" width="5" height="8" rx="2.5"/><path d="M3.2 7.5a4.8 4.8 0 0 0 9.6 0M8 12.3v2"/></svg></button><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button>
+      <div class="hrow"><span class="hyr" id="cal-year"></span><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button>
         <button class="iconbtn" data-act="prev" aria-label="Mes anterior"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
         <button class="pill" data-act="today">Hoy</button>
         <button class="iconbtn" data-act="next" aria-label="Mes siguiente"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
       </div></div>
       <h1 class="title" id="cal-title"></h1>
     </header>
+    <div class="subnav" role="group" aria-label="Más de tu agenda"><button data-sub="tareas">Tareas</button><button data-sub="fijos">Fijos</button><button data-sub="grupos">Grupos</button><button data-sub="caducidades">Caducidades</button></div>
     <div class="seg" role="group" aria-label="Qué ver en el calendario"><button data-calmode="mio" aria-pressed="true">Mi calendario</button><button data-calmode="teruel" aria-pressed="false">Teruel</button><button data-calmode="tiempo" aria-pressed="false">Tiempo</button></div>
     <div class="wk" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
     <div class="grid" id="grid"></div>
     <section class="panel" id="panel">
       <div class="dayhead"><h2 id="day-title"></h2><span class="daynet" id="day-net"></span></div>
-      <div class="adds" id="adds"></div>
+      <div class="adds one" id="adds"></div>
       <div class="comp" id="comp" hidden></div>
       <div id="day-list"></div>
     </section>
   </section>
 
   <section id="v-map" hidden>
-    <header class="head"><h1 class="title">Mapa</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button></div></header>
+    <header class="head"><h1 class="title">Lugares</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button></div></header>
+    <div class="seg lug" role="group" aria-label="Lugares"><button data-lug="map" aria-pressed="true">Mapa</button><button data-lug="sitios" aria-pressed="false">Sitios</button><button data-lug="viajes" aria-pressed="false">Viajes</button></div>
     <div class="tchips" id="map-trips"></div>
     <div class="mapbox" id="map-box">
       <svg id="map-svg" aria-label="Mapa de tus viajes y sitios">
@@ -458,7 +488,8 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
   </section>
 
   <section id="v-sitios" hidden>
-    <header class="head" id="sitios-head"><h1 class="title">Sitios</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-place">Añadir</button></div></header>
+    <header class="head" id="sitios-head"><h1 class="title">Lugares</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-place">Añadir</button></div></header>
+    <div class="seg lug" role="group" aria-label="Lugares"><button data-lug="map" aria-pressed="false">Mapa</button><button data-lug="sitios" aria-pressed="true">Sitios</button><button data-lug="viajes" aria-pressed="false">Viajes</button></div>
     <div id="sitios-body"></div>
   </section>
 
@@ -468,7 +499,7 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
   </section>
 
   <section id="v-cuentas" hidden>
-    <button class="back" data-act="mas-back" id="cuentas-back">‹ Más</button>
+    <button class="back" data-act="mas-back" id="cuentas-back">‹ Dinero</button>
     <header class="head" id="cuentas-head"><h1 class="title">Cuentas</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-acc">Añadir</button></div></header>
     <div id="cuentas-body"></div>
   </section>
@@ -482,6 +513,7 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
       </div></div>
       <h1 class="title" id="sum-title"></h1>
     </header>
+    <div class="subnav" role="group" aria-label="Más de tu dinero"><button data-sub="cuentas">Cuentas</button><button data-sub="recibos">Recibos</button><button data-sub="precios">Precios</button><button data-sub="coche">Coche</button></div>
     <div id="sum-body"></div>
   </section>
 </main>
@@ -500,11 +532,11 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
 
 <nav class="tabbar" aria-label="Secciones">
   <div class="tabs">
-    <button class="tab" data-tab="cal" aria-current="page"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>Calendario</button>
-    <button class="tab" data-tab="map"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4.2 6 2.5l4 1.7 4-1.7v9.3L10 13.5l-4-1.7-4 1.7z"/><path d="M6 2.5v9.3M10 4.2v9.3"/></svg>Mapa</button>
-    <button class="tab" data-tab="sitios"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.2s4.6-4.3 4.6-7.9a4.6 4.6 0 0 0-9.2 0c0 3.6 4.6 7.9 4.6 7.9z"/><circle cx="8" cy="6.3" r="1.7"/></svg>Sitios</button>
-    <button class="tab" data-tab="sum"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>Resumen</button>
-    <button class="tab" data-tab="mas"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="9" width="4.5" height="4.5" rx="1.2"/></svg>Más</button>
+    <button class="tab" data-tab="hoy" aria-current="page"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/></svg>Hoy</button>
+    <button class="tab" data-tab="cal"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 6.5h12M5.5 1.8v2.4M10.5 1.8v2.4"/></svg>Agenda</button>
+    <button class="tab tadd" data-act="apuntar" aria-label="Apuntar"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button>
+    <button class="tab" data-tab="sum"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.8" y="4" width="12.4" height="9" rx="2"/><path d="M1.8 7h12.4M10.5 10.2h1.5"/></svg>Dinero</button>
+    <button class="tab" data-tab="map"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8.1a4.8 4.8 0 0 0-9.6 0c0 3.8 4.8 8.1 4.8 8.1z"/><circle cx="8" cy="6.4" r="1.7"/></svg>Lugares</button>
   </div>
 </nav>
 <div class="vbar" id="vbar" hidden><span id="vbar-t"></span><button class="mini" data-act="v-cancel">Cancelar</button></div>
@@ -621,7 +653,7 @@ const reduceMotion=()=>!!(window.matchMedia&&window.matchMedia('(prefers-reduced
 const html=document.documentElement;
 
 const LS='diaadia.v1';
-const S={entries:new Map(),mode:'local',col:null,assets:null,sample:null,cursor:null,sel:todayStr(),view:'cal',comp:null,sheet:null,
+const S={entries:new Map(),mode:'local',col:null,assets:null,sample:null,cursor:null,sel:todayStr(),view:'hoy',comp:null,sheet:null,
   accId:null,tiempo:{},teruel:[],teruelInfo:null,calMode:'mio',tzona:'todo',mapTrip:'all',mapSel:null,placing:null,sit:{q:'',type:'Todos',city:'',cuisine:'',sort:'rating',view:'lista',year:''},placeKey:null,ai:{},viewer:null};
 S.cursor=monthOf(S.sel);
 try{const cm=localStorage.getItem('diaadia.calmode');if(cm==='teruel'||cm==='tiempo')S.calMode=cm}catch(_){}
@@ -837,8 +869,9 @@ function updateWidget(){
   }
   const KC={evento:'#F2C230',tarea:'#E9E2CF',cumple:'#F5D97E',caducidad:'#E0A458',lugar:'#F5D97E',viaje:'#D9A21B',nota:'#A8A296',ocio:'#BDB4D6'};
   const nw=new Date(),y0=nw.getFullYear(),m0=nw.getMonth(),mf=ymd(new Date(y0,m0,1,12)),ml=ymd(new Date(y0,m0+1,0,12)),marcas={};
-  occurrences(mf,ml).forEach(({e,date})=>{if(e.kind==='gasto'||e.kind==='ingreso'||e.kind==='traspaso'||(e.kind==='tarea'&&e.done))return;const c=groupColor(e)||KC[e.kind];if(!c)return;const k=String(+date.slice(8,10));const a=marcas[k]||(marcas[k]=[]);if(!a.includes(c))a.push(c)});
-  allTrips().forEach(tr=>{let d=parse(tr.date<mf?mf:tr.date);const stop=(tr.end||tr.date)>ml?ml:(tr.end||tr.date);for(let i=0;i<40;i++){const s=ymd(d);if(s>stop)break;const k=String(+s.slice(8,10));const a=marcas[k]||(marcas[k]=[]);if(!a.includes(KC.viaje))a.push(KC.viaje);d=addDays(d,1)}});
+  const push=(date,t,c)=>{const k=String(+date.slice(8,10));const a=marcas[k]||(marcas[k]=[]);if(a.length<4&&!a.some(x=>x.t===t))a.push({t,c})};
+  allTrips().forEach(tr=>{let d=parse(tr.date<mf?mf:tr.date);const stop=(tr.end||tr.date)>ml?ml:(tr.end||tr.date);for(let i=0;i<40;i++){const s=ymd(d);if(s>stop)break;push(s,tr.title,KC.viaje);d=addDays(d,1)}});
+  occurrences(mf,ml).filter(o=>!['gasto','ingreso','traspaso','viaje'].includes(o.e.kind)&&!(o.e.kind==='tarea'&&o.e.done)).sort((a,b)=>rank(a.e)-rank(b.e)||String(a.e.time||'').localeCompare(String(b.e.time||''))).forEach(({e,date})=>{const c=groupColor(e)||KC[e.kind];if(!c)return;push(date,(e.kind==='cumple'?'🎂 '+e.title.replace(/^Cumpleaños de /,''):e.time?e.time+' '+e.title:e.title),c)});
   const hoyT=occurrences(t0,t0).filter(o=>o.e.kind==='tarea'&&!o.e.done).map(o=>'Hoy · '+o.e.title);
   const sinF=listOf('todo').filter(x=>!x.done).sort((a,b)=>(a.created||0)-(b.created||0)).map(x=>x.title);
   const tareas={total:hoyT.length+sinF.length,lista:hoyT.concat(sinF).slice(0,9)};
@@ -1314,7 +1347,7 @@ function renderDay(){
   if(!h)h=`<p class="empty">Día libre. Elige arriba qué quieres apuntar.</p>`;
   $('#day-list').innerHTML=h;
 }
-function renderAdds(){$('#adds').innerHTML=ORDER.map(k=>`<button class="add" data-add="${k}" style="--c:var(--${k})">${IC[k]}${KINDS[k].label}</button>`).join('')}
+function renderAdds(){$('#adds').innerHTML=`<button class="addone" data-act="apuntar-dia">＋ Añadir a este día</button><span hidden>${ORDER.map(k=>`<button class="add" data-add="${k}"></button>`).join('')}</span>`}
 
 /* ---------- apunte rápido ---------- */
 function openComp(kind,editId,occDate,extra){
@@ -1501,7 +1534,7 @@ function openSheet(o){
   renderSheetGeo();renderSheetTrip();renderSheetPhotos();
   if(!e&&!p.title)setTimeout(()=>{const n=$('#s-name');if(n)n.focus()},60);
 }
-function closeSheet(saved){
+function closeSheet(saved){{const sv=document.querySelector('#sheet [data-act="sheet-save"]');if(sv){sv.hidden=false;sv.style.visibility=''}}
   const sh=S.sheet;
   if(!saved&&sh&&sh.added.length&&S.assets)sh.added.forEach(id=>S.assets.delete(id).catch(()=>{}));
   S.sheet=null;$('#sheet').hidden=true;$('#sheet-body').innerHTML='';
@@ -2496,7 +2529,6 @@ function openSettings(){
   h+=`<section class="set-sec"><h3>Copia de seguridad</h3><p class="sub">Guarda tus apuntes y fotos en un archivo. Si cambias de móvil, instala la app y usa «Importar copia». También sirve para pasar los datos desde la versión de Claude.</p><div class="btnrow sm"><button class="pri" data-act="backup">Guardar copia</button><button class="sec" data-act="restore">Importar copia</button></div><div id="imp-confirm" hidden></div><p class="note">${SET.lastBackup?'Última copia: '+esc(longDate(ymd(new Date(SET.lastBackup)))):'Todavía no has hecho ninguna copia.'} Los vídeos no se guardan en la copia: se pueden volver a crear.</p></section>`;
   h+=`<section class="set-sec"><h3>Gemini</h3><p class="sub">Se usa para ubicar sitios en el mapa y resumir viajes. Consigue una clave gratis en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> y pégala aquí. Solo se guarda en este móvil.</p><label class="lbl">Clave de Gemini<input class="field" id="g-key" type="password" autocomplete="off" placeholder="AIza…" value="${esc(SET.geminiKey||'')}"></label><label class="lbl" style="margin-top:10px">Modelo<input class="field" id="g-model" type="text" autocomplete="off" value="${esc(SET.geminiModel||'gemini-flash-latest')}"></label><div class="btnrow sm"><button class="sec" data-act="g-test">Probar</button></div><p class="note" id="g-msg"></p></section>`;
   if(isNative()){const A=avisos();h+=`<section class="set-sec"><h3>Avisos</h3><p class="sub">Notificaciones en el móvil, aunque no tengas la app abierta.</p><div class="chips"><button class="chip" data-act="av-on" aria-pressed="${A.on}">${A.on?'Avisos activados':'Activar avisos'}</button></div><div id="av-opts" ${A.on?'':'hidden'}><p class="ftitle" style="margin-top:12px">Eventos con hora</p><div class="chips">${[[0,'No'],[15,'15 min antes'],[30,'30 min antes'],[60,'1 hora antes'],[120,'2 horas antes']].map(([v,l])=>`<button class="chip" data-aveven="${v}" aria-pressed="${A.eventos===v}">${l}</button>`).join('')}</div><p class="ftitle" style="margin-top:12px">Avisarme de</p><div class="chips">${[['tareas','Tareas'],['recibos','Recibos'],['caducidades','Caducidades'],['cumples','Cumpleaños'],['viajes','Viajes'],['teruel','Eventos para ti'],['cartera','Cartera (cada día, 20:00)'],['semana','Resumen del domingo']].map(([k,l])=>`<button class="chip" data-avk="${k}" aria-pressed="${!!A[k]}">${l}</button>`).join('')}</div></div></section>`}
-  h+=`<section class="set-sec"><h3>Google Maps</h3><p class="sub">Pega tu clave de Google Maps para ver su mapa y su buscador de sitios dentro de la app. Sin clave se usa el mapa libre.</p><label class="lbl">Clave de Google Maps<input class="field" id="gm-key" type="password" autocomplete="off" placeholder="AIza…" value="${esc(SET.gmapsKey||'')}"></label></section>`;
   h+=`<section class="set-sec"><h3>Correo</h3><p class="sub">Dirección de tu script de Google que lee el correo. Las reservas, citas, facturas y tareas que encuentre aparecerán en «Por revisar».</p><label class="lbl">Dirección del script<input class="field" id="mail-url" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec?k=…" value="${esc(SET.mailUrl||'')}"></label><div class="btnrow sm"><button class="sec" data-act="mail-test">Probar</button></div></section>`;
   if(isNative())h+=`<section class="set-sec"><h3>Trade Republic</h3><p class="sub">La app mira solo las capturas de pantalla de Trade Republic que hagas y te propone actualizar tu cartera. No mira ninguna otra foto.</p><div class="chips"><button class="chip" data-act="tr-auto" aria-pressed="${!!SET.trAuto}">${SET.trAuto?'Leyendo capturas de Trade Republic':'Leer capturas de Trade Republic'}</button></div></section>`;
   if(isNative())h+=`<section class="set-sec"><h3>Widget</h3><p class="sub">Fondo del widget de la pantalla de inicio.</p><div class="chips" role="group" aria-label="Fondo del widget">${[['transparente','Transparente'],['semi','Semitransparente'],['negro','Negro']].map(([k,l])=>`<button class="chip" data-wbg="${k}" aria-pressed="${(SET.widgetBg||'transparente')===k}">${l}</button>`).join('')}</div><p class="note">El tiempo del widget se actualiza solo cada media hora, aunque no abras la app. Si ves que no lo hace, pon la batería de la app en «Sin restricciones».</p></section>`;
@@ -2525,6 +2557,8 @@ function closeViewer(){S.viewer=null;$('#viewer').hidden=true;$('#viewer-img').r
 
 /* ---------- MÁS: secciones nuevas ---------- */
 Object.assign(IC,{
+  musica:svg('<path d="M6 12.2V3.5l7-1.5v8.7"/><circle cx="4.3" cy="12.2" r="1.8"/><circle cx="11.3" cy="10.7" r="1.8"/>'),
+  mic:svg('<rect x="5.5" y="1.8" width="5" height="8" rx="2.5"/><path d="M3.2 7.5a4.8 4.8 0 0 0 9.6 0M8 12.3v2"/>'),
   cumple:svg('<path d="M3 13.5h10M4 13.5V9h8v4.5M8 9V6.6M8 4.8c-.9 0-1.3-.7-1.3-1.2C6.7 2.8 8 1.8 8 1.8s1.3 1 1.3 1.8c0 .5-.4 1.2-1.3 1.2z"/>'),
   caducidad:svg('<rect x="2.5" y="3.5" width="11" height="9" rx="1.6"/><path d="M5 7h3M5 9.6h6"/><circle cx="11" cy="6.6" r="1.1"/>'),
   ocio:svg('<rect x="2.5" y="3.5" width="11" height="9" rx="1.6"/><path d="M6.7 6.2v3.6L9.8 8z"/>'),
@@ -2570,12 +2604,13 @@ const noAI=()=>typeof openSettings==='function'?'<p class="note">Para usar la IA
 function openMas(sub,arg){S.mas=sub||null;S.masArg=arg||null;if(sub==='cuentas'){S.accId=null;setView('cuentas');return}setView('mas')}
 function masBack(){
   const back={persona:'personas',maleta:'maletas',tienda:'precios',grupo:'grupos'}[S.mas];
-  S.mas=back||null;S.masArg=null;renderMas();window.scrollTo(0,0);
+  if(back){S.mas=back;S.masArg=null;renderMas();window.scrollTo(0,0);return}
+  const sec=MAS_SECTION[S.mas]||'hoy';S.mas=null;S.masArg=null;setView(sec);
 }
 function renderMas(){
   const box=$('#mas-body');if(!box)return;
   const head=$('#mas-head');
-  if(!S.mas){head.hidden=false;box.innerHTML=masHome();return}
+  if(!S.mas){if(S.view==='mas')setView('hoy');return}
   head.hidden=true;
   const fn={revisar:masRevisar,fijos:masFijos,partituras:masPartituras,tareas:masTareas,grupos:masGrupos,grupo:masGrupo,recibos:masRecibos,coche:masCoche,precios:masPrecios,tienda:masTienda,personas:masPersonas,persona:masPersona,caducidades:masCaducidades,ocio:masOcio,maletas:masMaletas,maleta:masMaleta}[S.mas];
   if(!fn){S.mas=null;return renderMas()}
@@ -2585,7 +2620,7 @@ function renderMas(){
 }
 const EYE_SVG='<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>';
 const eyeHTML=()=>`<button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="${!html.classList.contains('privado')}">${EYE_SVG}</button>`;
-function backHTML(label){return `<div class="backrow"><button class="back" data-act="mas-back">‹ ${esc(label||'Más')}</button>${eyeHTML()}</div>`}
+function backHTML(label){return `<div class="backrow"><button class="back" data-act="mas-back">‹ ${esc(label||SECTION_LABEL[MAS_SECTION[S.mas]]||'Hoy')}</button>${eyeHTML()}</div>`}
 function masHome(){
   const t=todayStr();
   const rec=recibosList();const mes=rec.reduce((s2,r)=>s2+r.mensual,0);
@@ -3022,7 +3057,7 @@ function saveOcio(){
 function maletaBase(){const c=S.entries.get('cfg-maleta');return c&&Array.isArray(c.items)?c.items:[]}
 function masMaletas(){
   const t=todayStr();const trips=allTrips().filter(tr=>(tr.end||tr.date)>=ymd(addDays(parse(t),-30)));
-  let h=backHTML()+`<h1 class="title t2">Maletas</h1><p class="sub" style="margin-top:8px">Una lista para cada viaje. La IA te sugiere qué llevar según el destino, los días y el tiempo, y tú añades o quitas lo que quieras.</p>`;
+  let h=backHTML()+`<h1 class="title t2">Viajes</h1><p class="sub" style="margin-top:8px">Tus viajes y su maleta: una lista para cada uno. La IA te sugiere qué llevar según el destino, los días y el tiempo, y tú añades o quitas lo que quieras.</p>`;
   if(!trips.length)return h+`<section class="card"><p class="sub">Cuando apuntes un viaje en el calendario, su maleta aparecerá aquí.</p></section>`;
   h+=`<section class="card">${trips.sort((a,b)=>a.date<b.date?-1:1).map(tr=>{const m=tr.maleta||[];const d=m.filter(x=>x.done).length;return `<button class="row2" data-maleta="${tr.id}"><span class="ic" style="--c:var(--accent)">${IC.maleta}</span><span class="tx"><span class="t">${esc(tr.title)}</span><span class="m">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`, ${d} de ${m.length} listo`:', sin empezar'}</span>${m.length?`<span class="prog"><i style="width:${(d/m.length*100).toFixed(0)}%"></i></span>`:''}</span></button>`}).join('')}</section>`;
   return h;
@@ -3030,7 +3065,7 @@ function masMaletas(){
 function masMaleta(){
   const tr=S.entries.get(S.masArg);if(!tr){S.mas='maletas';return masMaletas()}
   const m=tr.maleta||[];const d=m.filter(x=>x.done).length;
-  let h=backHTML('Maletas')+`<h1 class="title t2">${esc(tr.title)}</h1><p class="sub" style="margin-top:8px">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`. ${d} de ${m.length} cosas listas`:''}</p>`;
+  let h=backHTML('Viajes')+`<h1 class="title t2">${esc(tr.title)}</h1><p class="sub" style="margin-top:8px">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`. ${d} de ${m.length} cosas listas`:''}</p>`;
   if(m.length)h+=`<span class="prog" style="display:block;height:8px"><i style="width:${(d/m.length*100).toFixed(0)}%"></i></span>`;
   h+=`<div class="irow" style="margin-top:14px"><input class="field" id="m-new" placeholder="Añadir: cargador, bañador…" style="flex:1"><button class="pri" data-act="m-add" style="height:40px">Añadir</button></div>`;
   h+=`<div class="chips" id="m-cats">${MAL_CATS.map(c=>`<button class="chip" data-mcat="${c}" aria-pressed="${(S.mcat||'Otros')===c}">${c}</button>`).join('')}</div>`;
@@ -3065,6 +3100,7 @@ Responde solo con JSON: {"items":[{"t":"cosa concreta, con cantidad si hace falt
 /* ----- hojas genéricas ----- */
 function sheetOpen(mode,title,state,html){
   closeComp();
+  {const sv=document.querySelector('#sheet [data-act="sheet-save"]');if(sv){sv.hidden=false;sv.style.visibility=''}}
   S.sheet=Object.assign({mode,added:[],photos:[],orig:[],uploading:0},state);
   $('#sheet-title').textContent=title;
   $('#sheet-body').innerHTML=html+`<p class="err" id="s-err" role="alert"></p>`;
@@ -3284,14 +3320,14 @@ function appContext(){
 }
 async function askApp(q){
   q=String(q||'').trim();if(!q)return;
-  const item={q,busy:true};S.askLog.unshift(item);S.askLog=S.askLog.slice(0,8);renderMas();
+  const item={q,busy:true};S.askLog.unshift(item);S.askLog=S.askLog.slice(0,8);render();
   try{
     item.a=await aiTextCall(`Eres el asistente de «Día a día», la app personal de organización de quien te pregunta. Responde en español, hablándole de tú, de forma breve y directa (normalmente de 1 a 4 frases). Usa solo los datos de abajo. Para dinero, apóyate en «totales_por_mes» cuando sirva y suma con cuidado. Si los datos no permiten responder, dilo con naturalidad y sugiere qué podría apuntar. Escribe las fechas como «3 de octubre». Sin markdown ni listas.
 Leyenda: k = tipo de apunte (gasto, ingreso, evento, tarea, todo = tarea sin fecha, viaje, lugar = sitio visitado, pendiente = sitio por visitar, persona, regalo, caducidad, ocio, repostaje, cuenta, nota), t = título, d = fecha, eur = importe en euros, cat = categoría, rep = se repite (weekly, monthly, quarterly, yearly).
 DATOS: ${appContext()}
 PREGUNTA: ${q}`);
   }catch(e){item.err=aiMsg(e)}
-  item.busy=false;if(S.view==='mas'&&!S.mas)renderMas();
+  item.busy=false;render();
 }
 function askHTML(){
   let h=`<div class="ask"><input class="field" id="ask-q" type="text" autocomplete="off" enterkeyhint="send" placeholder="Pregúntale a tu app…" aria-label="Pregúntale a tu app"><button class="pri" data-act="ask">Preguntar</button></div>`;
@@ -3912,7 +3948,7 @@ async function reviewDecide(id,ok){
   if(S.view==='mas')renderMas();else render();
   toast(ok?'Añadido':'Descartado');
 }
-function reviewsBadge(){const n=listOf('revisar').length;const t=document.querySelector('.tab[data-tab="mas"]');if(t){let b=t.querySelector('.tbadge');if(n){if(!b){b=document.createElement('span');b.className='tbadge';t.appendChild(b)}b.textContent=n>9?'9+':n}else if(b)b.remove()}}
+function reviewsBadge(){const n=listOf('revisar').length;const t=document.querySelector('.tab[data-tab="hoy"]');if(t){let b=t.querySelector('.tbadge');if(n){if(!b){b=document.createElement('span');b.className='tbadge';t.appendChild(b)}b.textContent=n>9?'9+':n}else if(b)b.remove()}}
 
 /* ---------- eventos fijos (solo se ven al entrar en el día) ---------- */
 const WD=['L','M','X','J','V','S','D'];
@@ -4029,6 +4065,83 @@ function extras3Click(el,d){
   return false;
 }
 
+/* ---------- estructura: secciones, Hoy y Apuntar ---------- */
+const MAS_SECTION={tareas:'cal',fijos:'cal',grupos:'cal',grupo:'cal',caducidades:'cal',cuentas:'sum',recibos:'sum',precios:'sum',tienda:'sum',coche:'sum',maletas:'map',maleta:'map',personas:'hoy',persona:'hoy',ocio:'hoy',partituras:'hoy',revisar:'hoy'};
+const SECTION_LABEL={hoy:'Hoy',cal:'Agenda',sum:'Dinero',map:'Lugares'};
+const sectionOf=v=>v==='mas'?(MAS_SECTION[S.mas]||'hoy'):v==='cuentas'?'sum':v==='sitios'?'map':v;
+const AP_ITEMS=[['evento','Evento'],['tarea','Tarea'],['gasto','Gasto'],['ingreso','Ingreso'],['lugar','Sitio'],['viaje','Viaje'],['nota','Nota'],['traspaso','Traspaso'],['ticket','Ticket'],['todo','Sin fecha'],['repostaje','Repostaje'],['pendiente','Por visitar']];
+function openApuntar(date){
+  const dd=date||todayStr();
+  sheetOpen('apuntar',dd!==todayStr()?'Apuntar · '+shortDate(dd):'Apuntar',{date:dd},
+  `<button class="bigmic" data-act="ap-voz"><span class="bm-ic">${IC.mic}</span><span class="tx"><b>Dímelo</b><small>«45 euros de gasolina», «recuérdame mañana a las 9…»</small></span></button>
+  <div class="apgrid">${AP_ITEMS.map(([k,l])=>`<button class="apbtn" data-ap="${k}"><span class="ic" style="--c:var(--accent)">${IC[{lugar:'lugar',ticket:'ticket',todo:'tarea',repostaje:'repostaje',pendiente:'lugar'}[k]||k]}</span>${l}</button>`).join('')}</div>`);
+  const sv=document.querySelector('#sheet [data-act="sheet-save"]');if(sv)sv.style.visibility='hidden';
+}
+function apGo(k){
+  const date=(S.sheet&&S.sheet.date)||todayStr();closeSheet(true);
+  if(['evento','tarea','gasto','ingreso','viaje','nota','traspaso'].includes(k)){S.sel=date;S.cursor=monthOf(date);setView('cal');render();openComp(k);return}
+  if(k==='lugar'){S.sel=date;S.cursor=monthOf(date);setView('cal');render();openSheet({date});return}
+  if(k==='ticket'){ticketPick(true);return}
+  if(k==='todo'){openMas('tareas');setTimeout(()=>{const i=$('#todo-new');if(i)i.focus()},150);return}
+  if(k==='repostaje'){openRepostajeSheet();return}
+  if(k==='pendiente'){openPendSheet();return}
+}
+function hoyItems(s){
+  return occurrences(s,s).filter(o=>!['gasto','ingreso','traspaso'].includes(o.e.kind)&&!(o.e.kind==='tarea'&&o.e.done)).sort((a,b)=>rank(a.e)-rank(b.e)||String(a.e.time||'').localeCompare(String(b.e.time||'')));
+}
+function renderHoy(){
+  const box=$('#hoy-body');if(!box)return;
+  const t=todayStr(),now=new Date(),hr=now.getHours();
+  $('#hoy-greet').textContent=hr<6||hr>=21?'BUENAS NOCHES':hr<14?'BUENOS DÍAS':'BUENAS TARDES';
+  $('#hoy-title').textContent=longDate(t);
+  const gear=$('#hoy-gear');if(gear)gear.hidden=typeof openSettings!=='function';
+  let h='';
+  const w=weatherFor(t);
+  if(w.day)h+=`<button class="hcard" data-hgo="tiempo"><span class="wxi">${wIcon(w.day.sky,36)}</span><span class="tx"><span class="t">${esc(w.trip?w.trip.title:'Teruel')} · ${w.day.tmax}° / ${w.day.tmin}°</span><span class="m">${esc(w.day.text||SKY[w.day.sky]||'')}${w.day.rain?`, ${w.day.rain} % de lluvia`:''}</span></span><span class="m">›</span></button>`;
+  const nrv=listOf('revisar').length;
+  if(nrv)h+=`<button class="hcard gold" data-act="go-revisar"><span class="ic" style="--c:var(--accent)">${IC.nota}</span><span class="tx"><span class="t">Por revisar</span><span class="m">${nrv} ${nrv===1?'cosa':'cosas'} del correo, capturas o compartido</span></span><span class="m">›</span></button>`;
+  const late=[...S.entries.values()].filter(e=>e.kind==='tarea'&&!e.done&&e.date<t);
+  const items=hoyItems(t),fx=fijosOn(t);
+  h+=`<section class="card"><div class="chead"><h2>Tu día</h2><button class="link" data-hgo="cal">Agenda ›</button></div>`;
+  if(items.length||fx.length)h+=`<ul class="list">${items.map(o=>itemHTML(o)).join('')}${fx.map(fijoRow).join('')}</ul>`;
+  else h+=`<p class="sub">Nada apuntado para hoy.</p>`;
+  if(late.length)h+=`<button class="row2" data-hgo="cal"><span class="tx"><span class="t" style="color:var(--gasto)">${late.length} ${late.length===1?'tarea atrasada':'tareas atrasadas'}</span></span><span class="m">›</span></button>`;
+  h+=`</section>`;
+  const t1=ymd(addDays(parse(t),1)),it1=hoyItems(t1).concat(fijosOn(t1).map(f=>({fijo:f})));
+  if(it1.length)h+=`<section class="card"><div class="chead"><h2>Mañana</h2></div><ul class="list">${it1.slice(0,4).map(o=>o.fijo?fijoRow(o.fijo):itemHTML(o)).join('')}</ul>${it1.length>4?`<p class="note">Y ${it1.length-4} más.</p>`:''}</section>`;
+  const td=listOf('todo').filter(x=>!x.done).sort((a,b)=>(a.created||0)-(b.created||0));
+  h+=`<section class="card"><div class="chead"><h2>Tareas</h2><button class="link" data-sub="tareas">${td.length?'Ver todas ›':'Abrir ›'}</button></div>${td.length?td.slice(0,4).map(todoRowHTML).join(''):'<p class="sub">No tienes tareas sin fecha pendientes.</p>'}</section>`;
+  const ms=ymd(new Date(now.getFullYear(),now.getMonth(),1,12));let gm=0,gd=0;
+  occurrences(ms,t).forEach(({e,date})=>{if(e.kind==='gasto'){gm+=e.amount||0;if(date===t)gd+=e.amount||0}});
+  h+=`<button class="hcard" data-hgo="sum"><span class="ic" style="--c:var(--gasto)">${IC.gasto}</span><span class="tx"><span class="t">Gastado este mes: ${fmt(gm)}</span><span class="m">${gd?'Hoy '+fmt(gd):'Hoy no has gastado nada'}</span></span><span class="m">›</span></button>`;
+  const pc=typeof picksCfg==='function'&&picksCfg(),lim=ymd(addDays(parse(t),7));
+  const picks=pc&&pc.picks?S.teruel.filter(ev=>pc.picks[ev.id]&&(ev.end||ev.date)>=t&&ev.date<=lim).slice(0,2):[];
+  if(picks.length)h+=`<section class="card"><div class="chead"><h2>Para ti en Teruel</h2><button class="link" data-hgo="teruel">Ver ›</button></div>${picks.map(ev=>`<div class="row2"><span class="tx"><span class="t">${esc(ev.title)}</span><span class="m">${esc(relDay(ev.date))}${ev.time?' a las '+esc(ev.time):''}${ev.place?', '+esc(ev.place):''}</span></span></div>`).join('')}</section>`;
+  const cum=personas().filter(p=>p.cumple).map(p=>({p,d:nextBirthday(p)})).filter(x=>daysBetween(t,x.d)<=30).sort((a,b)=>a.d<b.d?-1:1).slice(0,3);
+  if(cum.length)h+=`<section class="card"><div class="chead"><h2>Cumpleaños</h2></div>${cum.map(x=>`<button class="row2" data-persona="${x.p.id}">${avatarHTML(x.p,34)}<span class="tx"><span class="t">${esc(x.p.id==='yo'?'Tú':x.p.title)}</span><span class="m">${esc(shortDate(x.d))}</span></span><span class="pill-s soon">${esc(relIn(x.d))}</span></button>`).join('')}</section>`;
+  h+=`<section class="card"><div class="chead"><h2>Pregúntale a tu app</h2></div>${askHTML()}</section>`;
+  const more=[['personas','regalo','Personas y regalos'],['ocio','ocio','Ocio'],['partituras','musica','Partituras']];
+  if(typeof openSettings==='function')more.push(['ajustes','ajustes','Ajustes']);
+  h+=`<p class="grp" style="margin:22px 4px 8px">Más</p><div class="tiles">${more.map(([k,ic,n])=>`<button class="tile sm" ${k==='ajustes'?'data-act="settings"':`data-sub="${k}"`}><span class="ic" style="--c:var(--accent)">${IC[ic]}</span><b>${esc(n)}</b></button>`).join('')}</div>`;
+  box.innerHTML=h;
+}
+function hoyClick(el,d){
+  if(d.ap){apGo(d.ap);return true}
+  if(d.sub){S.mas=null;openMas(d.sub);return true}
+  if(d.lug){if(d.lug==='viajes')openMas('maletas');else setView(d.lug);return true}
+  if(d.hgo){
+    if(d.hgo==='tiempo'||d.hgo==='teruel'){S.calMode=d.hgo;try{localStorage.setItem('diaadia.calmode',S.calMode)}catch(_){}S.sel=todayStr();S.cursor=monthOf(S.sel);setView('cal');document.querySelectorAll('[data-calmode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.calmode===S.calMode)));render();return true}
+    if(d.hgo==='cal'){S.sel=todayStr();S.cursor=monthOf(S.sel);setView('cal');render();return true}
+    setView(d.hgo);return true;
+  }
+  switch(d.act){
+    case 'apuntar':openApuntar();return true;
+    case 'apuntar-dia':openApuntar(S.sel);return true;
+    case 'ap-voz':closeSheet(true);openDictar(true);return true;
+  }
+  return false;
+}
+
 /* ---------- clics ---------- */
 function extras2Click(el,d){
   if(d.capacc&&S.sheet&&S.sheet.mode==='cartera'){S.sheet.newAcc=d.capacc==='new';S.sheet.accId=d.capacc==='new'?null:d.capacc;el.parentNode.querySelectorAll('[data-capacc]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));$('#cap-new').hidden=!S.sheet.newAcc;return true}
@@ -4063,14 +4176,16 @@ function render(){
   if(S.view==='map'){renderMapUI();drawOverlay()}
   if(S.view==='cuentas')renderCuentas();
   if(S.view==='mas')renderMas();
+  if(S.view==='hoy')renderHoy();
   scheduleWidget();
   if(typeof syncEyes==='function')syncEyes();
   if(typeof reviewsBadge==='function')reviewsBadge();
   if(typeof syncGuard==='function')setTimeout(syncGuard,0);
 }
 function setView(v,opts){
-  S.view=v;['cal','map','sitios','cuentas','sum','mas'].forEach(x=>{$('#v-'+x).hidden=x!==v});
-  const tv=v==='cuentas'?'mas':v;document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.tab===tv)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  S.view=v;['hoy','cal','map','sitios','cuentas','sum','mas'].forEach(x=>{$('#v-'+x).hidden=x!==v});
+  const tv=sectionOf(v);
+  if(v==='hoy')renderHoy();document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.tab===tv)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   if(v==='mas')renderMas();
   if(v!=='cal')closeComp();
   if(v!=='map'&&S.placing){S.placing=null}
@@ -4120,13 +4235,13 @@ $('#toast-undo').addEventListener('click',()=>{const f=undoFn;undoFn=null;$('#to
 document.addEventListener('click',ev=>{
   const el=ev.target.closest('button');if(!el)return;
   const d=el.dataset;
-  if(d.tab==='mas'){if(S.view==='mas'&&S.mas){S.mas=null;S.masArg=null;renderMas();window.scrollTo(0,0);return}S.mas=null;return setView('mas')}
-  if(d.act==='mas-back'&&S.view!=='mas'){S.mas=null;return setView('mas')}
+  if(d.act==='mas-back'&&S.view==='cuentas'){S.mas=null;return setView('sum')}
   if(extrasClick(el,d))return;
   if(extras2Click(el,d))return;
   if(gruposClick(el,d))return;
   if(todosClick(el,d))return;
   if(extras3Click(el,d))return;
+  if(hoyClick(el,d))return;
   if(typeof geoClick==='function'&&geoClick(el,d))return;
   if(d.tab){if(d.tab==='sitios'&&S.view==='sitios'&&S.placeKey){S.placeKey=null;renderSitios();return}if(d.tab==='cuentas'&&S.view==='cuentas'&&S.accId){S.accId=null;renderCuentas();return}return setView(d.tab)}
   if(d.calmode){S.calMode=d.calmode;try{localStorage.setItem('diaadia.calmode',S.calMode)}catch(_){}closeComp();render();return}
@@ -4248,6 +4363,7 @@ sheet.addEventListener('change',ev=>{
   if(ev.target.id==='s-date')renderSheetTrip();
 });
 sheet.addEventListener('input',()=>{const e=$('#s-err');if(e)e.textContent=''});
+$('#hoy-body').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='ask-q'){ev.preventDefault();const q=ev.target.value;ev.target.value='';askApp(q)}});
 $('#mas-body').addEventListener('input',ev=>{if(ev.target.id==='pq'){S.pq=ev.target.value;renderPriceSearch()}});
 $('#sheet-body').addEventListener('change',ev=>{if(ev.target.id==='t-store'&&S.sheet&&S.sheet.mode==='ticket'){document.querySelectorAll('#t-items [data-ti]').forEach(inp=>{const it=S.sheet.items[+inp.dataset.ti];if(it){if(inp.dataset.tf==='p')it.p=inp.value;else{const v=parseAmount(inp.value);it.u=isFinite(v)?v:null}}});renderTicketItems()}});
 $('#sheet-body').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='geo-q'){ev.preventDefault();geoSearch()}});
@@ -4268,7 +4384,7 @@ function syncEyes(){const hid=html.classList.contains('privado');document.queryS
 document.addEventListener('click',ev=>{const t=ev.target.closest&&ev.target.closest('.pv');if(t&&html.classList.contains('privado')){ev.preventDefault();ev.stopPropagation();html.classList.remove('privado');syncEyes()}},true);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){html.classList.add('privado');syncEyes()}});
 const NAV={on:(()=>{try{return window.top===window}catch(_){return false}})(),guard:false,skip:false};
-function isRootUI(){return S.view==='cal'&&!S.sheet&&!S.comp&&!S.viewer&&!S.placing}
+function isRootUI(){return S.view==='hoy'&&!S.sheet&&!S.comp&&!S.viewer&&!S.placing}
 function syncGuard(){
   if(!NAV.on)return;
   try{
@@ -4281,12 +4397,12 @@ function navBack(){
   if(S.sheet){closeSheet(false);return}
   if(S.comp){closeComp();return}
   if(S.placing){S.placing=null;renderPlacing();if(typeof drawOverlay==='function')drawOverlay();return}
-  if(S.view==='mas'&&S.mas){if(['persona','maleta','tienda','grupo'].includes(S.mas))masBack();else{S.mas=null;S.masArg=null;renderMas()}window.scrollTo(0,0);return}
+  if(S.view==='mas'&&S.mas){masBack();window.scrollTo(0,0);return}
   if(S.view==='cuentas'&&S.accId){S.accId=null;renderCuentas();return}
-  if(S.view==='cuentas'){S.mas=null;setView('mas');return}
+  if(S.view==='cuentas'){S.mas=null;setView('sum');return}
   if(S.view==='sitios'&&S.placeKey){S.placeKey=null;renderSitios();return}
   if(S.view==='map'&&(S.mapSel||S.mapTrip!=='all')){if(S.mapSel){S.mapSel=null}else{S.mapTrip='all'}renderMapUI();if(typeof focusCurrent==='function'&&!S.mapSel)focusCurrent(true);if(typeof drawOverlay==='function')drawOverlay();return}
-  if(S.view!=='cal'){setView('cal');return}
+  if(S.view!=='hoy'){setView('hoy');return}
 }
 if(NAV.on){
   window.addEventListener('popstate',()=>{if(NAV.skip){NAV.skip=false;return}NAV.guard=false;navBack();setTimeout(syncGuard,0)});

@@ -78,6 +78,10 @@ Para un widget nuevo (por ejemplo, «Cuentas» con tu patrimonio) se copian esos
 **Avisos:** en ⚙ → Avisos los activas y eliges de qué quieres que te avise (eventos, tareas, recibos, caducidades, cumpleaños, viajes y el resumen del domingo).
 
 
+## Cómo está organizada
+
+Abajo hay cinco botones: **Hoy** (tu resumen del día), **Agenda** (calendario, tareas, eventos fijos, grupos y caducidades), **＋** (apuntar cualquier cosa, también por voz), **Dinero** (resumen, cuentas, recibos, precios y coche) y **Lugares** (mapa, sitios y viajes). Personas, Ocio, Partituras y Ajustes están al final de Hoy.
+
 ## Novedades: voz, correo, compartir y más
 
 - **Apunta día:** un segundo icono en el móvil. «Ok Google, abre Apunta día» y dicta: gastos, eventos, tareas, recordatorios («recuérdame mañana a las 9…»), sitios con su gasto y su nota, canciones para Spotify, partituras o «borra lo último». También desde el panel de ajustes rápidos y el botón 🎙 de los widgets.
@@ -86,7 +90,6 @@ Para un widget nuevo (por ejemplo, «Cuentas» con tu patrimonio) se copian esos
 - **Eventos fijos:** lo que se repite cada semana; solo aparece al entrar en el día.
 - **Partituras:** búsqueda en IMSLP de obras para piano solo, con la mejor edición descargable.
 - **Correo:** el script `correo/Codigo.gs` va en script.google.com (ver las instrucciones dentro del archivo).
-- **Google Maps:** pega tu clave en ⚙ → Google Maps.
 
 ## 7. Actualizar la app
 
