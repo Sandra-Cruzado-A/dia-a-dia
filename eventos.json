@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-16",
+ "updatedAt": "2026-10-17",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -49,30 +49,6 @@
    "url": "https://www.diariodeteruel.es/cultura/el-iet-organiza-un-encuentro-teruel-mudejar-que-analizara-la-convivencia-de-los-dos-mundos-que-habitaron-la-ciudad",
    "end": "2026-10-17",
    "time": "19:00"
-  },
-  {
-   "id": "im-pulse-tributo-a-pink-floyd-2026-10-16",
-   "title": "IM-PULSE, tributo a Pink Floyd",
-   "date": "2026-10-16",
-   "place": "Teatro Marín",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Más de dos horas de concierto con montaje audiovisual. De 30 a 38 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:00"
-  },
-  {
-   "id": "im-pulse-pink-floyd-tribute-live-show-2026-10-16",
-   "title": "IM-PULSE Pink Floyd Tribute Live Show",
-   "date": "2026-10-16",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Espectáculo audiovisual homenaje a Pink Floyd a cargo de la banda tributo IM-PULSE. Entradas desde 30 € hasta 38 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:00"
   },
   {
    "id": "feria-sobre-ruedas-salon-del-vehiculo-2026-10-16",
@@ -135,6 +111,18 @@
    "time": "18:00"
   },
   {
+   "id": "chiavette-polifonicamente-incorrectos-2026-10-17",
+   "title": "Chiavette: Polifónicamente incorrectos",
+   "date": "2026-10-17",
+   "place": "Sala de la Villa, Puertomingalvo",
+   "zona": "provincia",
+   "cat": "Música",
+   "desc": "El cuarteto vocal Chiavette interpreta un repertorio jocoso del Cancionero de Palacio en el marco de 'Aragón, tierra de cultura'.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-programacion-de-aragon-tierra-de-cultura-llegara-este-sabado-a-puertomingalvo",
+   "time": "18:00"
+  },
+  {
    "id": "concierto-para-violin-y-piano-de-alberto-navas-y-fran-galleg-2026-10-17",
    "title": "Concierto para violín y piano de Alberto Navas y Fran Gallego",
    "date": "2026-10-17",
@@ -181,6 +169,17 @@
    "url": "https://www.diariodeteruel.es/deportes"
   },
   {
+   "id": "menu-cerrado-2026-10-17",
+   "title": "Menú cerrado",
+   "date": "2026-10-17",
+   "place": "Teatro Municipal de Alcañiz",
+   "zona": "provincia",
+   "cat": "Teatro",
+   "desc": "Comedia dramática gastronómica de Jordi Casanovas con Nacho López, Raúl Fernández de Pablo y Carlos Santos dentro de Escenas de Otoño. Entrada: 15 €.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/alta-cocina-recuerdos-amargos-y-una-masculinidad-mal-entendida-en-el-teatro-municipal-de-alcaniz"
+  },
+  {
    "id": "carrera-popular-aragon-sur-2026-10-18",
    "title": "Carrera Popular Aragón Sur",
    "date": "2026-10-18",
@@ -203,6 +202,30 @@
    "url": "https://ecodeteruel.tv/mirambel-acoge-la-xxii-marcha-senderista-del-maestrazgo-y-la-iii-feria-de-salud-el-proximo-18-de-octubre/"
   },
   {
+   "id": "taller-prensa-sin-edad-2026-10-19",
+   "title": "Taller Prensa sin edad",
+   "date": "2026-10-19",
+   "place": "Biblioteca municipal de Híjar",
+   "zona": "provincia",
+   "cat": "Charlas",
+   "desc": "Taller gratuito y participativo de la DPT y Periodistas de Aragón para aprender a identificar noticias falsas y bulos.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
+   "end": "2026-10-26"
+  },
+  {
+   "id": "camina-por-tu-salud-2026-10-20",
+   "title": "Camina por tu salud",
+   "date": "2026-10-20",
+   "place": "Frontón San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Inicio de las andadas gratuitas para mayores de 55 años organizadas por el Ayuntamiento y el Club Alpino Javalambre, con recorridos de 5 a 8 km.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/las-rutas-circulares-camina-por-tu-salud-para-mayores-de-55-se-inician-el-dia-20",
+   "time": "10:00"
+  },
+  {
    "id": "conferencia-la-historia-de-la-aviacion-espanola-2026-10-20",
    "title": "Conferencia: la historia de la aviación española",
    "date": "2026-10-20",
@@ -213,6 +236,18 @@
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/el-casino-de-teruel-llena-de-historia-y-literatura-el-centro-de-la-capital-con-cuatro-grandes-citas-en-octubre/",
    "time": "19:00"
+  },
+  {
+   "id": "taller-prensa-sin-edad-2026-10-22",
+   "title": "Taller Prensa sin edad",
+   "date": "2026-10-22",
+   "place": "Biblioteca municipal de Manzanera",
+   "zona": "provincia",
+   "cat": "Charlas",
+   "desc": "Sesiones formativas gratuitas impartidas por periodistas para aprender a verificar información y combatir bulos.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
+   "end": "2026-10-29"
   },
   {
    "id": "motorland-classic-festival-2026-2026-10-23",
@@ -239,13 +274,25 @@
    "time": "18:00"
   },
   {
+   "id": "la-biblioteca-imaginaria-2026-10-24",
+   "title": "La Biblioteca Imaginaria",
+   "date": "2026-10-24",
+   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Infantil",
+   "desc": "Obra infantil de Teatro Arbolé programada a través del Teatro Marín. Entrada: 6 € gastos de gestión incluidos.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "18:00"
+  },
+  {
    "id": "andre-y-dorine-2026-10-24",
    "title": "André y Dorine",
    "date": "2026-10-24",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Obra de teatro de máscaras sin texto. Entradas disponibles por 6 € más gastos de gestión.",
+   "desc": "Espectáculo de teatro de máscaras sin texto. Entradas a 6 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -298,13 +345,25 @@
    "time": "19:30"
   },
   {
+   "id": "taller-prensa-sin-edad-2026-10-28",
+   "title": "Taller Prensa sin edad",
+   "date": "2026-10-28",
+   "place": "Biblioteca municipal de Alcorisa",
+   "zona": "provincia",
+   "cat": "Charlas",
+   "desc": "Taller gratuito abierto a la ciudadanía para dotar de herramientas frente a la desinformación.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
+   "end": "2026-10-29"
+  },
+  {
    "id": "fiesta-de-la-cerveza-2026-10-31",
    "title": "Fiesta de la Cerveza",
    "date": "2026-10-31",
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo.",
+   "desc": "Jornada festiva con degustación de cerveza, gastronomía y animación.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -346,13 +405,25 @@
    "end": "2026-11-02"
   },
   {
+   "id": "taller-prensa-sin-edad-2026-11-04",
+   "title": "Taller Prensa sin edad",
+   "date": "2026-11-04",
+   "place": "Biblioteca municipal de Muniesa",
+   "zona": "provincia",
+   "cat": "Charlas",
+   "desc": "Taller abierto al público financiado por la DPT para aprender a discernir noticias veraces de bulos.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
+   "end": "2026-11-05"
+  },
+  {
    "id": "perimenoparty-2026-11-05",
    "title": "PERIMENOPARTY",
    "date": "2026-11-05",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo y celebración de bienvenida a una nueva etapa de la vida. Entradas a 18 € con gastos incluidos.",
+   "desc": "Espectáculo que da la bienvenida con humor a una etapa vital ineludible. Entrada: 18 € gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -364,10 +435,21 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Presentación musical junto a Metamorfosis, un grupo de pop lírico en plena crisis creativa. Entradas a 15 € + gg.",
+   "desc": "Kala presenta a Metamorfosis, un grupo de pop lírico en plena crisis creativa y personal. Entradas: 15 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
+  },
+  {
+   "id": "media-maraton-caja-rural-de-teruel-2026-11-07",
+   "title": "Media Maratón Caja Rural de Teruel",
+   "date": "2026-11-07",
+   "place": "Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "22ª edición de la prueba deportiva que recorre el patrimonio mudéjar turolense con tres distancias.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/la-media-maraton-caja-rural-de-teruel-recorrera-el-arte-mudejar-el-proximo-7-de-noviembre-con-tres-distancias/"
   },
   {
    "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
@@ -389,6 +471,18 @@
    "zona": "ciudad",
    "cat": "Danza",
    "desc": "Obra de Tchaikovsky interpretada por la International Ballet Company. Entradas entre 25 € y 38 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:00"
+  },
+  {
+   "id": "el-lago-de-los-cisnes-2026-11-12",
+   "title": "El lago de los cisnes",
+   "date": "2026-11-12",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Danza",
+   "desc": "Ballet clásico de Chaikovski a cargo de la International Ballet Company. Entradas desde 25 € hasta 38 € más gastos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -418,6 +512,18 @@
    "time": "18:00"
   },
   {
+   "id": "promenade-2026-11-14",
+   "title": "Promenade",
+   "date": "2026-11-14",
+   "place": "Auditorio de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Infantil",
+   "desc": "Espectáculo para público infantil de la compañía Caleidoscopio Teatro. Entrada: 6 € gastos de gestión incluidos.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "18:00"
+  },
+  {
    "id": "concierto-en-honor-de-santa-cecilia-2026-11-14",
    "title": "Concierto en honor de Santa Cecilia",
    "date": "2026-11-14",
@@ -435,7 +541,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Comedia inteligente, provocadora y con final inesperado. Entradas a 18 € con gastos de gestión incluidos.",
+   "desc": "Propuesta de humor provocadora y sorprendente con un final inesperado. Entrada: 18 € gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
