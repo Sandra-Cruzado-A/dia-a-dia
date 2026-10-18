@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-17",
+ "updatedAt": "2026-10-18",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -14,18 +14,6 @@
    "end": "2026-11-15"
   },
   {
-   "id": "ciclo-cultural-en-homenaje-a-elvira-de-hidalgo-2026-10-13",
-   "title": "Ciclo cultural en homenaje a Elvira de Hidalgo",
-   "date": "2026-10-13",
-   "place": "Fundación Ibercaja, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Programación cultural con la música y el legado lírico aragonés como protagonistas en homenaje a Elvira de Hidalgo.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/teruel-rinde-homenaje-a-elvira-de-hidalgo-y-a-los-grandes-compositores-en-la-nueva-agenda-cultural-de-fundacion-ibercaja/",
-   "end": "2026-10-17"
-  },
-  {
    "id": "exposicion-los-que-permanecen-de-javier-aunon-2026-10-15",
    "title": "Exposición 'Los que permanecen' de Javier Auñón",
    "date": "2026-10-15",
@@ -36,19 +24,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/javier-aunon-fotografo-de-vez-en-cuando-me-doy-el-gustazo-de-tirar-y-revelar-un-carrete-pero-cuesta-un-rinon",
    "end": "2026-10-23"
-  },
-  {
-   "id": "encuentro-teruel-mudejar-vivir-entre-dos-mundos-2026-10-16",
-   "title": "Encuentro Teruel Mudéjar: vivir entre dos mundos",
-   "date": "2026-10-16",
-   "place": "Salón de actos del Museo de Teruel, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Jornadas del IET con mesa redonda, conferencia y visita guiada para conmemorar el 40º aniversario del mudéjar como Patrimonio Mundial.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-iet-organiza-un-encuentro-teruel-mudejar-que-analizara-la-convivencia-de-los-dos-mundos-que-habitaron-la-ciudad",
-   "end": "2026-10-17",
-   "time": "19:00"
   },
   {
    "id": "feria-sobre-ruedas-salon-del-vehiculo-2026-10-16",
@@ -99,87 +74,6 @@
    "end": "2026-10-18"
   },
   {
-   "id": "charla-el-calvario-de-alloza-un-ideal-llevado-a-la-practica-2026-10-17",
-   "title": "Charla 'El Calvario de Alloza, un ideal llevado a la práctica'",
-   "date": "2026-10-17",
-   "place": "Albergue de Alloza, Alloza",
-   "zona": "provincia",
-   "cat": "Charlas",
-   "desc": "Conferencia impartida por Alfredo Andreu sobre el origen, estructura y simbología del conjunto patrimonial del Calvario de Alloza.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/alloza-impulsa-la-divulgacion-de-la-historia-y-el-patrimonio-de-su-calvario",
-   "time": "18:00"
-  },
-  {
-   "id": "chiavette-polifonicamente-incorrectos-2026-10-17",
-   "title": "Chiavette: Polifónicamente incorrectos",
-   "date": "2026-10-17",
-   "place": "Sala de la Villa, Puertomingalvo",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "El cuarteto vocal Chiavette interpreta un repertorio jocoso del Cancionero de Palacio en el marco de 'Aragón, tierra de cultura'.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/la-programacion-de-aragon-tierra-de-cultura-llegara-este-sabado-a-puertomingalvo",
-   "time": "18:00"
-  },
-  {
-   "id": "concierto-para-violin-y-piano-de-alberto-navas-y-fran-galleg-2026-10-17",
-   "title": "Concierto para violín y piano de Alberto Navas y Fran Gallego",
-   "date": "2026-10-17",
-   "place": "Auditorio de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Recital de violín y piano a cargo de Alberto Navas y Fran Gallego, dentro del ciclo musical de Fundación Ibercaja.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
-  },
-  {
-   "id": "concierto-de-violin-y-piano-de-alberto-navas-y-fran-gallego-2026-10-17",
-   "title": "Concierto de violín y piano de Alberto Navas y Fran Gallego",
-   "date": "2026-10-17",
-   "place": "Auditorio de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto para violín y piano a cargo de Alberto Navas y Fran Gallego, patrocinado por Fundación Ibercaja.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/juan-villalba-ofrecera-una-charla-sobre-la-soprano-elvira-de-hidalgo",
-   "time": "19:00"
-  },
-  {
-   "id": "iii-encuentro-solidario-de-sketchers-2026-10-17",
-   "title": "III Encuentro Solidario de Sketchers",
-   "date": "2026-10-17",
-   "place": "Calles de Teruel",
-   "zona": "ciudad",
-   "cat": "Arte",
-   "desc": "Quedada solidaria para dibujar la ciudad en directo.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/"
-  },
-  {
-   "id": "ix-memorial-santiago-rueda-2026-10-17",
-   "title": "IX Memorial Santiago Rueda",
-   "date": "2026-10-17",
-   "place": "Estadio Pinilla",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Partido homenaje con los veteranos de la Real Sociedad.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/deportes"
-  },
-  {
-   "id": "menu-cerrado-2026-10-17",
-   "title": "Menú cerrado",
-   "date": "2026-10-17",
-   "place": "Teatro Municipal de Alcañiz",
-   "zona": "provincia",
-   "cat": "Teatro",
-   "desc": "Comedia dramática gastronómica de Jordi Casanovas con Nacho López, Raúl Fernández de Pablo y Carlos Santos dentro de Escenas de Otoño. Entrada: 15 €.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/alta-cocina-recuerdos-amargos-y-una-masculinidad-mal-entendida-en-el-teatro-municipal-de-alcaniz"
-  },
-  {
    "id": "carrera-popular-aragon-sur-2026-10-18",
    "title": "Carrera Popular Aragón Sur",
    "date": "2026-10-18",
@@ -200,6 +94,29 @@
    "desc": "Jornada deportiva y comunitaria que aúna la tradicional marcha senderista y la feria de la salud en la localidad.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/mirambel-acoge-la-xxii-marcha-senderista-del-maestrazgo-y-la-iii-feria-de-salud-el-proximo-18-de-octubre/"
+  },
+  {
+   "id": "aragon-sur-2026-2026-10-18",
+   "title": "Aragón Sur 2026",
+   "date": "2026-10-18",
+   "place": "Fuente Cerrada, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "XXIII edición de la prueba deportiva inclusiva con trail de 22 km, marcha de 17 km, sprint de 10 km y mini trail inclusivo.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/deportes/en-marcha-la-recogida-de-dorsales-para-la-aragonsur"
+  },
+  {
+   "id": "mujeres-de-oro-2026-10-19",
+   "title": "Mujeres de oro",
+   "date": "2026-10-19",
+   "place": "Iglesia de San Pedro, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Propuesta escénica multidisciplinar interpretada por Ruth Gabriel y Montse Peidro, dirigida por Jorge Rivera, que reivindica a las mujeres del Siglo de Oro.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/quien-dijo-que-el-teatro-clasico-no-es-moderno-divertido-y-femenino",
+   "time": "19:00"
   },
   {
    "id": "taller-prensa-sin-edad-2026-10-19",
@@ -268,7 +185,7 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de la compañía Teatro Arbolé en el Auditorio de San Julián. Entradas a 6 €.",
+   "desc": "Función de teatro infantil de la compañía Teatro Arbolé. Entradas a 6 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -308,6 +225,17 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/los-rescoldos-de-barricada-sonaran-el-dia-24-en-el-iv-escarbachofest",
    "time": "22:00"
+  },
+  {
+   "id": "pamesa-teruel-vs-melilla-2026-10-24",
+   "title": "Pamesa Teruel vs Melilla",
+   "date": "2026-10-24",
+   "place": "Pabellón Los Planos, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Partido oficial de la Superliga Masculina de voleibol entre el Pamesa Teruel y el Melilla.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/deportes/pamesa-muestra-sus-credenciales-ante-san-sadurnino-en-el-arranque-de-la-superliga"
   },
   {
    "id": "cd-teruel-aguilas-2026-10-25",
@@ -363,7 +291,7 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Jornada festiva con degustación de cerveza, gastronomía y animación.",
+   "desc": "Celebración popular con cerveza, oferta gastronómica y ambiente festivo.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -423,7 +351,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo que da la bienvenida con humor a una etapa vital ineludible. Entrada: 18 € gastos de gestión incluidos.",
+   "desc": "La fiesta de bienvenida a una etapa vital ineludible. Entrada: 18 € (gastos incluidos).",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -435,7 +363,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Kala presenta a Metamorfosis, un grupo de pop lírico en plena crisis creativa y personal. Entradas: 15 € más gastos de gestión.",
+   "desc": "Kala presenta a Metamorfosis, grupo de pop lírico en crisis creativa y personal. Entradas: 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -447,7 +375,7 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Deporte",
-   "desc": "22ª edición de la prueba deportiva que recorre el patrimonio mudéjar turolense con tres distancias.",
+   "desc": "Competición de media maratón con tres distancias que transcurre por el patrimonio de arte mudéjar turolense.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/la-media-maraton-caja-rural-de-teruel-recorrera-el-arte-mudejar-el-proximo-7-de-noviembre-con-tres-distancias/"
   },
@@ -458,7 +386,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Clásico del ballet con música de Chaikovski interpretado por la International Ballet Company. Entradas desde 25 € hasta 38 €.",
+   "desc": "Clásico del ballet con música de Tchaikovsky. Entradas desde 25 € hasta 38 € más gastos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -503,10 +431,10 @@
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
    "title": "Promenade - Caleidoscopio Teatro",
    "date": "2026-11-14",
-   "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
+   "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Función infantil representada por la compañía Caleidoscopio Teatro en el Auditorio de San Julián. Entradas a 6 €.",
+   "desc": "Espectáculo infantil a cargo de Caleidoscopio Teatro. Entradas a 6 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -541,7 +469,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta de humor provocadora y sorprendente con un final inesperado. Entrada: 18 € gastos de gestión incluidos.",
+   "desc": "Propuesta teatral de humor inteligente, provocadora y con un final inesperado. Entrada: 18 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
