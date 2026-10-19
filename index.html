@@ -286,7 +286,7 @@ textarea.field{height:auto;min-height:96px;padding:10px 12px;resize:vertical;lin
 .tabs{display:flex;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px;width:100%;max-width:460px}
 .tab{flex:1;min-width:0;height:52px;border:0;border-radius:16px;background:transparent;font-weight:650;font-size:11.5px;color:var(--muted);padding:0 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;line-height:1;white-space:nowrap}
 .tab svg{flex:none}
-.tab[aria-current="page"]{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.tab[aria-current="page"]{background:var(--accent);color:var(--on-accent)}
 .toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,8px);background:var(--ink);color:var(--on-ink);border-radius:14px;padding:10px 12px 10px 16px;display:flex;gap:14px;align-items:center;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:50;width:max-content;max-width:calc(100% - 32px)}
 .toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 .toast button{border:0;background:transparent;color:inherit;font-weight:700;text-decoration:underline;padding:4px}
@@ -439,35 +439,28 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
 </head>
 <body>
 <main>
-  <section id="v-hoy">
-    <header class="head two"><div class="hrow"><span class="hyr" id="hoy-greet"></span><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="iconbtn" data-act="settings" id="hoy-gear" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v1.6M8 12.6v1.6M1.8 8h1.6M12.6 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1"/></svg></button></div></div><h1 class="title" id="hoy-title"></h1></header>
-    <div id="hoy-body"></div>
-  </section>
-
-  <section id="v-cal" hidden>
+  <section id="v-cal">
     <header class="head two">
-      <div class="hrow"><span class="hyr" id="cal-year"></span><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button>
+      <div class="hrow"><span class="hleft"><button class="iconbtn" data-act="settings" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.8v1.6M8 12.6v1.6M1.8 8h1.6M12.6 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1"/></svg></button><span class="hyr" id="cal-year"></span></span><div class="navs"><button class="iconbtn" data-act="dictar" aria-label="Apunta día"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="1.8" width="5" height="8" rx="2.5"/><path d="M3.2 7.5a4.8 4.8 0 0 0 9.6 0M8 12.3v2"/></svg></button><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button>
         <button class="iconbtn" data-act="prev" aria-label="Mes anterior"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
         <button class="pill" data-act="today">Hoy</button>
         <button class="iconbtn" data-act="next" aria-label="Mes siguiente"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
       </div></div>
       <h1 class="title" id="cal-title"></h1>
     </header>
-    <div class="subnav" role="group" aria-label="Más de tu agenda"><button data-sub="tareas">Tareas</button><button data-sub="fijos">Fijos</button><button data-sub="grupos">Grupos</button><button data-sub="caducidades">Caducidades</button></div>
     <div class="seg" role="group" aria-label="Qué ver en el calendario"><button data-calmode="mio" aria-pressed="true">Mi calendario</button><button data-calmode="teruel" aria-pressed="false">Teruel</button><button data-calmode="tiempo" aria-pressed="false">Tiempo</button></div>
     <div class="wk" aria-hidden="true"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
     <div class="grid" id="grid"></div>
     <section class="panel" id="panel">
       <div class="dayhead"><h2 id="day-title"></h2><span class="daynet" id="day-net"></span></div>
-      <div class="adds one" id="adds"></div>
+      <div class="adds" id="adds"></div>
       <div class="comp" id="comp" hidden></div>
       <div id="day-list"></div>
     </section>
   </section>
 
   <section id="v-map" hidden>
-    <header class="head"><h1 class="title">Lugares</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button></div></header>
-    <div class="seg lug" role="group" aria-label="Lugares"><button data-lug="map" aria-pressed="true">Mapa</button><button data-lug="sitios" aria-pressed="false">Sitios</button><button data-lug="viajes" aria-pressed="false">Viajes</button></div>
+    <header class="head"><h1 class="title">Mapa</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button></div></header>
     <div class="tchips" id="map-trips"></div>
     <div class="mapbox" id="map-box">
       <svg id="map-svg" aria-label="Mapa de tus viajes y sitios">
@@ -488,8 +481,7 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
   </section>
 
   <section id="v-sitios" hidden>
-    <header class="head" id="sitios-head"><h1 class="title">Lugares</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-place">Añadir</button></div></header>
-    <div class="seg lug" role="group" aria-label="Lugares"><button data-lug="map" aria-pressed="false">Mapa</button><button data-lug="sitios" aria-pressed="true">Sitios</button><button data-lug="viajes" aria-pressed="false">Viajes</button></div>
+    <header class="head" id="sitios-head"><h1 class="title">Sitios</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-place">Añadir</button></div></header>
     <div id="sitios-body"></div>
   </section>
 
@@ -499,7 +491,7 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
   </section>
 
   <section id="v-cuentas" hidden>
-    <button class="back" data-act="mas-back" id="cuentas-back">‹ Dinero</button>
+    <button class="back" data-act="mas-back" id="cuentas-back">‹ Más</button>
     <header class="head" id="cuentas-head"><h1 class="title">Cuentas</h1><div class="navs"><button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg></button><button class="pill" data-act="add-acc">Añadir</button></div></header>
     <div id="cuentas-body"></div>
   </section>
@@ -513,7 +505,6 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
       </div></div>
       <h1 class="title" id="sum-title"></h1>
     </header>
-    <div class="subnav" role="group" aria-label="Más de tu dinero"><button data-sub="cuentas">Cuentas</button><button data-sub="recibos">Recibos</button><button data-sub="precios">Precios</button><button data-sub="coche">Coche</button></div>
     <div id="sum-body"></div>
   </section>
 </main>
@@ -532,11 +523,11 @@ html.privado .pv,html.privado .pv *{color:transparent!important;text-shadow:none
 
 <nav class="tabbar" aria-label="Secciones">
   <div class="tabs">
-    <button class="tab" data-tab="hoy" aria-current="page"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1"/></svg>Hoy</button>
-    <button class="tab" data-tab="cal"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 6.5h12M5.5 1.8v2.4M10.5 1.8v2.4"/></svg>Agenda</button>
-    <button class="tab tadd" data-act="apuntar" aria-label="Apuntar"><svg width="24" height="24" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg></button>
-    <button class="tab" data-tab="sum"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.8" y="4" width="12.4" height="9" rx="2"/><path d="M1.8 7h12.4M10.5 10.2h1.5"/></svg>Dinero</button>
-    <button class="tab" data-tab="map"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8.1a4.8 4.8 0 0 0-9.6 0c0 3.8 4.8 8.1 4.8 8.1z"/><circle cx="8" cy="6.4" r="1.7"/></svg>Lugares</button>
+    <button class="tab" data-tab="cal" aria-current="page"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 6.5h12M5.5 1.8v2.4M10.5 1.8v2.4"/></svg>Calendario</button>
+    <button class="tab" data-tab="map"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 4.2 6 2.5l4 1.7 4.2-1.7v9.3L10 13.5l-4-1.7-4.2 1.7z"/><path d="M6 2.5v9.3M10 4.2v9.3"/></svg>Mapa</button>
+    <button class="tab" data-tab="sitios"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14.5s4.8-4.3 4.8-8.1a4.8 4.8 0 0 0-9.6 0c0 3.8 4.8 8.1 4.8 8.1z"/><circle cx="8" cy="6.4" r="1.7"/></svg>Sitios</button>
+    <button class="tab" data-tab="sum"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13.5V8.5M8 13.5V3M13 13.5V6"/></svg>Resumen</button>
+    <button class="tab" data-tab="mas"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1.2"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1.2"/><rect x="9" y="9" width="4.5" height="4.5" rx="1.2"/></svg>Más</button>
   </div>
 </nav>
 <div class="vbar" id="vbar" hidden><span id="vbar-t"></span><button class="mini" data-act="v-cancel">Cancelar</button></div>
@@ -653,7 +644,7 @@ const reduceMotion=()=>!!(window.matchMedia&&window.matchMedia('(prefers-reduced
 const html=document.documentElement;
 
 const LS='diaadia.v1';
-const S={entries:new Map(),mode:'local',col:null,assets:null,sample:null,cursor:null,sel:todayStr(),view:'hoy',comp:null,sheet:null,
+const S={entries:new Map(),mode:'local',col:null,assets:null,sample:null,cursor:null,sel:todayStr(),view:'cal',comp:null,sheet:null,
   accId:null,tiempo:{},teruel:[],teruelInfo:null,calMode:'mio',tzona:'todo',mapTrip:'all',mapSel:null,placing:null,sit:{q:'',type:'Todos',city:'',cuisine:'',sort:'rating',view:'lista',year:''},placeKey:null,ai:{},viewer:null};
 S.cursor=monthOf(S.sel);
 try{const cm=localStorage.getItem('diaadia.calmode');if(cm==='teruel'||cm==='tiempo')S.calMode=cm}catch(_){}
@@ -1347,7 +1338,7 @@ function renderDay(){
   if(!h)h=`<p class="empty">Día libre. Elige arriba qué quieres apuntar.</p>`;
   $('#day-list').innerHTML=h;
 }
-function renderAdds(){$('#adds').innerHTML=`<button class="addone" data-act="apuntar-dia">＋ Añadir a este día</button><span hidden>${ORDER.map(k=>`<button class="add" data-add="${k}"></button>`).join('')}</span>`}
+function renderAdds(){$('#adds').innerHTML=ORDER.map(k=>`<button class="add" data-add="${k}" style="--c:var(--${k})">${IC[k]}${KINDS[k].label}</button>`).join('')}
 
 /* ---------- apunte rápido ---------- */
 function openComp(kind,editId,occDate,extra){
@@ -2604,13 +2595,12 @@ const noAI=()=>typeof openSettings==='function'?'<p class="note">Para usar la IA
 function openMas(sub,arg){S.mas=sub||null;S.masArg=arg||null;if(sub==='cuentas'){S.accId=null;setView('cuentas');return}setView('mas')}
 function masBack(){
   const back={persona:'personas',maleta:'maletas',tienda:'precios',grupo:'grupos'}[S.mas];
-  if(back){S.mas=back;S.masArg=null;renderMas();window.scrollTo(0,0);return}
-  const sec=MAS_SECTION[S.mas]||'hoy';S.mas=null;S.masArg=null;setView(sec);
+  S.mas=back||null;S.masArg=null;renderMas();window.scrollTo(0,0);
 }
 function renderMas(){
   const box=$('#mas-body');if(!box)return;
   const head=$('#mas-head');
-  if(!S.mas){if(S.view==='mas')setView('hoy');return}
+  if(!S.mas){head.hidden=false;box.innerHTML=masHome();return}
   head.hidden=true;
   const fn={revisar:masRevisar,fijos:masFijos,partituras:masPartituras,tareas:masTareas,grupos:masGrupos,grupo:masGrupo,recibos:masRecibos,coche:masCoche,precios:masPrecios,tienda:masTienda,personas:masPersonas,persona:masPersona,caducidades:masCaducidades,ocio:masOcio,maletas:masMaletas,maleta:masMaleta}[S.mas];
   if(!fn){S.mas=null;return renderMas()}
@@ -2620,7 +2610,7 @@ function renderMas(){
 }
 const EYE_SVG='<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>';
 const eyeHTML=()=>`<button class="eye" data-act="privado" aria-label="Mostrar u ocultar importes" aria-pressed="${!html.classList.contains('privado')}">${EYE_SVG}</button>`;
-function backHTML(label){return `<div class="backrow"><button class="back" data-act="mas-back">‹ ${esc(label||SECTION_LABEL[MAS_SECTION[S.mas]]||'Hoy')}</button>${eyeHTML()}</div>`}
+function backHTML(label){return `<div class="backrow"><button class="back" data-act="mas-back">‹ ${esc(label||'Más')}</button>${eyeHTML()}</div>`}
 function masHome(){
   const t=todayStr();
   const rec=recibosList();const mes=rec.reduce((s2,r)=>s2+r.mensual,0);
@@ -2643,7 +2633,7 @@ function masHome(){
     ['caducidades','caducidad','Caducidades',cads.length?`${cads.length} ${cads.length===1?'caduca':'caducan'} pronto`:'DNI, ITV, seguros…'],
     ['ocio','ocio','Ocio',vistos?`${vistos} vistos o leídos`:'Pelis, series y libros'],
     ['fijos','recibo','Eventos fijos',listOf('fijo').length?`${listOf('fijo').length} cada semana`:'Lo que se repite cada semana'],
-    ['partituras','ocio','Partituras',listOf('partitura').length?`${listOf('partitura').length} guardadas`:'Busca en IMSLP para piano'],
+    ['partituras','musica','Partituras',listOf('partitura').length?`${listOf('partitura').length} guardadas`:'Busca en IMSLP para piano'],
     ['grupos','evento','Grupos',groupsList().length?groupsList().map(g=>g.title).slice(0,3).join(', '):'Eventos por colores'],
     ['maletas','maleta','Maletas',trips.length?`Próximo: ${trips[trips.length-1].title}`:'Listas para tus viajes']
   ];
@@ -3057,7 +3047,7 @@ function saveOcio(){
 function maletaBase(){const c=S.entries.get('cfg-maleta');return c&&Array.isArray(c.items)?c.items:[]}
 function masMaletas(){
   const t=todayStr();const trips=allTrips().filter(tr=>(tr.end||tr.date)>=ymd(addDays(parse(t),-30)));
-  let h=backHTML()+`<h1 class="title t2">Viajes</h1><p class="sub" style="margin-top:8px">Tus viajes y su maleta: una lista para cada uno. La IA te sugiere qué llevar según el destino, los días y el tiempo, y tú añades o quitas lo que quieras.</p>`;
+  let h=backHTML()+`<h1 class="title t2">Maletas</h1><p class="sub" style="margin-top:8px">Una lista para cada viaje. La IA te sugiere qué llevar según el destino, los días y el tiempo, y tú añades o quitas lo que quieras.</p>`;
   if(!trips.length)return h+`<section class="card"><p class="sub">Cuando apuntes un viaje en el calendario, su maleta aparecerá aquí.</p></section>`;
   h+=`<section class="card">${trips.sort((a,b)=>a.date<b.date?-1:1).map(tr=>{const m=tr.maleta||[];const d=m.filter(x=>x.done).length;return `<button class="row2" data-maleta="${tr.id}"><span class="ic" style="--c:var(--accent)">${IC.maleta}</span><span class="tx"><span class="t">${esc(tr.title)}</span><span class="m">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`, ${d} de ${m.length} listo`:', sin empezar'}</span>${m.length?`<span class="prog"><i style="width:${(d/m.length*100).toFixed(0)}%"></i></span>`:''}</span></button>`}).join('')}</section>`;
   return h;
@@ -3065,7 +3055,7 @@ function masMaletas(){
 function masMaleta(){
   const tr=S.entries.get(S.masArg);if(!tr){S.mas='maletas';return masMaletas()}
   const m=tr.maleta||[];const d=m.filter(x=>x.done).length;
-  let h=backHTML('Viajes')+`<h1 class="title t2">${esc(tr.title)}</h1><p class="sub" style="margin-top:8px">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`. ${d} de ${m.length} cosas listas`:''}</p>`;
+  let h=backHTML('Maletas')+`<h1 class="title t2">${esc(tr.title)}</h1><p class="sub" style="margin-top:8px">${esc(rangeStr(tr.date,tr.end||tr.date))}${m.length?`. ${d} de ${m.length} cosas listas`:''}</p>`;
   if(m.length)h+=`<span class="prog" style="display:block;height:8px"><i style="width:${(d/m.length*100).toFixed(0)}%"></i></span>`;
   h+=`<div class="irow" style="margin-top:14px"><input class="field" id="m-new" placeholder="Añadir: cargador, bañador…" style="flex:1"><button class="pri" data-act="m-add" style="height:40px">Añadir</button></div>`;
   h+=`<div class="chips" id="m-cats">${MAL_CATS.map(c=>`<button class="chip" data-mcat="${c}" aria-pressed="${(S.mcat||'Otros')===c}">${c}</button>`).join('')}</div>`;
@@ -3948,7 +3938,7 @@ async function reviewDecide(id,ok){
   if(S.view==='mas')renderMas();else render();
   toast(ok?'Añadido':'Descartado');
 }
-function reviewsBadge(){const n=listOf('revisar').length;const t=document.querySelector('.tab[data-tab="hoy"]');if(t){let b=t.querySelector('.tbadge');if(n){if(!b){b=document.createElement('span');b.className='tbadge';t.appendChild(b)}b.textContent=n>9?'9+':n}else if(b)b.remove()}}
+function reviewsBadge(){const n=listOf('revisar').length;const t=document.querySelector('.tab[data-tab="mas"]');if(t){let b=t.querySelector('.tbadge');if(n){if(!b){b=document.createElement('span');b.className='tbadge';t.appendChild(b)}b.textContent=n>9?'9+':n}else if(b)b.remove()}}
 
 /* ---------- eventos fijos (solo se ven al entrar en el día) ---------- */
 const WD=['L','M','X','J','V','S','D'];
@@ -4183,9 +4173,8 @@ function render(){
   if(typeof syncGuard==='function')setTimeout(syncGuard,0);
 }
 function setView(v,opts){
-  S.view=v;['hoy','cal','map','sitios','cuentas','sum','mas'].forEach(x=>{$('#v-'+x).hidden=x!==v});
-  const tv=sectionOf(v);
-  if(v==='hoy')renderHoy();document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.tab===tv)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  S.view=v;['cal','map','sitios','cuentas','sum','mas'].forEach(x=>{$('#v-'+x).hidden=x!==v});
+  const tv=v==='cuentas'?'mas':v;document.querySelectorAll('.tab').forEach(b=>{if(b.dataset.tab===tv)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   if(v==='mas')renderMas();
   if(v!=='cal')closeComp();
   if(v!=='map'&&S.placing){S.placing=null}
@@ -4235,7 +4224,8 @@ $('#toast-undo').addEventListener('click',()=>{const f=undoFn;undoFn=null;$('#to
 document.addEventListener('click',ev=>{
   const el=ev.target.closest('button');if(!el)return;
   const d=el.dataset;
-  if(d.act==='mas-back'&&S.view==='cuentas'){S.mas=null;return setView('sum')}
+  if(d.tab==='mas'){if(S.view==='mas'&&S.mas){S.mas=null;S.masArg=null;renderMas();window.scrollTo(0,0);return}S.mas=null;return setView('mas')}
+  if(d.act==='mas-back'&&S.view!=='mas'){S.mas=null;return setView('mas')}
   if(extrasClick(el,d))return;
   if(extras2Click(el,d))return;
   if(gruposClick(el,d))return;
@@ -4363,7 +4353,6 @@ sheet.addEventListener('change',ev=>{
   if(ev.target.id==='s-date')renderSheetTrip();
 });
 sheet.addEventListener('input',()=>{const e=$('#s-err');if(e)e.textContent=''});
-$('#hoy-body').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='ask-q'){ev.preventDefault();const q=ev.target.value;ev.target.value='';askApp(q)}});
 $('#mas-body').addEventListener('input',ev=>{if(ev.target.id==='pq'){S.pq=ev.target.value;renderPriceSearch()}});
 $('#sheet-body').addEventListener('change',ev=>{if(ev.target.id==='t-store'&&S.sheet&&S.sheet.mode==='ticket'){document.querySelectorAll('#t-items [data-ti]').forEach(inp=>{const it=S.sheet.items[+inp.dataset.ti];if(it){if(inp.dataset.tf==='p')it.p=inp.value;else{const v=parseAmount(inp.value);it.u=isFinite(v)?v:null}}});renderTicketItems()}});
 $('#sheet-body').addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='geo-q'){ev.preventDefault();geoSearch()}});
@@ -4384,7 +4373,7 @@ function syncEyes(){const hid=html.classList.contains('privado');document.queryS
 document.addEventListener('click',ev=>{const t=ev.target.closest&&ev.target.closest('.pv');if(t&&html.classList.contains('privado')){ev.preventDefault();ev.stopPropagation();html.classList.remove('privado');syncEyes()}},true);
 document.addEventListener('visibilitychange',()=>{if(document.hidden){html.classList.add('privado');syncEyes()}});
 const NAV={on:(()=>{try{return window.top===window}catch(_){return false}})(),guard:false,skip:false};
-function isRootUI(){return S.view==='hoy'&&!S.sheet&&!S.comp&&!S.viewer&&!S.placing}
+function isRootUI(){return S.view==='cal'&&!S.sheet&&!S.comp&&!S.viewer&&!S.placing}
 function syncGuard(){
   if(!NAV.on)return;
   try{
@@ -4397,12 +4386,12 @@ function navBack(){
   if(S.sheet){closeSheet(false);return}
   if(S.comp){closeComp();return}
   if(S.placing){S.placing=null;renderPlacing();if(typeof drawOverlay==='function')drawOverlay();return}
-  if(S.view==='mas'&&S.mas){masBack();window.scrollTo(0,0);return}
+  if(S.view==='mas'&&S.mas){if(['persona','maleta','tienda','grupo'].includes(S.mas))masBack();else{S.mas=null;S.masArg=null;renderMas()}window.scrollTo(0,0);return}
   if(S.view==='cuentas'&&S.accId){S.accId=null;renderCuentas();return}
-  if(S.view==='cuentas'){S.mas=null;setView('sum');return}
+  if(S.view==='cuentas'){S.mas=null;setView('mas');return}
   if(S.view==='sitios'&&S.placeKey){S.placeKey=null;renderSitios();return}
   if(S.view==='map'&&(S.mapSel||S.mapTrip!=='all')){if(S.mapSel){S.mapSel=null}else{S.mapTrip='all'}renderMapUI();if(typeof focusCurrent==='function'&&!S.mapSel)focusCurrent(true);if(typeof drawOverlay==='function')drawOverlay();return}
-  if(S.view!=='hoy'){setView('hoy');return}
+  if(S.view!=='cal'){setView('cal');return}
 }
 if(NAV.on){
   window.addEventListener('popstate',()=>{if(NAV.skip){NAV.skip=false;return}NAV.guard=false;navBack();setTimeout(syncGuard,0)});
