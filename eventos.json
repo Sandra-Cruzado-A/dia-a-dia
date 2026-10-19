@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-18",
+ "updatedAt": "2026-10-19",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -26,85 +26,28 @@
    "end": "2026-10-23"
   },
   {
-   "id": "feria-sobre-ruedas-salon-del-vehiculo-2026-10-16",
-   "title": "Feria Sobre Ruedas, salón del vehículo",
-   "date": "2026-10-16",
-   "place": "Palacio de Exposiciones y Congresos",
+   "id": "acto-institucional-del-dia-mundial-contra-el-cancer-de-mama-2026-10-19",
+   "title": "Acto institucional del Día Mundial contra el Cáncer de Mama",
+   "date": "2026-10-19",
+   "place": "Ayuntamiento de Teruel",
    "zona": "ciudad",
-   "cat": "Ferias",
-   "desc": "Coches nuevos, seminuevos y de ocasión. Entrada 1 €.",
-   "source": "festivalesdeespana.com",
-   "url": "https://www.festivalesdeespana.com/festival/feria-sobre-ruedas-teruel",
-   "end": "2026-10-18"
-  },
-  {
-   "id": "festival-contra-la-despoblacion-2026-10-16",
-   "title": "Festival Contra la Despoblación",
-   "date": "2026-10-16",
-   "place": "Allepuz",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "Festival de música. Malifeta actúa el sábado 17 a las 21:00.",
-   "source": "Bandsintown",
-   "url": "https://www.bandsintown.com/c/teruel-spain",
-   "end": "2026-10-18"
-  },
-  {
-   "id": "viii-festival-contra-la-despoblacion-2026-10-16",
-   "title": "VIII Festival contra la Despoblación",
-   "date": "2026-10-16",
-   "place": "Allepuz",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "Festival con un cartel ecléctico que abarca rock, pop, música electrónica y canción de autor.",
+   "cat": "Otros",
+   "desc": "Lectura de manifiesto con motivo del Día Mundial contra el Cáncer de Mama e instalación de una mesa informativa.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura",
-   "end": "2026-10-18"
+   "url": "https://www.diariodeteruel.es/teruel/la-asociacion-espanola-contra-el-cancer-moviliza-a-teruel-y-su-provincia-para-reivindicar-una-atencion-mas-humana-e-integral-a-las-mujeres-con-cancer-de-mama",
+   "time": "10:30"
   },
   {
-   "id": "festival-contra-la-despoblacion-de-allepuz-2026-10-16",
-   "title": "Festival contra la Despoblación de Allepuz",
-   "date": "2026-10-16",
-   "place": "Allepuz",
+   "id": "cocinando-territorio-2026-10-19",
+   "title": "Cocinando Territorio",
+   "date": "2026-10-19",
+   "place": "Restaurante La Fondica, La Puebla de Valverde",
    "zona": "provincia",
-   "cat": "Música",
-   "desc": "Octava edición del festival con conciertos de Ixeya, Malifeta, Eskorzo y Azero, además de actividades y comida popular. Entrada gratuita.",
+   "cat": "Congresos",
+   "desc": "Encuentro organizado por el CITA Teruel para conectar a agentes de la cadena agroalimentaria local mediante gastronomía y 'networking'.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/eduardo-paz-se-cae-del-festival-de-allepuz-por-motivos-de-salud",
-   "end": "2026-10-18"
-  },
-  {
-   "id": "carrera-popular-aragon-sur-2026-10-18",
-   "title": "Carrera Popular Aragón Sur",
-   "date": "2026-10-18",
-   "place": "Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Recorridos de 9, 17 y 22 km.",
-   "source": "gotrail.run",
-   "url": "https://gotrail.run/en/race/carrera-popular-aragon-sur"
-  },
-  {
-   "id": "xxii-marcha-senderista-del-maestrazgo-y-iii-feria-de-salud-2026-10-18",
-   "title": "XXII Marcha Senderista del Maestrazgo y III Feria de Salud",
-   "date": "2026-10-18",
-   "place": "Mirambel",
-   "zona": "provincia",
-   "cat": "Deporte",
-   "desc": "Jornada deportiva y comunitaria que aúna la tradicional marcha senderista y la feria de la salud en la localidad.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/mirambel-acoge-la-xxii-marcha-senderista-del-maestrazgo-y-la-iii-feria-de-salud-el-proximo-18-de-octubre/"
-  },
-  {
-   "id": "aragon-sur-2026-2026-10-18",
-   "title": "Aragón Sur 2026",
-   "date": "2026-10-18",
-   "place": "Fuente Cerrada, Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "XXIII edición de la prueba deportiva inclusiva con trail de 22 km, marcha de 17 km, sprint de 10 km y mini trail inclusivo.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/deportes/en-marcha-la-recogida-de-dorsales-para-la-aragonsur"
+   "url": "https://www.diariodeteruel.es/comarcas/cita-teruel-organiza-cocinando-territorio-un-encuentro-para-impulsar-las-conexiones-entre-los-agentes-de-la-cadena-agroalimentaria-turolense",
+   "time": "12:00"
   },
   {
    "id": "mujeres-de-oro-2026-10-19",
@@ -113,7 +56,7 @@
    "place": "Iglesia de San Pedro, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta escénica multidisciplinar interpretada por Ruth Gabriel y Montse Peidro, dirigida por Jorge Rivera, que reivindica a las mujeres del Siglo de Oro.",
+   "desc": "Propuesta escénica multidisciplinar interpretada por Ruth Gabriel y Montse Peidro, que fusiona verso, música en directo y comedia.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/quien-dijo-que-el-teatro-clasico-no-es-moderno-divertido-y-femenino",
    "time": "19:00"
@@ -197,7 +140,7 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Obra infantil de Teatro Arbolé programada a través del Teatro Marín. Entrada: 6 € gastos de gestión incluidos.",
+   "desc": "Espectáculo infantil a cargo de la compañía Teatro Arbolé. Entradas por 6 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -209,7 +152,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Espectáculo de teatro de máscaras sin texto. Entradas a 6 € más gastos de gestión.",
+   "desc": "Espectáculo de teatro de máscaras sin texto. Entradas a 6 € + gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -291,7 +234,7 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Celebración popular con cerveza, oferta gastronómica y ambiente festivo.",
+   "desc": "Celebración con degustación de cerveza, oferta gastronómica y ambiente festivo popular.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -351,7 +294,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "La fiesta de bienvenida a una etapa vital ineludible. Entrada: 18 € (gastos incluidos).",
+   "desc": "Espectáculo cómico y festivo sobre la bienvenida a una etapa ineludible de la vida. Entrada: 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -363,7 +306,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Kala presenta a Metamorfosis, grupo de pop lírico en crisis creativa y personal. Entradas: 15 € + gg.",
+   "desc": "Espectáculo musical centrado en Metamorfosis, un grupo de pop lírico en crisis creativa y personal. Entrada: 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -375,7 +318,7 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Deporte",
-   "desc": "Competición de media maratón con tres distancias que transcurre por el patrimonio de arte mudéjar turolense.",
+   "desc": "Prueba atlética abierta al público con tres distancias que recorre el patrimonio mudéjar de la ciudad.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/la-media-maraton-caja-rural-de-teruel-recorrera-el-arte-mudejar-el-proximo-7-de-noviembre-con-tres-distancias/"
   },
@@ -410,7 +353,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Ballet clásico de Chaikovski a cargo de la International Ballet Company. Entradas desde 25 € hasta 38 € más gastos.",
+   "desc": "Obra de Tchaikovsky y cumbre del ballet clásico, a cargo de International Ballet Company. Entradas desde 25 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -446,7 +389,7 @@
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo para público infantil de la compañía Caleidoscopio Teatro. Entrada: 6 € gastos de gestión incluidos.",
+   "desc": "Propuesta escénica para público familiar a cargo de Caleidoscopio Teatro. Entrada: 6 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -469,7 +412,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta teatral de humor inteligente, provocadora y con un final inesperado. Entrada: 18 € con gastos incluidos.",
+   "desc": "Propuesta teatral de humor inteligente, provocadora y con desenlace inesperado. Entrada: 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
