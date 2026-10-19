@@ -241,6 +241,9 @@ textarea.field{height:auto;min-height:96px;padding:10px 12px;resize:vertical;lin
 .sortrow .chip{height:30px;font-size:13px}
 .back{border:0;background:none;color:var(--muted);font-weight:600;padding:8px 0;font-size:15px}
 .bigstar{font-size:26px;font-weight:760;font-stretch:80%}
+.tipbox.no{border-color:color-mix(in srgb,var(--gasto) 40%,transparent)}
+.tipbox.no b{color:var(--gasto)}
+.rankbox{margin-top:12px;padding:12px;border-radius:16px;border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:color-mix(in srgb,var(--accent) 6%,transparent)}
 .tipbox{margin-top:14px;background:color-mix(in srgb,var(--lugar) 10%,var(--surface));border-radius:16px;padding:12px 14px}
 .tipbox b{display:block;font-size:13.5px;color:var(--muted);font-weight:600}
 .tipbox p{margin:4px 0 0;font-size:16px;font-weight:600}
@@ -975,6 +978,38 @@ async function checkTR(){
     if(n){render();toast(`He leído ${n} ${n===1?'captura':'capturas'} de Trade Republic. Revísalas en «Por revisar».`)}
   }catch(_){}finally{trBusy=false}
 }
+/* tickets en la galería */
+let tkBusy=false;
+async function checkTickets(){
+  if(!isNative()||!SET.tkAuto||tkBusy||!S.sample)return;const WB=plug('WidgetBridge');if(!WB||typeof WB.findImages!=='function')return;tkBusy=true;
+  try{
+    const since=+(await kvGet('tkSince')||0)||Math.floor(Date.now()/1000)-86400;
+    const r=await WB.findImages({contains:'',since});
+    const imgs=(r&&r.images||[]).filter(im=>/^(\d{8}_\d{6}|IMG_\d{8}|PXL_\d{8})/i.test(im.name||'')).sort((a,b)=>a.date-b.date).slice(-8);
+    let max=since,n=0,names=[];
+    for(const im of imgs){
+      max=Math.max(max,im.date||0);
+      const d=await WB.readImage({uri:im.uri,max:1800});if(!d||!d.data)continue;
+      let v=null;
+      try{v=await aiVisionJSON('Mira esta foto. Si NO es un ticket, una factura o una cuenta de restaurante, responde solo {"es_ticket":false}. Si lo es, responde también "es_ticket":true y sigue estas instrucciones. '+TICKET_PROMPT(),b64ToBlob(d.data,'image/jpeg'))}catch(_){continue}
+      if(!v||v.es_ticket===false||!(+v.total>0))continue;
+      const nm=registerTicket(v,im);if(nm){n++;names.push(nm)}
+    }
+    await kvSet('tkSince',max);
+    if(n){render();toast(`He apuntado ${n} ${n===1?'ticket':'tickets'} de tu galería: ${names.join(', ')}. Los precios están en Precios.`)}
+  }catch(_){}finally{tkBusy=false}
+}
+function registerTicket(r,im){
+  const items=(Array.isArray(r.lineas)?r.lineas:[]).filter(x=>x&&x.producto).map(x=>({p:String(x.producto).trim(),g:x.comun?String(x.comun).trim():String(x.producto).trim(),q:Number(x.cantidad)||1,u:x.precio_unidad!=null&&isFinite(+x.precio_unidad)?+x.precio_unidad:null,t:x.importe!=null&&isFinite(+x.importe)?+x.importe:null})).map(it=>{if(it.u==null&&it.t!=null)it.u=Math.round(it.t/(it.q||1)*100)/100;return it});
+  const total=Math.round(+r.total*100)/100,store=String(r.establecimiento||'').trim();
+  const date=/^\d{4}-\d{2}-\d{2}$/.test(r.fecha||'')&&r.fecha<=todayStr()?r.fecha:ymd(new Date((im.date||Date.now()/1000)*1000));
+  const cat=CATS.gasto.includes(r.categoria)?r.categoria:(guessCat('gasto',store)||'Súper');
+  const ex=listOf('gasto').find(g=>g.date===date&&Math.abs((g.amount||0)-total)<0.06);
+  if(ex){if(ex.items&&ex.items.length)return null;persist(Object.assign({},ex,{items,store:ex.store||store||null}),true);return store||ex.title}
+  if(listOf('gasto').some(g=>g.galleryUri===im.uri))return null;
+  persist({id:newId(),kind:'gasto',title:store||cat,store:store||null,amount:total,cat,date,repeat:'none',items,galleryUri:im.uri,account:((defaultAcc()||{}).id)||null,tripId:autoTrip(date)||null,created:Date.now()},true);
+  return store||cat;
+}
 /* Google Maps */
 let gReady=null;
 function loadGoogle(){
@@ -1021,7 +1056,7 @@ async function boot(){
   refreshWeather();refreshEvents();loadGasData();
   if(isNative()&&window.Capacitor.isPluginAvailable&&window.Capacitor.isPluginAvailable('SpeechRecognition'))nativeListen=nativeListenImpl;
   if(SET.gmapsKey)loadGoogle().then(ok=>{if(ok&&M.ready)setMapStyle(S.mapStyle)});
-  setTimeout(()=>{checkLaunch();fetchMail();checkTR()},600);
+  setTimeout(()=>{checkLaunch();fetchMail();checkTR();checkTickets()},600);
   if('serviceWorker' in navigator&&location.protocol==='https:'&&!/^localhost$/.test(location.hostname))navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 
@@ -1076,7 +1111,7 @@ function groups(filter){
     g.name=v[0].title;g.city=(v.find(x=>x.city)||{}).city||'';g.ptype=(v.find(x=>x.ptype)||{}).ptype||'';
     const rated=v.filter(x=>x.rating);g.avg=rated.length?rated.reduce((s,x)=>s+x.rating,0)/rated.length:null;
     g.cuisine=(v.find(x=>x.cuisine)||{}).cuisine||'';
-    g.tip=(v.find(x=>x.tip)||{}).tip||'';const ag=v.find(x=>x.again===true||x.again===false);g.again=ag?ag.again:null;
+    g.tip=(v.find(x=>x.tip)||{}).tip||'';g.notip=(v.find(x=>x.notip)||{}).notip||'';{const pp=v.filter(x=>x.ppp>0);g.ppp=pp.length?pp.reduce((a,x)=>a+x.ppp,0)/pp.length:null}const ag=v.find(x=>x.again===true||x.again===false);g.again=ag?ag.again:null;
     g.photos=v.flatMap(x=>x.photos||[]);g.last=v[0].date;return g;
   });
 }
@@ -1397,6 +1432,7 @@ function renderComp(){
   }
   if(money){const pick=accs.filter(a=>k==='ingreso'||a.atype!=='inversion');if(pick.length>1)h+=`<p class="ftitle" style="margin:12px 0 0">Cuenta</p><div class="chips" style="margin-top:6px;--c:var(--cuenta)">${pick.map(a=>`<button class="chip" data-acc="${a.id}" aria-pressed="${a.id===c.acc}">${esc(a.title)}</button>`).join('')}</div>`}
   if(money)h+=`<div class="chips" id="c-cats" role="group" aria-label="Categoría">${CATS[k].map(x=>`<button class="chip" data-cat="${esc(x)}" aria-pressed="${x===c.cat}">${esc(x)}</button>`).join('')}</div>`;
+  if(k==='gasto')h+=`<div id="c-rank" hidden></div>`;
   if(k==='evento'||k==='tarea')h+=`<p class="ftitle" style="margin:12px 0 0">Grupo</p><div class="chips" id="c-groups" style="margin-top:6px">${groupChipsHTML(c.group)}</div><div id="c-gnew" hidden>${gnewHTML()}</div>`;
   const opts=[];
   if(k==='evento'||money||k==='traspaso')opts.push(`<button class="chip" data-act="repeat" aria-pressed="${c.repeat!=='none'}">${REPEAT[c.repeat]}</button>`);
@@ -1408,6 +1444,45 @@ function renderComp(){
   if(opts.length)h+=`<div class="chips">${opts.join('')}</div>`;
   h+=`<p class="err" id="c-err" role="alert"></p><div class="acts" id="c-acts">${actsHTML()}</div>`;
   box.innerHTML=h;box.hidden=false;
+  if(k==='gasto')updateRankBox();
+}
+/* ---------- valorar el sitio desde el gasto ---------- */
+const RANK_CATS={'Cenas y bares':'Restaurante','Ocio':'Actividad','Viajes':'Alojamiento','Compras':'Compras'};
+function compCat(){const c=S.comp;if(!c)return null;return c.cat||guessCat(c.kind,(($('#c-text')||{}).value)||'')}
+function rankBoxHTML(c,pl){
+  const pt=c.rptype||(pl&&pl.ptype)||RANK_CATS[compCat()]||'Restaurante';
+  const types=compCat()==='Cenas y bares'?['Restaurante','Bar']:PTYPES;
+  return `<div class="rankbox"><p class="ftitle" style="margin:0">Valóralo</p>
+  <div class="row" style="margin-top:8px"><label class="lbl">Sitio<input class="field" id="c-rname" type="text" autocomplete="off" placeholder="Nombre del sitio" value="${esc(pl?pl.title:(c.rname||''))}"></label><label class="lbl" style="flex:0 0 42%">Ciudad<input class="field" id="c-rcity" type="text" autocomplete="off" placeholder="Teruel" value="${esc(pl?pl.city||'':(c.rcity||''))}"></label></div>
+  <div class="chips" style="margin-top:8px">${types.map(t=>`<button class="chip" data-crtype="${t}" aria-pressed="${pt===t}">${t}</button>`).join('')}</div>
+  <div class="starsrow" style="margin-top:8px"><div class="starsin" id="c-stars">${starInputHTML(c.rating||0).replace(/data-star=/g,'data-cstar=')}</div><span class="stv" id="c-stv">${c.rating?fmtRating(c.rating)+' de 5':'Sin nota'}</span></div>
+  <label class="lbl">Qué pedir<input class="field" id="c-tip" type="text" autocomplete="off" placeholder="El arroz negro" value="${esc(pl?pl.tip||'':'')}"></label>
+  <label class="lbl">Qué no pedir<input class="field" id="c-notip" type="text" autocomplete="off" placeholder="El postre, muy seco" value="${esc(pl?pl.notip||'':'')}"></label>
+  <div class="row"><label class="lbl">Personas<input class="field" id="c-pers" type="text" inputmode="numeric" autocomplete="off" placeholder="2" value="${esc(pl&&pl.personas?String(pl.personas):'')}"></label><label class="lbl">Por persona<input class="field" id="c-ppp" type="text" inputmode="decimal" autocomplete="off" placeholder="0,00 €" value="${esc(pl&&pl.ppp?String(pl.ppp).replace('.',','):'')}"></label></div></div>`;
+}
+function updateRankBox(){
+  const c=S.comp,box=$('#c-rank');if(!c||!box||c.kind!=='gasto')return;
+  const show=!!RANK_CATS[compCat()];
+  if(show&&!box.innerHTML){const pl=c.editId&&(S.entries.get(c.editId)||{}).placeId?S.entries.get(S.entries.get(c.editId).placeId):null;if(pl){c.rating=pl.rating||0;c.rptype=pl.ptype}box.innerHTML=rankBoxHTML(c,pl);const n=$('#c-rname');if(n&&!n.value)n.value=(($('#c-text')||{}).value||'').replace(/\s*\d[\d.,]*\s*(€|euros?)?\s*$/i,'').replace(/^(cena|comida|almuerzo|desayuno|merienda|caf[eé]|copas?|cañas?|vermut|tapas|aperitivo)\s+(en|de)\s+(el\s+|la\s+)?/i,'').trim()}
+  box.hidden=!show;
+}
+function updatePpp(){
+  const p=parseInt((($('#c-pers')||{}).value||'').replace(/\D/g,''),10),pp=$('#c-ppp');if(!pp||pp.dataset.touched)return;
+  let raw=(($('#c-amount')||{}).value||'').trim();if(!raw){const m=((($('#c-text')||{}).value)||'').match(/(\d[\d.,]*)\s*(?:€|euros?)?\s*$/i);if(m)raw=m[1]}
+  const a=parseAmount(raw);pp.value=p>0&&a>0?String(Math.round(a/p*100)/100).replace('.',','):'';
+}
+function saveRank(e){
+  const c=S.comp;if(!c||e.kind!=='gasto'||!RANK_CATS[e.cat])return null;
+  const box=$('#c-rank');if(!box||box.hidden||!box.innerHTML)return null;
+  const name=(($('#c-rname')||{}).value||'').trim()||e.title,tip=(($('#c-tip')||{}).value||'').trim(),notip=(($('#c-notip')||{}).value||'').trim();
+  const pers=parseInt((($('#c-pers')||{}).value||'').replace(/\D/g,''),10)||null,pppRaw=(($('#c-ppp')||{}).value||'').trim(),ppp=pppRaw?parseAmount(pppRaw):(pers?Math.round(e.amount/pers*100)/100:null);
+  const old=e.placeId&&S.entries.get(e.placeId);
+  if(!old&&!c.rating&&!tip&&!notip&&!pers)return null;
+  const pt=c.rptype||RANK_CATS[e.cat];
+  const l=Object.assign({},old||{},{id:old?old.id:newId(),kind:'lugar',title:name,city:(($('#c-rcity')||{}).value||'').trim(),date:e.date,ptype:pt,rating:c.rating||null,tip,notip,personas:pers,ppp:ppp>0?ppp:null,gastoId:e.id,tripId:(e.tripId&&e.tripId!=='none')?e.tripId:null,photos:old?old.photos||[]:[],created:old&&old.created||Date.now()});
+  if(!old)l.cuisine=null;
+  e.placeId=l.id;
+  return l;
 }
 function linkTripEntries(tr){
   const end=tr.end||tr.date;
@@ -1471,8 +1546,10 @@ function save(){
   if(!e.repeat||e.repeat==='none')delete e.until;
   if(k==='evento'||k==='tarea'){if(c.group&&S.entries.get(c.group))e.group=c.group;else delete e.group}
   e.title=title;
+  const rk=k==='gasto'?saveRank(e):null;
   closeComp();
   if(k==='viaje')linkTripEntries(e);
+  if(rk){persist(rk,true);if(!hasGeo(rk))setTimeout(()=>queueGeo(rk.id),300)}
   persist(e);
   toast(old?'Guardado':'Añadido');
   if(k==='viaje'&&!hasGeo(e))queueGeo(e.id);
@@ -1514,9 +1591,11 @@ function openSheet(o){
   h+=`<div id="s-trip"></div>`;
   h+=`<div><p class="ftitle">Valoración</p><div class="starsrow"><div class="starsin" id="s-stars" role="group" aria-label="Valoración, toca la mitad izquierda de una estrella para media">${starInputHTML(S.sheet.rating)}</div><span class="stv" id="s-stv">${S.sheet.rating?fmtRating(S.sheet.rating)+' de 5':'Sin nota'}</span></div></div>`;
   h+=`<div><p class="ftitle">¿Volverías?</p><div class="chips"><button class="chip" data-again="1" aria-pressed="${S.sheet.again===true}">Sí</button><button class="chip" data-again="0" aria-pressed="${S.sheet.again===false}">No</button></div></div>`;
-  h+=`<label class="lbl">Qué pedir o no perderse<input class="field" id="s-tip" type="text" autocomplete="off" placeholder="El arroz negro y la torrija" value="${esc(e?e.tip||'':'')}"></label>`;
+  h+=`<label class="lbl">Qué pedir<input class="field" id="s-tip" type="text" autocomplete="off" placeholder="El arroz negro y la torrija" value="${esc(e?e.tip||'':'')}"></label>`;
+  h+=`<label class="lbl">Qué no pedir<input class="field" id="s-notip" type="text" autocomplete="off" placeholder="El postre, muy seco" value="${esc(e?e.notip||'':'')}"></label>`;
   h+=`<label class="lbl">Qué tal fue<textarea class="field" id="s-review" rows="4" placeholder="Terraza con vistas, servicio rápido, algo caro.">${esc(e?e.review||'':'')}</textarea></label>`;
   h+=`<label class="lbl">Lo que gastaste (opcional)<input class="field" id="s-amount" type="text" inputmode="decimal" autocomplete="off" placeholder="0,00 €" value="${g&&g.amount!=null?esc(String(g.amount).replace('.',',')):''}"></label>`;
+  h+=`<div class="row"><label class="lbl">Personas<input class="field" id="s-pers" type="text" inputmode="numeric" autocomplete="off" placeholder="2" value="${esc(e&&e.personas?String(e.personas):'')}"></label><label class="lbl">Por persona<input class="field" id="s-ppp" type="text" inputmode="decimal" autocomplete="off" placeholder="0,00 €" value="${esc(e&&e.ppp?String(e.ppp).replace('.',','):'')}"></label></div>`;
   h+=`<div><p class="ftitle">Fotos</p><div id="s-photos"></div></div>`;
   h+=`<p class="err" id="s-err" role="alert"></p>`;
   if(e)h+=`<div class="btnrow"><button class="ghost danger" data-act="sheet-del">Borrar este sitio</button></div>`;
@@ -1544,7 +1623,7 @@ function initMini(){
   if(S.mini){try{S.mini.remove()}catch(_){}S.mini=null}
   el.hidden=false;
   const m=L.map(el,{zoomControl:true,attributionControl:false});
-  (googleLayer(S.mapStyle)||L.tileLayer(TILES[S.mapStyle].u,{maxZoom:19,subdomains:TILES[S.mapStyle].sub||'abc',detectRetina:true})).addTo(m);
+  (googleLayer(S.mapStyle)||baseLayer(S.mapStyle)).addTo(m);
   const start=sh.lat!=null?[sh.lat,sh.lon]:[HOME.lat,HOME.lon];
   const mk=L.marker(start,{icon:pinIcon('pin sel','',''),draggable:true}).addTo(m);
   const set=ll=>{mk.setLatLng(ll);sh.lat=ll.lat;sh.lon=ll.lng;sh.geo='manual';sh.geoPrec='sitio';const g=$('#s-geo-msg');if(g)g.textContent='Ubicado en el mapa. Puedes arrastrar el punto para afinar.'};
@@ -1569,6 +1648,7 @@ function geoClick(el,d){
   if(d.mapstyle){setMapStyle(d.mapstyle);return true}
   if(d.act==='sh-ticket'&&S.sheet&&S.sheet.mode==='shared'){const b=S.sheet.blob;closeSheet(true);scanTicket(b);return true}
   if(d.act==='sh-cartera'&&S.sheet&&S.sheet.mode==='shared'){const b=S.sheet.blob;closeSheet(true);scanCartera(b);return true}
+  if(d.act==='tk-auto'){(async()=>{if(!SET.tkAuto){const WB=plug('WidgetBridge');let p={granted:false};try{if(WB&&typeof WB.requestPhotos==='function')p=await WB.requestPhotos()}catch(_){}if(!p.granted){toast('Sin permiso para ver tus fotos no puedo leer los tickets.');return}await kvSet('tkSince',Math.floor(Date.now()/1000)-2*86400)}SET.tkAuto=!SET.tkAuto;await saveSettings();el.setAttribute('aria-pressed',String(SET.tkAuto));el.textContent=SET.tkAuto?'Leyendo tickets de la galería':'Leer tickets de la galería';if(SET.tkAuto)checkTickets()})();return true}
   if(d.act==='tr-auto'){(async()=>{if(!SET.trAuto){const WB=plug('WidgetBridge');let p={granted:false};try{if(WB&&typeof WB.requestPhotos==='function')p=await WB.requestPhotos()}catch(_){}if(WB&&typeof WB.requestPhotos!=='function'){toast('Instala el APK nuevo para usar esta opción.');return}if(!p.granted){toast('Sin permiso para ver tus fotos no puedo leer las capturas.');return}await kvSet('trSince',Math.floor(Date.now()/1000)-3*86400)}SET.trAuto=!SET.trAuto;await saveSettings();el.setAttribute('aria-pressed',String(SET.trAuto));el.textContent=SET.trAuto?'Leyendo capturas de Trade Republic':'Leer capturas de Trade Republic';if(SET.trAuto)checkTR()})();return true}
   if(d.act==='mail-test'){(async()=>{const u=($('#mail-url')||{}).value.trim();if(!u){toast('Pega primero la dirección del script.');return}try{const j=await (await fetch(u+(u.includes('?')?'&':'?')+'action=list')).json();toast(j&&j.ok?`Conectado. ${(j.items||[]).length} correos con cosas para apuntar.`:'El script responde, pero algo no va bien. Revisa la clave.')}catch(_){toast('No se puede conectar con el script. Revisa la dirección.')}})();return true}
   if(d.geopick!=null&&S.sheet&&S.geoRes){const x=S.geoRes[+d.geopick];if(x){S.sheet.lat=+x.lat;S.sheet.lon=+x.lon;S.sheet.geo='manual';S.sheet.geoPrec='sitio';const g=$('#s-geo-msg');if(g)g.textContent='Ubicado en la dirección elegida.';$('#geo-res').innerHTML='';$('#geo-sbox').hidden=true;initMini()}return true}
@@ -1637,7 +1717,7 @@ function sheetSave(){
   if(rawAmt&&!(amt>0))return err('Lo que gastaste tiene que ser una cantidad, como 35 o 12,50.');
   const old=S.entries.get(sh.id);
   const e=Object.assign({},old||{},{id:sh.id,kind:'lugar',title:name,city,date,ptype:sh.ptype,rating:sh.rating||null,again:sh.again,
-    cuisine:FOODTYPES.includes(sh.ptype)?(sh.cuisine||null):null,tip:$('#s-tip').value.trim(),review:$('#s-review').value.trim(),photos:sh.photos.slice(),tripId:sh.tripId||null,created:old&&old.created||Date.now()});
+    cuisine:FOODTYPES.includes(sh.ptype)?(sh.cuisine||null):null,tip:$('#s-tip').value.trim(),notip:(($('#s-notip')||{}).value||'').trim(),personas:parseInt((($('#s-pers')||{}).value||'').replace(/\D/g,''),10)||null,ppp:(()=>{const r=(($('#s-ppp')||{}).value||'').trim(),p=parseInt((($('#s-pers')||{}).value||'').replace(/\D/g,''),10);return r?parseAmount(r):(p>0&&amt>0?Math.round(amt/p*100)/100:null)})(),review:$('#s-review').value.trim(),photos:sh.photos.slice(),tripId:sh.tripId||null,created:old&&old.created||Date.now()});
   if(sh.lat!=null){e.lat=sh.lat;e.lon=sh.lon;e.geo=sh.geo;e.geoPrec=sh.geoPrec}else{delete e.lat;delete e.lon}
   if(old&&gkey(old)!==gkey(e)&&e.geo==='auto'){delete e.lat;delete e.lon;delete e.geo;delete e.geoPrec}
   delete e.geoFail;
@@ -1748,14 +1828,19 @@ function tripKmText(tr){
 /* ---------- mapa ---------- */
 const M={ready:false,focused:false,t:null};
 const TILES={
-  calles:{u:'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',a:'© OpenStreetMap · © CARTO',sub:'abcd'},
-  oscuro:{u:'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',a:'© OpenStreetMap · © CARTO',sub:'abcd'},
-  satelite:{u:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',a:'© Esri, Maxar, Earthstar',sub:''}
+  calles:{u:'https://tile.openstreetmap.org/{z}/{x}/{y}.png',a:'© OpenStreetMap',max:19},
+  oscuro:{u:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',labels:'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',a:'© Esri · OpenStreetMap',max:16},
+  satelite:{u:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',labels:'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',a:'© Esri, Maxar, Earthstar',max:19}
 };
+function baseLayer(k){
+  const t=TILES[k]||TILES.calles;
+  const b=L.tileLayer(t.u,{maxZoom:20,maxNativeZoom:t.max,attribution:t.a});
+  return t.labels?L.layerGroup([b,L.tileLayer(t.labels,{maxZoom:20,maxNativeZoom:t.max})]):b;
+}
 S.mapStyle=(()=>{try{return localStorage.getItem('diaadia.mapstyle')||'calles'}catch(_){return'calles'}})();
 function setMapStyle(k){
   if(!TILES[k])return;S.mapStyle=k;try{localStorage.setItem('diaadia.mapstyle',k)}catch(_){}
-  if(M.tile){M.L.removeLayer(M.tile);M.tile=googleLayer(k)||L.tileLayer(TILES[k].u,{maxZoom:19,subdomains:TILES[k].sub||'abc',attribution:TILES[k].a,detectRetina:true});M.tile.addTo(M.L)}
+  if(M.tile){M.L.removeLayer(M.tile);M.tile=googleLayer(k)||baseLayer(k);M.tile.addTo(M.L)}
   document.querySelectorAll('[data-mapstyle]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapstyle===k)));
   $('#map-box').classList.toggle('mapdark',k!=='calles');
 }
@@ -1766,7 +1851,7 @@ function mapInit(){
   let el=$('#lmap');if(!el){el=document.createElement('div');el.id='lmap';box.insertBefore(el,box.firstChild)}
   M.L=L.map(el,{zoomControl:false,attributionControl:true,worldCopyJump:true,tap:true}).setView([40.34,-1.11],6);
   M.L.attributionControl.setPrefix(false);
-  M.tile=(googleLayer(S.mapStyle)||L.tileLayer(TILES[S.mapStyle].u,{maxZoom:19,subdomains:TILES[S.mapStyle].sub||'abc',attribution:TILES[S.mapStyle].a,detectRetina:true})).addTo(M.L);
+  M.tile=(googleLayer(S.mapStyle)||baseLayer(S.mapStyle)).addTo(M.L);
   M.layer=L.layerGroup().addTo(M.L);
   const st=document.createElement('div');st.className='mapstyle';st.innerHTML=[['calles','Calles'],['oscuro','Oscuro'],['satelite','Satélite']].map(([k,l])=>`<button data-mapstyle="${k}" aria-pressed="${S.mapStyle===k}">${l}</button>`).join('');box.appendChild(st);
   L.DomEvent.disableClickPropagation(st);
@@ -2236,11 +2321,13 @@ function renderSitio(box){
   const last=g.visits[0];
   let h=`<button class="back" data-act="sitios-back">‹ Todos los sitios</button><h1 class="title t2">${esc(g.name)}</h1><p class="sub" style="margin-top:8px">${esc([g.ptype,g.cuisine,g.city].filter(Boolean).join(', '))}</p>`;
   h+=`<div class="srow">${g.avg?`<span class="bigstar">${fmtRating(g.avg)}</span>${starsHTML(g.avg)}`:'<span class="m">Sin valorar</span>'}<span class="m">${g.visits.length===1?'1 visita':g.visits.length+' visitas'}</span>${g.again===true?'<span class="badge">Volverías</span>':g.again===false?'<span class="badge no">No volverías</span>':''}</div>`;
-  if(g.tip)h+=`<div class="tipbox"><b>Qué pedir o no perderse</b><p>${esc(g.tip)}</p></div>`;
+  if(g.tip)h+=`<div class="tipbox"><b>Qué pedir</b><p>${esc(g.tip)}</p></div>`;
+  if(g.notip)h+=`<div class="tipbox no"><b>Qué no pedir</b><p>${esc(g.notip)}</p></div>`;
+  if(g.ppp)h+=`<p class="note" style="margin-top:8px">Sale a unos <b>${fmt(g.ppp)}</b> por persona.</p>`;
   if(g.photos.length)h+=`<div class="pgrid">${g.photos.map((id,i)=>`<button class="phb" data-ph="${i}" data-phset="place:${encodeURIComponent(g.key)}" aria-label="Ver foto"><img src="${blob(id)}" alt="" loading="lazy"></button>`).join('')}</div>`;
   h+=`<div class="btnrow"><button class="pri" data-act="again-visit">Apuntar otra visita</button>${hasGeo(last)?`<button class="sec" data-act="see-map" data-id="${last.id}">Ver en el mapa</button>`:`<button class="sec" data-place="${last.id}">Marcar en el mapa</button>`}</div>`;
   const yNow=String(new Date().getFullYear());
-  h+=`<section class="card"><h2>Visitas</h2>${g.visits.map(v=>{const ga=v.gastoId&&S.entries.get(v.gastoId);return `<div class="visit"><div class="tr1"><b>${esc(longDate(v.date))}${v.date.slice(0,4)!==yNow?' '+v.date.slice(0,4):''}</b><button class="mini" data-edit="${v.id}">Editar</button></div>${v.rating||ga?`<div class="srow">${v.rating?starsHTML(v.rating):''}${ga?`<span class="m">${esc(fmt(ga.amount))}</span>`:''}</div>`:''}${v.review?`<p class="rv">${esc(v.review)}</p>`:''}${v.tip&&v.tip!==g.tip?`<p class="m" style="white-space:normal">Pedir: ${esc(v.tip)}</p>`:''}</div>`}).join('')}</section>`;
+  h+=`<section class="card"><h2>Visitas</h2>${g.visits.map(v=>{const ga=v.gastoId&&S.entries.get(v.gastoId);return `<div class="visit"><div class="tr1"><b>${esc(longDate(v.date))}${v.date.slice(0,4)!==yNow?' '+v.date.slice(0,4):''}</b><button class="mini" data-edit="${v.id}">Editar</button></div>${v.personas||v.ppp?`<p class="m" style="margin:4px 0 0">${[v.personas?v.personas+(v.personas===1?' persona':' personas'):'',v.ppp?fmt(v.ppp)+' por persona':''].filter(Boolean).join(' · ')}</p>`:''}${v.rating||ga?`<div class="srow">${v.rating?starsHTML(v.rating):''}${ga?`<span class="m">${esc(fmt(ga.amount))}</span>`:''}</div>`:''}${v.review?`<p class="rv">${esc(v.review)}</p>`:''}${v.tip&&v.tip!==g.tip?`<p class="m" style="white-space:normal">Pedir: ${esc(v.tip)}</p>`:''}</div>`}).join('')}</section>`;
   box.innerHTML=h;
 }
 
@@ -2521,6 +2608,7 @@ function openSettings(){
   h+=`<section class="set-sec"><h3>Gemini</h3><p class="sub">Se usa para ubicar sitios en el mapa y resumir viajes. Consigue una clave gratis en <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> y pégala aquí. Solo se guarda en este móvil.</p><label class="lbl">Clave de Gemini<input class="field" id="g-key" type="password" autocomplete="off" placeholder="AIza…" value="${esc(SET.geminiKey||'')}"></label><label class="lbl" style="margin-top:10px">Modelo<input class="field" id="g-model" type="text" autocomplete="off" value="${esc(SET.geminiModel||'gemini-flash-latest')}"></label><div class="btnrow sm"><button class="sec" data-act="g-test">Probar</button></div><p class="note" id="g-msg"></p></section>`;
   if(isNative()){const A=avisos();h+=`<section class="set-sec"><h3>Avisos</h3><p class="sub">Notificaciones en el móvil, aunque no tengas la app abierta.</p><div class="chips"><button class="chip" data-act="av-on" aria-pressed="${A.on}">${A.on?'Avisos activados':'Activar avisos'}</button></div><div id="av-opts" ${A.on?'':'hidden'}><p class="ftitle" style="margin-top:12px">Eventos con hora</p><div class="chips">${[[0,'No'],[15,'15 min antes'],[30,'30 min antes'],[60,'1 hora antes'],[120,'2 horas antes']].map(([v,l])=>`<button class="chip" data-aveven="${v}" aria-pressed="${A.eventos===v}">${l}</button>`).join('')}</div><p class="ftitle" style="margin-top:12px">Avisarme de</p><div class="chips">${[['tareas','Tareas'],['recibos','Recibos'],['caducidades','Caducidades'],['cumples','Cumpleaños'],['viajes','Viajes'],['teruel','Eventos para ti'],['cartera','Cartera (cada día, 20:00)'],['semana','Resumen del domingo']].map(([k,l])=>`<button class="chip" data-avk="${k}" aria-pressed="${!!A[k]}">${l}</button>`).join('')}</div></div></section>`}
   h+=`<section class="set-sec"><h3>Correo</h3><p class="sub">Dirección de tu script de Google que lee el correo. Las reservas, citas, facturas y tareas que encuentre aparecerán en «Por revisar».</p><label class="lbl">Dirección del script<input class="field" id="mail-url" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec?k=…" value="${esc(SET.mailUrl||'')}"></label><div class="btnrow sm"><button class="sec" data-act="mail-test">Probar</button></div></section>`;
+  if(isNative())h+=`<section class="set-sec"><h3>Tickets de la galería</h3><p class="sub">La app mira las fotos nuevas de la cámara y, si alguna es un ticket, apunta el gasto y los precios de cada producto o plato. Para saber si una foto es un ticket, la envía a Gemini. No mira capturas ni fotos de WhatsApp.</p><div class="chips"><button class="chip" data-act="tk-auto" aria-pressed="${!!SET.tkAuto}">${SET.tkAuto?'Leyendo tickets de la galería':'Leer tickets de la galería'}</button></div></section>`;
   if(isNative())h+=`<section class="set-sec"><h3>Trade Republic</h3><p class="sub">La app mira solo las capturas de pantalla de Trade Republic que hagas y te propone actualizar tu cartera. No mira ninguna otra foto.</p><div class="chips"><button class="chip" data-act="tr-auto" aria-pressed="${!!SET.trAuto}">${SET.trAuto?'Leyendo capturas de Trade Republic':'Leer capturas de Trade Republic'}</button></div></section>`;
   if(isNative())h+=`<section class="set-sec"><h3>Widget</h3><p class="sub">Fondo del widget de la pantalla de inicio.</p><div class="chips" role="group" aria-label="Fondo del widget">${[['transparente','Transparente'],['semi','Semitransparente'],['negro','Negro']].map(([k,l])=>`<button class="chip" data-wbg="${k}" aria-pressed="${(SET.widgetBg||'transparente')===k}">${l}</button>`).join('')}</div><p class="note">El tiempo del widget se actualiza solo cada media hora, aunque no abras la app. Si ves que no lo hace, pon la batería de la app en «Sin restricciones».</p></section>`;
   h+=`<section class="set-sec"><h3>Eventos de Teruel y tiempo</h3><p class="sub">Los eventos se buscan solos cada mañana y el tiempo se actualiza al abrir la app.</p><label class="lbl">Dirección de los eventos<input class="field" id="ev-url" type="url" autocomplete="off" value="${esc(eventsURL())}"></label><div class="btnrow sm"><button class="sec" data-act="refresh-all">Actualizar ahora</button></div></section>`;
@@ -3283,7 +3371,7 @@ function appContext(){
     const o={k:e.kind,t:e.title};if(e.date)o.d=e.date;if(e.end)o.fin=e.end;
     if(e.amount!=null)o.eur=e.amount;if(e.cat)o.cat=e.cat;if(e.repeat&&e.repeat!=='none')o.rep=e.repeat;
     if(e.currency&&e.currency!=='EUR'){o.moneda=e.currency;o.importe_original=e.amountOrig}
-    if(e.city)o.ciudad=e.city;if(e.ptype)o.tipo=e.ptype;if(e.cuisine)o.comida=e.cuisine;if(e.rating)o.nota=e.rating;if(e.tip)o.pedir=e.tip;if(e.review)o.resena=String(e.review).slice(0,200);
+    if(e.city)o.ciudad=e.city;if(e.ptype)o.tipo=e.ptype;if(e.cuisine)o.comida=e.cuisine;if(e.rating)o.nota=e.rating;if(e.tip)o.pedir=e.tip;if(e.notip)o.no_pedir=e.notip;if(e.personas)o.personas=e.personas;if(e.ppp)o.precio_persona=e.ppp;if(e.review)o.resena=String(e.review).slice(0,200);
     if(e.again===true)o.volveria='sí';if(e.again===false)o.volveria='no';
     if(e.time)o.hora=e.time;if(e.place)o.lugar=e.place;if(e.kind==='tarea'||e.kind==='todo')o.hecha=!!e.done;
     if(e.kind==='viaje'){if(e.transport)o.transporte=e.transport;if(e.km&&e.km.total)o.km_ida_vuelta=e.km.total;if(e.moneda)o.moneda=e.moneda;if(e.budget)o.presupuesto=e.budget}
@@ -3795,7 +3883,7 @@ async function applyActions(list,label){
     }else if(a.tipo==='sitio'){
       if(!a.nombre)continue;
       const pt=PTYPES.includes(a.tipo_sitio)?a.tipo_sitio:(a.comida?'Restaurante':'Restaurante');
-      const e={id:newId(),kind:'lugar',title:a.nombre,city:a.ciudad||'',ptype:pt,cuisine:FOODTYPES.includes(pt)&&CUISINES.includes(a.comida)?a.comida:null,rating:+a.nota>0?Math.max(0.5,Math.min(5,Math.round(+a.nota*2)/2)):null,tip:a.pedir||'',review:a.comentario||'',photos:[],date:d,created:now};
+      const e={id:newId(),kind:'lugar',title:a.nombre,city:a.ciudad||'',ptype:pt,cuisine:FOODTYPES.includes(pt)&&CUISINES.includes(a.comida)?a.comida:null,rating:+a.nota>0?Math.max(0.5,Math.min(5,Math.round(+a.nota*2)/2)):null,tip:a.pedir||'',notip:a.no_pedir||'',personas:+a.personas>0?+a.personas:null,ppp:+a.personas>0&&+a.importe>0?Math.round(+a.importe/+a.personas*100)/100:null,review:a.comentario||'',photos:[],date:d,created:now};
       const tr=autoTrip(d);if(tr)e.tripId=tr;
       const pl=await placeLookup(a.nombre,a.ciudad||(tr&&S.entries.get(tr).title)||HOME.name);
       if(pl){e.lat=pl.lat;e.lon=pl.lon;e.geo='auto';e.geoPrec='sitio';if(!e.city&&pl.city)e.city=pl.city}
@@ -3850,7 +3938,7 @@ Responde solo con JSON: {"acciones":[...]} usando estos tipos (pon solo los camp
 - {"tipo":"evento","titulo":"","fecha":"","hora":"HH:MM","lugar":"","grupo":"","recordar":minutos_antes_o_null}
 - {"tipo":"recordatorio","titulo":"lo que hay que recordar, en infinitivo","fecha":"","hora":"HH:MM"}  (cuando dice «recuérdame…»)
 - {"tipo":"tarea","titulo":"","fecha":"AAAA-MM-DD o null si no hay día","grupo":""}
-- {"tipo":"sitio","nombre":"","ciudad":"","tipo_sitio":"una de: ${PTYPES.join(', ')}","comida":"una de: ${CUISINES.join(', ')} o null","nota":estrellas_0_5,"importe":0,"pedir":"","comentario":"","fecha":""}  (cuando ha estado en un restaurante, bar o sitio; si dice cuánto gastó, pon el importe aquí y no hagas un gasto aparte)
+- {"tipo":"sitio","nombre":"","ciudad":"","tipo_sitio":"una de: ${PTYPES.join(', ')}","comida":"una de: ${CUISINES.join(', ')} o null","nota":estrellas_0_5,"importe":0,"personas":0,"pedir":"","no_pedir":"","comentario":"","fecha":""}  (cuando ha estado en un restaurante, bar o sitio; si dice cuánto gastó, pon el importe aquí y no hagas un gasto aparte)
 - {"tipo":"viaje","destino":"","desde":"","hasta":"","transporte":"coche|tren|avion|bus|otro"}
 - {"tipo":"nota","texto":""}
 - {"tipo":"spotify","cancion":"","artista":"","playlist":"nombre de la playlist o null","favorito":true_o_false}
@@ -4275,7 +4363,9 @@ document.addEventListener('click',ev=>{
   if('cityf' in d){S.sit.city=d.cityf;el.parentNode.querySelectorAll('[data-cityf]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));renderSitiosList();return}
   if(d.sortby){S.sit.sort=d.sortby;el.parentNode.querySelectorAll('[data-sortby]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));renderSitiosList();return}
   if(d.ph!=null&&d.phset){openViewer(photoSet(d.phset),+d.ph);return}
-  if(d.cat!=null&&S.comp){S.comp.cat=d.cat;S.comp.catTouched=true;el.parentNode.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));return}
+  if(d.cat!=null&&S.comp){S.comp.cat=d.cat;S.comp.catTouched=true;el.parentNode.querySelectorAll('[data-cat]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));updateRankBox();return}
+  if(d.cstar&&S.comp){const n=+d.cstar,c=S.comp;c.rating=c.rating===n?0:n;const b2=$('#c-stars');if(b2)b2.innerHTML=starInputHTML(c.rating).replace(/data-star=/g,'data-cstar=');const v=$('#c-stv');if(v)v.textContent=c.rating?fmtRating(c.rating)+' de 5':'Sin nota';return}
+  if(d.crtype&&S.comp){S.comp.rptype=d.crtype;el.parentNode.querySelectorAll('[data-crtype]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));return}
   if(S.sheet){
     const sh=S.sheet;
     if(d.atype&&sh.mode==='cuenta'){sh.atype=d.atype;el.parentNode.querySelectorAll('[data-atype]').forEach(b=>b.setAttribute('aria-pressed',String(b===el)));updateAccFields();return}
@@ -4340,6 +4430,7 @@ const comp=$('#comp');
 comp.addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.tagName==='INPUT'){ev.preventDefault();save()}if(ev.key==='Escape')closeComp()});
 comp.addEventListener('change',ev=>{if(ev.target.id==='c-cur')setCompCurrency(ev.target.value)});
 comp.addEventListener('input',ev=>{if(ev.target.id==='c-rate'){ev.target.dataset.touched='1';updateConv()}if(ev.target.id==='c-amount')updateConv();
+  if(ev.target.id==='c-ppp')ev.target.dataset.touched='1';if(['c-amount','c-pers','c-text'].includes(ev.target.id))setTimeout(()=>{updateRankBox();updatePpp()},0);
   const err=$('#c-err');if(err)err.textContent='';
   const c=S.comp;
   if(c&&ev.target.id==='c-text'&&(c.kind==='gasto'||c.kind==='ingreso')&&!c.catTouched){
@@ -4399,7 +4490,7 @@ if(NAV.on){
 }
 renderAdds();render();boot();
 (function(){try{const C=window.Capacitor;if(C&&C.isPluginAvailable&&C.isPluginAvailable('App')){NAV.on=false;const A=plug('App');A.addListener('backButton',()=>{if(isRootUI())A.exitApp();else navBack()})}}catch(_){}})();
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkLaunch();fetchMail();checkTR();refreshWeather();if(!S.evAt||Date.now()-S.evAt>3*3600e3){S.evAt=Date.now();refreshEvents()}}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){checkLaunch();fetchMail();checkTR();checkTickets();refreshWeather();if(!S.evAt||Date.now()-S.evAt>3*3600e3){S.evAt=Date.now();refreshEvents()}}});
 })();
 </script>
 </body>
