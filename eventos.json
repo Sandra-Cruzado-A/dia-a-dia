@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-19",
+ "updatedAt": "2026-10-20",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -24,42 +24,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/javier-aunon-fotografo-de-vez-en-cuando-me-doy-el-gustazo-de-tirar-y-revelar-un-carrete-pero-cuesta-un-rinon",
    "end": "2026-10-23"
-  },
-  {
-   "id": "acto-institucional-del-dia-mundial-contra-el-cancer-de-mama-2026-10-19",
-   "title": "Acto institucional del Día Mundial contra el Cáncer de Mama",
-   "date": "2026-10-19",
-   "place": "Ayuntamiento de Teruel",
-   "zona": "ciudad",
-   "cat": "Otros",
-   "desc": "Lectura de manifiesto con motivo del Día Mundial contra el Cáncer de Mama e instalación de una mesa informativa.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/la-asociacion-espanola-contra-el-cancer-moviliza-a-teruel-y-su-provincia-para-reivindicar-una-atencion-mas-humana-e-integral-a-las-mujeres-con-cancer-de-mama",
-   "time": "10:30"
-  },
-  {
-   "id": "cocinando-territorio-2026-10-19",
-   "title": "Cocinando Territorio",
-   "date": "2026-10-19",
-   "place": "Restaurante La Fondica, La Puebla de Valverde",
-   "zona": "provincia",
-   "cat": "Congresos",
-   "desc": "Encuentro organizado por el CITA Teruel para conectar a agentes de la cadena agroalimentaria local mediante gastronomía y 'networking'.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/cita-teruel-organiza-cocinando-territorio-un-encuentro-para-impulsar-las-conexiones-entre-los-agentes-de-la-cadena-agroalimentaria-turolense",
-   "time": "12:00"
-  },
-  {
-   "id": "mujeres-de-oro-2026-10-19",
-   "title": "Mujeres de oro",
-   "date": "2026-10-19",
-   "place": "Iglesia de San Pedro, Teruel",
-   "zona": "ciudad",
-   "cat": "Teatro",
-   "desc": "Propuesta escénica multidisciplinar interpretada por Ruth Gabriel y Montse Peidro, que fusiona verso, música en directo y comedia.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/quien-dijo-que-el-teatro-clasico-no-es-moderno-divertido-y-femenino",
-   "time": "19:00"
   },
   {
    "id": "taller-prensa-sin-edad-2026-10-19",
@@ -98,6 +62,29 @@
    "time": "19:00"
   },
   {
+   "id": "charla-abastecimiento-de-agua-en-teruel-de-la-edad-media-al--2026-10-20",
+   "title": "Charla 'Abastecimiento de agua en Teruel: de la Edad Media al Renacimiento'",
+   "date": "2026-10-20",
+   "place": "Aljibes Medievales, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Conferencia a cargo del arqueólogo Javier Ibáñez González dentro del ciclo 'Entre conferencias, arte y páginas'.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/los-aljibes-medievales-se-convierten-en-un-referente-para-indagar-sobre-su-ciudad",
+   "time": "19:30"
+  },
+  {
+   "id": "andadas-camina-por-tu-salud-2026-10-20",
+   "title": "Andadas 'Camina por tu salud'",
+   "date": "2026-10-20",
+   "place": "San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Activación de la sexta edición de las andadas populares 'Camina por tu salud' desde San Julián.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/"
+  },
+  {
    "id": "taller-prensa-sin-edad-2026-10-22",
    "title": "Taller Prensa sin edad",
    "date": "2026-10-22",
@@ -108,6 +95,17 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
    "end": "2026-10-29"
+  },
+  {
+   "id": "ponencia-de-manuel-pimentel-en-el-congreso-sobre-regadios-2026-10-22",
+   "title": "Ponencia de Manuel Pimentel en el Congreso sobre Regadíos",
+   "date": "2026-10-22",
+   "place": "Teatro de Alcañiz, Alcañiz",
+   "zona": "provincia",
+   "cat": "Congresos",
+   "desc": "Inauguración del Congreso sobre Regadíos 'Agua, Vida y Desarrollo' con la ponencia de Manuel Pimentel.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/manuel-pimentel-escritor-ingeniero-agronomo-y-doctor-en-derecho-el-campo-agoniza-y-por-eso-se-anuncian-nuevas-tractoradas-pacificas"
   },
   {
    "id": "motorland-classic-festival-2026-2026-10-23",
@@ -234,7 +232,7 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Celebración con degustación de cerveza, oferta gastronómica y ambiente festivo popular.",
+   "desc": "Jornada festiva con cerveza, propuestas gastronómicas y ambiente popular.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -365,9 +363,9 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Congresos",
-   "desc": "Lo abren Antonio Narváez y Alberto Ruiz-Gallardón.",
+   "desc": "Segunda edición del congreso con la participación de ponentes como Albert Rivera.",
    "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/",
+   "url": "https://ecodeteruel.tv/albert-rivera-estara-en-el-ii-congreso-aragon-justicia-y-empresa-de-teruel/",
    "end": "2026-11-13"
   },
   {
