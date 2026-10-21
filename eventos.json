@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-20",
+ "updatedAt": "2026-10-21",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -38,51 +38,16 @@
    "end": "2026-10-26"
   },
   {
-   "id": "camina-por-tu-salud-2026-10-20",
-   "title": "Camina por tu salud",
-   "date": "2026-10-20",
-   "place": "Frontón San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Inicio de las andadas gratuitas para mayores de 55 años organizadas por el Ayuntamiento y el Club Alpino Javalambre, con recorridos de 5 a 8 km.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/las-rutas-circulares-camina-por-tu-salud-para-mayores-de-55-se-inician-el-dia-20",
-   "time": "10:00"
-  },
-  {
-   "id": "conferencia-la-historia-de-la-aviacion-espanola-2026-10-20",
-   "title": "Conferencia: la historia de la aviación española",
-   "date": "2026-10-20",
-   "place": "Casino de Teruel",
+   "id": "presentacion-del-libro-de-serafin-aldecoa-2026-10-21",
+   "title": "Presentación del libro de Serafín Aldecoa",
+   "date": "2026-10-21",
+   "place": "Salón de actos del Museo de Teruel, Teruel",
    "zona": "ciudad",
    "cat": "Charlas",
-   "desc": "Con el Ejército del Aire y del Espacio. Entrada libre.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/el-casino-de-teruel-llena-de-historia-y-literatura-el-centro-de-la-capital-con-cuatro-grandes-citas-en-octubre/",
-   "time": "19:00"
-  },
-  {
-   "id": "charla-abastecimiento-de-agua-en-teruel-de-la-edad-media-al--2026-10-20",
-   "title": "Charla 'Abastecimiento de agua en Teruel: de la Edad Media al Renacimiento'",
-   "date": "2026-10-20",
-   "place": "Aljibes Medievales, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Conferencia a cargo del arqueólogo Javier Ibáñez González dentro del ciclo 'Entre conferencias, arte y páginas'.",
+   "desc": "Serafín Aldecoa presenta su obra 'Cien años de construcción del non nato ferrocarril Teruel-Alcañiz. Crónica de una frustración'.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/los-aljibes-medievales-se-convierten-en-un-referente-para-indagar-sobre-su-ciudad",
+   "url": "https://www.diariodeteruel.es/cultura/serafin-aldecoa-presenta-su-ultimo-libro-sobre-el-ferrocarril-teruel-alcaniz",
    "time": "19:30"
-  },
-  {
-   "id": "andadas-camina-por-tu-salud-2026-10-20",
-   "title": "Andadas 'Camina por tu salud'",
-   "date": "2026-10-20",
-   "place": "San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Activación de la sexta edición de las andadas populares 'Camina por tu salud' desde San Julián.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/"
   },
   {
    "id": "taller-prensa-sin-edad-2026-10-22",
@@ -177,6 +142,18 @@
    "desc": "Partido oficial de la Superliga Masculina de voleibol entre el Pamesa Teruel y el Melilla.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/deportes/pamesa-muestra-sus-credenciales-ante-san-sadurnino-en-el-arranque-de-la-superliga"
+  },
+  {
+   "id": "xxxiii-feria-ganadera-y-de-maquinaria-agricola-2026-10-24",
+   "title": "XXXIII Feria Ganadera y de Maquinaria Agrícola",
+   "date": "2026-10-24",
+   "place": "Mora de Rubielos",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "Mora de Rubielos acoge su tradicional feria dedicada al ganado y a la maquinaria agrícola.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/mora-de-rubielos-celebra-este-fin-de-semana-su-xxxiii-feria-ganadera-y-de-maquinaria-agricola/",
+   "end": "2026-10-25"
   },
   {
    "id": "cd-teruel-aguilas-2026-10-25",
