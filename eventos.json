@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-21",
+ "updatedAt": "2026-10-22",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -38,16 +38,16 @@
    "end": "2026-10-26"
   },
   {
-   "id": "presentacion-del-libro-de-serafin-aldecoa-2026-10-21",
-   "title": "Presentación del libro de Serafín Aldecoa",
-   "date": "2026-10-21",
-   "place": "Salón de actos del Museo de Teruel, Teruel",
+   "id": "presentacion-del-proyecto-de-conexion-san-julian-ensanche-2026-10-22",
+   "title": "Presentación del proyecto de conexión San Julián - Ensanche",
+   "date": "2026-10-22",
+   "place": "Sala Guadalaviar del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Charlas",
-   "desc": "Serafín Aldecoa presenta su obra 'Cien años de construcción del non nato ferrocarril Teruel-Alcañiz. Crónica de una frustración'.",
+   "desc": "Reunión abierta a los ciudadanos donde el Ayuntamiento expone las alternativas técnicas para conectar ambos barrios mediante un elemento mecánico.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/serafin-aldecoa-presenta-su-ultimo-libro-sobre-el-ferrocarril-teruel-alcaniz",
-   "time": "19:30"
+   "url": "https://www.diariodeteruel.es/teruel/el-ayuntamiento-expondra-a-los-vecinos-de-san-julian-y-el-ensanche-las-alternativas-para-conectar-ambos-barrios-con-un-elemento-mecanico",
+   "time": "20:00"
   },
   {
    "id": "taller-prensa-sin-edad-2026-10-22",
@@ -73,6 +73,29 @@
    "url": "https://www.diariodeteruel.es/teruel/manuel-pimentel-escritor-ingeniero-agronomo-y-doctor-en-derecho-el-campo-agoniza-y-por-eso-se-anuncian-nuevas-tractoradas-pacificas"
   },
   {
+   "id": "flashmob-por-el-dia-de-las-personas-sin-hogar-2026-10-22",
+   "title": "Flashmob por el Día de las Personas sin Hogar",
+   "date": "2026-10-22",
+   "place": "Plaza del Torico, Teruel",
+   "zona": "ciudad",
+   "cat": "Otros",
+   "desc": "Cáritas Teruel convoca un flashmob en la Plaza del Torico con motivo del Día de las Personas sin Hogar.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/"
+  },
+  {
+   "id": "proyeccion-de-la-opera-la-traviata-2026-10-23",
+   "title": "Proyección de la ópera La Traviata",
+   "date": "2026-10-23",
+   "place": "Auditorio de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Cine",
+   "desc": "Proyección gratuita de la ópera de Verdi dentro del ciclo El Real en Pantalla. Requiere inscripción previa en Fundación Ibercaja.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-teatro-real-regresa-a-la-gran-pantalla-en-teruel-con-la-traviata-de-verdi",
+   "time": "18:00"
+  },
+  {
    "id": "motorland-classic-festival-2026-2026-10-23",
    "title": "Motorland Classic Festival 2026",
    "date": "2026-10-23",
@@ -83,6 +106,31 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/bajoaragon/motorland-ya-prepara-su-gran-evento-del-ano-de-vehiculo-historico-el-classic-festival-2026",
    "end": "2026-10-25"
+  },
+  {
+   "id": "festival-teruel-de-cuento-y-verso-2026-10-23",
+   "title": "Festival Teruel de Cuento y Verso",
+   "date": "2026-10-23",
+   "place": "Salón de plenos del Ayuntamiento, Auditorio de San Julián y Espacio Luvitien, Teruel",
+   "zona": "ciudad",
+   "cat": "Otros",
+   "desc": "Encuentro que reúne a destacados poetas y escritores con charlas sobre sus obras, recitales y micrófono abierto.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-plataforma-de-poetas-presenta-el-festival-teruel-de-cuento-y-verso",
+   "end": "2026-10-24"
+  },
+  {
+   "id": "feria-alcorisa-muestra-2026-10-24",
+   "title": "Feria Alcorisa Muestra",
+   "date": "2026-10-24",
+   "place": "Pabellón municipal, Alcorisa",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "VII edición de la feria con 36 puestos de artesanía, comercio local, gastronomía, degustaciones, música y actividades infantiles.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/la-feria-alcorisa-muestra-ofrece-los-dias-24-y-25-de-octubre-un-gran-escaparate-de-artesania-local",
+   "end": "2026-10-25",
+   "time": "11:00"
   },
   {
    "id": "la-biblioteca-imaginaria-teatro-arbole-2026-10-24",
@@ -156,6 +204,18 @@
    "end": "2026-10-25"
   },
   {
+   "id": "marchas-solidarias-contra-el-cancer-2026-10-24",
+   "title": "Marchas solidarias contra el cáncer",
+   "date": "2026-10-24",
+   "place": "Alcañiz, Valjunquera y Albalate del Arzobispo",
+   "zona": "provincia",
+   "cat": "Deporte",
+   "desc": "Tradicionales marchas solidarias contra el cáncer celebradas durante el fin de semana en varias localidades turolenses.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/teruel-y-su-provincia-se-volcaran-este-fin-de-semana-con-la-solidaridad-contra-el-cancer-con-marchas-y-un-gran-vermu/",
+   "end": "2026-10-25"
+  },
+  {
    "id": "cd-teruel-aguilas-2026-10-25",
    "title": "CD Teruel – Águilas",
    "date": "2026-10-25",
@@ -203,13 +263,24 @@
    "end": "2026-10-29"
   },
   {
+   "id": "proyecto-bibliotecas-humanas-2026-10-29",
+   "title": "Proyecto Bibliotecas Humanas",
+   "date": "2026-10-29",
+   "place": "Mazaleón",
+   "zona": "provincia",
+   "cat": "Otros",
+   "desc": "Jornada del proyecto 'Bibliotecas humanas' para conectar las historias y experiencias de los mayores con los jóvenes del municipio.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/mazaleon-acogera-el-29-de-octubre-el-proyecto-bibliotecas-humanas-para-conectar-las-historias-de-los-mayores-con-los-jovenes-del-municipio/"
+  },
+  {
    "id": "fiesta-de-la-cerveza-2026-10-31",
    "title": "Fiesta de la Cerveza",
    "date": "2026-10-31",
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Jornada festiva con cerveza, propuestas gastronómicas y ambiente popular.",
+   "desc": "Celebración festiva con cerveza, propuestas gastronómicas y ambiente popular.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -273,6 +344,19 @@
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
+  },
+  {
+   "id": "lakuerter-ibera-2026-11-06",
+   "title": "Lakuerter Íbera",
+   "date": "2026-11-06",
+   "place": "Andorra",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "XVIII edición de la fiesta de recreación histórica, con pregón inaugural a cargo de la Fundación Bodas de Isabel.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/la-fundacion-bodas-de-isabel-pregonera-de-la-xviii-edicion-de-lakuerter-ibera-de-andorra",
+   "end": "2026-11-08",
+   "time": "18:00"
   },
   {
    "id": "kala-la-guru-del-pop-2026-11-07",
@@ -381,6 +465,17 @@
    "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
   },
   {
+   "id": "concierto-de-quique-gonzalez-y-toni-brunet-2026-11-18",
+   "title": "Concierto de Quique González y Toni Brunet",
+   "date": "2026-11-18",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto en formato de dúo acústico para presentar el disco «1973» y repasar grandes temas de su carrera musical.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
+  },
+  {
    "id": "locuras-paralelas-2026-11-19",
    "title": "Locuras Paralelas",
    "date": "2026-11-19",
@@ -393,6 +488,29 @@
    "time": "20:30"
   },
   {
+   "id": "proyeccion-de-la-opera-turandot-2026-11-20",
+   "title": "Proyección de la ópera Turandot",
+   "date": "2026-11-20",
+   "place": "Auditorio de San Julián, Teruel",
+   "zona": "ciudad",
+   "cat": "Cine",
+   "desc": "Proyección gratuita de la ópera de Puccini dentro del programa El Real en Pantalla, previa inscripción en la Fundación Ibercaja.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-teatro-real-regresa-a-la-gran-pantalla-en-teruel-con-la-traviata-de-verdi"
+  },
+  {
+   "id": "concierto-de-hevia-y-la-banda-santa-cecilia-2026-11-21",
+   "title": "Concierto de Hevia y la Banda Santa Cecilia",
+   "date": "2026-11-21",
+   "place": "Palacio de Exposiciones y Congresos, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto único del gaitero Hevia junto a 140 músicos de la Banda Santa Cecilia por el 25 aniversario del disco 'Tierra de nadie'.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/hevia-y-140-musicos-de-la-banda-santa-cecilia-ofreceran-en-teruel-un-concierto-unico-coincidiendo-con-el-25-aniversario-del-exito-internacional-de-tierra-de-nadie",
+   "time": "19:00"
+  },
+  {
    "id": "concierto-de-hevia-y-la-banda-de-musica-santa-cecilia-2026-11-21",
    "title": "Concierto de Hevia y la Banda de Música Santa Cecilia",
    "date": "2026-11-21",
@@ -400,17 +518,6 @@
    "zona": "ciudad",
    "cat": "Música",
    "desc": "Concierto conjunto del gaitero Hevia y la Banda Santa Cecilia con motivo del 25 aniversario del Platinum Europe Award.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
-  },
-  {
-   "id": "concierto-de-hevia-y-la-banda-santa-cecilia-2026-11-21",
-   "title": "Concierto de Hevia y la Banda Santa Cecilia",
-   "date": "2026-11-21",
-   "place": "Palacio de Exposiciones y Congresos de Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto conjunto del gaitero José Ángel Hevia y la banda de música Santa Cecilia dentro del ciclo Otoño Cultural.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
   },
