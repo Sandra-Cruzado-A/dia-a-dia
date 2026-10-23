@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-22",
+ "updatedAt": "2026-10-23",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -38,18 +38,6 @@
    "end": "2026-10-26"
   },
   {
-   "id": "presentacion-del-proyecto-de-conexion-san-julian-ensanche-2026-10-22",
-   "title": "Presentación del proyecto de conexión San Julián - Ensanche",
-   "date": "2026-10-22",
-   "place": "Sala Guadalaviar del Centro Sociocultural de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Reunión abierta a los ciudadanos donde el Ayuntamiento expone las alternativas técnicas para conectar ambos barrios mediante un elemento mecánico.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/el-ayuntamiento-expondra-a-los-vecinos-de-san-julian-y-el-ensanche-las-alternativas-para-conectar-ambos-barrios-con-un-elemento-mecanico",
-   "time": "20:00"
-  },
-  {
    "id": "taller-prensa-sin-edad-2026-10-22",
    "title": "Taller Prensa sin edad",
    "date": "2026-10-22",
@@ -62,26 +50,16 @@
    "end": "2026-10-29"
   },
   {
-   "id": "ponencia-de-manuel-pimentel-en-el-congreso-sobre-regadios-2026-10-22",
-   "title": "Ponencia de Manuel Pimentel en el Congreso sobre Regadíos",
-   "date": "2026-10-22",
-   "place": "Teatro de Alcañiz, Alcañiz",
-   "zona": "provincia",
-   "cat": "Congresos",
-   "desc": "Inauguración del Congreso sobre Regadíos 'Agua, Vida y Desarrollo' con la ponencia de Manuel Pimentel.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/manuel-pimentel-escritor-ingeniero-agronomo-y-doctor-en-derecho-el-campo-agoniza-y-por-eso-se-anuncian-nuevas-tractoradas-pacificas"
-  },
-  {
-   "id": "flashmob-por-el-dia-de-las-personas-sin-hogar-2026-10-22",
-   "title": "Flashmob por el Día de las Personas sin Hogar",
-   "date": "2026-10-22",
-   "place": "Plaza del Torico, Teruel",
+   "id": "charla-sobre-la-guerra-en-gaza-por-fayez-badawi-2026-10-23",
+   "title": "Charla sobre la guerra en Gaza por Fayez Badawi",
+   "date": "2026-10-23",
+   "place": "El Jardín de Najarín, Teruel",
    "zona": "ciudad",
-   "cat": "Otros",
-   "desc": "Cáritas Teruel convoca un flashmob en la Plaza del Torico con motivo del Día de las Personas sin Hogar.",
+   "cat": "Charlas",
+   "desc": "Charla coloquio impartida por Fayez Badawi, exportavoz del FPLP, sobre la invasión de Gaza y el conflicto entre Palestina e Israel.",
    "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/"
+   "url": "https://www.diariodeteruel.es/cultura/fayez-badawi-ofrecera-una-charla-en-teruel-sobre-la-guerra-en-gaza",
+   "time": "17:30"
   },
   {
    "id": "proyeccion-de-la-opera-la-traviata-2026-10-23",
@@ -139,7 +117,7 @@
    "place": "Auditorio del Centro Sociocultural de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Función de teatro infantil de la compañía Teatro Arbolé. Entradas a 6 € con gastos de gestión incluidos.",
+   "desc": "Espectáculo infantil a cargo de Teatro Arbolé. Entradas a 6 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -163,10 +141,10 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Espectáculo de teatro de máscaras sin texto. Entradas a 6 € + gastos de gestión.",
+   "desc": "Teatro de máscaras sin texto recomendado para mayores de 12 años. Entradas a 6 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
+   "time": "19:30"
   },
   {
    "id": "iv-escarbachofest-2026-10-24",
@@ -216,6 +194,41 @@
    "end": "2026-10-25"
   },
   {
+   "id": "alcorisa-muestra-2026-10-24",
+   "title": "Alcorisa Muestra",
+   "date": "2026-10-24",
+   "place": "Pabellón municipal, Alcorisa",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "Séptima edición de la feria comercial, artesana y agroalimentaria con talleres, presentaciones, catas y música.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/alcorisa-muestra-reune-a-26-expositores-del-sector-agroalimentario-e-industrial",
+   "end": "2026-10-25"
+  },
+  {
+   "id": "pamesa-teruel-voleibol-vs-melilla-2026-10-24",
+   "title": "Pamesa Teruel Voleibol vs Melilla",
+   "date": "2026-10-24",
+   "place": "Pabellón Los Planos, Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Debut del equipo naranja como local en Superliga, en una jornada dedicada a la Asociación Española Contra el Cáncer.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/deportes/el-ayuntamiento-de-teruel-elevara-a-150000-euros-su-aportacion-al-pamesa-teruel-voleibol-en-2027"
+  },
+  {
+   "id": "iii-vermu-solidario-2026-10-25",
+   "title": "III Vermú Solidario",
+   "date": "2026-10-25",
+   "place": "Plaza de San Juan, Teruel",
+   "zona": "ciudad",
+   "cat": "Otros",
+   "desc": "Degustación de Jamón de Teruel recién cortado a beneficio de la AECC Teruel por 5 euros.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/",
+   "time": "12:00"
+  },
+  {
    "id": "cd-teruel-aguilas-2026-10-25",
    "title": "CD Teruel – Águilas",
    "date": "2026-10-25",
@@ -263,6 +276,18 @@
    "end": "2026-10-29"
   },
   {
+   "id": "aragon-tierra-de-jota-2026-10-29",
+   "title": "Aragón - Tierra de Jota",
+   "date": "2026-10-29",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Danza",
+   "desc": "Espectáculo organizado por Heraldo de Aragón. Acceso gratuito con invitación.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "19:00"
+  },
+  {
    "id": "proyecto-bibliotecas-humanas-2026-10-29",
    "title": "Proyecto Bibliotecas Humanas",
    "date": "2026-10-29",
@@ -274,13 +299,24 @@
    "url": "https://ecodeteruel.tv/mazaleon-acogera-el-29-de-octubre-el-proyecto-bibliotecas-humanas-para-conectar-las-historias-de-los-mayores-con-los-jovenes-del-municipio/"
   },
   {
+   "id": "bibliotecas-humanas-2026-10-29",
+   "title": "Bibliotecas humanas",
+   "date": "2026-10-29",
+   "place": "Mazaleón",
+   "zona": "provincia",
+   "cat": "Otros",
+   "desc": "Proyecto de recopilación de vivencias para conectar las historias y experiencias de los mayores con los jóvenes.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/mazaleon-acogera-el-29-de-octubre-el-proyecto-bibliotecas-humanas-para-conectar-las-historias-de-los-mayores-con-los-jovenes-del-municipio/"
+  },
+  {
    "id": "fiesta-de-la-cerveza-2026-10-31",
    "title": "Fiesta de la Cerveza",
    "date": "2026-10-31",
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Celebración festiva con cerveza, propuestas gastronómicas y ambiente popular.",
+   "desc": "Celebración con cerveza, gastronomía y ambiente festivo en Torre de las Arcas.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -322,6 +358,18 @@
    "end": "2026-11-02"
   },
   {
+   "id": "homenaje-a-pepe-vicente-lapuente-y-jornada-taurina-2026-11-01",
+   "title": "Homenaje a Pepe Vicente Lapuente y jornada taurina",
+   "date": "2026-11-01",
+   "place": "Plaza de Toros de Teruel",
+   "zona": "ciudad",
+   "cat": "Fiestas",
+   "desc": "Reconocimiento a Pepe Vicente Lapuente, exhibición de Pedro Domínguez y toro embolado organizado por El Ruedo.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/la-plaza-de-toros-de-teruel-rendira-homenaje-a-pepe-vicente-lapuente-el-proximo-1-de-noviembre",
+   "time": "16:15"
+  },
+  {
    "id": "taller-prensa-sin-edad-2026-11-04",
    "title": "Taller Prensa sin edad",
    "date": "2026-11-04",
@@ -335,12 +383,12 @@
   },
   {
    "id": "perimenoparty-2026-11-05",
-   "title": "PERIMENOPARTY",
+   "title": "Perimenoparty",
    "date": "2026-11-05",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo cómico y festivo sobre la bienvenida a una etapa ineludible de la vida. Entrada: 18 €.",
+   "desc": "La fiesta de bienvenida a una etapa vital ineludible. Entrada: 18 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -365,7 +413,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Espectáculo musical centrado en Metamorfosis, un grupo de pop lírico en crisis creativa y personal. Entrada: 15 € + gg.",
+   "desc": "Presentación del grupo de pop lírico Metamorfosis de la mano de Kala. Entrada: 15 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -388,7 +436,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Clásico del ballet con música de Tchaikovsky. Entradas desde 25 € hasta 38 € más gastos.",
+   "desc": "Obra magistral del ballet clásico y Tchaikovsky. Entradas entre 25 € y 38 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -436,7 +484,7 @@
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de Caleidoscopio Teatro. Entradas a 6 € con gastos incluidos.",
+   "desc": "Espectáculo infantil en el Auditorio de San Julián. Entradas por 6 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -465,6 +513,17 @@
    "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
   },
   {
+   "id": "xvi-fiesta-del-chopo-cabecero-2026-11-14",
+   "title": "XVI Fiesta del Chopo Cabecero",
+   "date": "2026-11-14",
+   "place": "La Hoz de la Vieja",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Tributo al patrimonio natural y a la cultura rural de Aragón.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/la-hoz-de-la-vieja-celebra-el-14-de-noviembre-la-xvi-fiesta-del-chopo-cabecero-un-tributo-al-patrimonio-natural-y-a-la-cultura-rural-de-aragon/"
+  },
+  {
    "id": "concierto-de-quique-gonzalez-y-toni-brunet-2026-11-18",
    "title": "Concierto de Quique González y Toni Brunet",
    "date": "2026-11-18",
@@ -476,13 +535,24 @@
    "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
   },
   {
+   "id": "quique-gonzalez-y-toni-brunet-2026-11-18",
+   "title": "Quique González y Toni Brunet",
+   "date": "2026-11-18",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto en formato de dúo acústico para presentar el disco '1973' y repasar grandes éxitos.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
+  },
+  {
    "id": "locuras-paralelas-2026-11-19",
    "title": "Locuras Paralelas",
    "date": "2026-11-19",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta teatral de humor inteligente, provocadora y con desenlace inesperado. Entrada: 18 €.",
+   "desc": "Propuesta inteligente, provocadora y sorprendente con desenlace inesperado. Entradas a 18 € con gg incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -508,6 +578,18 @@
    "desc": "Concierto único del gaitero Hevia junto a 140 músicos de la Banda Santa Cecilia por el 25 aniversario del disco 'Tierra de nadie'.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/hevia-y-140-musicos-de-la-banda-santa-cecilia-ofreceran-en-teruel-un-concierto-unico-coincidiendo-con-el-25-aniversario-del-exito-internacional-de-tierra-de-nadie",
+   "time": "19:00"
+  },
+  {
+   "id": "hevia-y-la-banda-santa-cecilia-de-teruel-2026-11-21",
+   "title": "Hevia y la Banda Santa Cecilia de Teruel",
+   "date": "2026-11-21",
+   "place": "Palacio de Exposiciones y Congresos, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Estreno de un espectáculo inédito con 145 músicos turolenses y la banda de Hevia. Entradas desde 6 euros.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/hevia-estrenara-un-espectaculo-inedito-junto-a-la-banda-de-santa-cecilia-de-teruel",
    "time": "19:00"
   },
   {
