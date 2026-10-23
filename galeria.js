@@ -111,6 +111,7 @@ function clusters(media, idx, gap) {
 function buildPlan(D) {
   const { media, folders, cfg } = D;
   const todayN = dnum(D.today);
+  const decl = cfg.decl || {}, np = cfg.np || {};
   const cat = fk => (cfg.cats && cfg.cats[fk]) || folders.get(fk).auto;
   const albums = [];
   const byFk = new Map();
@@ -137,13 +138,14 @@ function buildPlan(D) {
       c.runs = q.map(r => [r.a, r.b]);
       c.start = Math.min(...q.map(r => r.a));
     });
+    const extra = main.slice(1).filter(c => !decl['spl:s:' + f.fk + ':' + dstr(c.start)]);
     const splitIdx = new Set();
-    main.slice(1).forEach(c => c.idx.forEach(i => splitIdx.add(i)));
+    extra.forEach(c => c.idx.forEach(i => splitIdx.add(i)));
     const prim = main[0];
     const fixed = DATE_PREFIX.exec(f.name);
     const al = { id: 'f:' + f.fk, kind: 'existing', fk: f.fk, vol: f.vol, parent: f.parent, base: baseName(f.name), cl: prim, ranges: prim.runs.slice(), date: dstr(prim.start), count: f.idx.length - splitIdx.size, adds: [], keep: fixed ? fixed[1] + '-' + fixed[2] + '-' + fixed[3] : null };
     albums.push(al); byFk.set(f.fk, al);
-    main.slice(1).forEach(c => albums.push({ id: 's:' + f.fk + ':' + dstr(c.start), kind: 'split', fk: f.fk, vol: f.vol, parent: f.parent, base: baseName(f.name), cl: c, ranges: c.runs.slice(), date: dstr(c.start), count: c.idx.length, idx: c.idx, adds: [], primary: al }));
+    extra.forEach(c => albums.push({ id: 's:' + f.fk + ':' + dstr(c.start), kind: 'split', fk: f.fk, vol: f.vol, parent: f.parent, base: baseName(f.name), cl: c, ranges: c.runs.slice(), date: dstr(c.start), count: c.idx.length, idx: c.idx, adds: [], primary: al }));
   }
 
   // 2. viajes y eventos de Día a día: mandan sobre las fechas
@@ -174,7 +176,7 @@ function buildPlan(D) {
     g.sort((a, b) => b.count - a.count);
     for (let i = 1; i < g.length; i++) {
       const b = g[i];
-      if (b.kind !== 'existing') continue;
+      if (b.kind !== 'existing' || decl['mrg:' + b.fk]) continue;
       const a = g.find(x => x !== b && !x.mergeInto && x.kind === 'existing' && (Math.max(x.cl.a, b.cl.a) - Math.min(x.cl.b, b.cl.b)) <= 30);
       if (!a || a === b) continue;
       b.mergeInto = a;
@@ -192,12 +194,24 @@ function buildPlan(D) {
     albums.push({ id: 'n:' + it.id, kind: 'new', vol: defVol, parent: defParent, base: cleanName(it.title) || (it.kind === 'viaje' ? 'Viaje' : 'Evento'), date: it.date, ranges: [[it.a, it.b]], count: 0, adds: [], link: it });
   }
 
-  // nombres finales
+  // clave estable de cada álbum (para recordar lo que descartas)
+  for (const al of albums) al.key = al.link ? 'i:' + al.link.id : 'n:' + al.vol + '|' + nrm(stripYear(al.base, al.date)) + '|' + al.date.slice(0, 7);
+
+  // nombres finales; si descartaste un nombre, se prueba otra fecha y, si no hay, se deja como está
   const names = cfg.names || {};
   for (const al of albums) {
     const custom = names[al.id] ? cleanName(names[al.id]) : '';
     if (al.keep && !custom) { al.label = al.base; al.finalName = folders.get(al.fk).name; }
-    else { al.label = custom || stripYear(al.base, al.date); al.finalName = al.date + ' ' + al.label; }
+    else if (al.kind === 'existing') {
+      const fname = folders.get(al.fk).name;
+      const dates = [al.date];
+      if (al.link && !custom) { const alt = dstr(al.cl.start); if (alt !== al.date) dates.push(alt); }
+      let chosen = null;
+      for (const d of dates) { const lb = custom || stripYear(al.base, d); const n = d + ' ' + lb; if (n === fname || !decl['ren:' + al.fk + '>' + n]) { chosen = { lb, n }; break; } }
+      if (chosen) { al.label = chosen.lb; al.finalName = chosen.n; }
+      else { al.label = baseName(fname); al.finalName = fname; al.noRename = true; }
+    } else { al.label = custom || stripYear(al.base, al.date); al.finalName = al.date + ' ' + al.label; }
+    al.renKey = al.fk ? 'ren:' + al.fk + '>' + al.finalName : null;
     al.finalRel = al.parent + al.finalName + '/';
   }
 
@@ -209,7 +223,7 @@ function buildPlan(D) {
   if (tilde && felix && !(tilde.fk in merge)) merge[tilde.fk] = felix.fk;
   for (const [src, dst] of Object.entries(merge)) {
     const fs = folders.get(src), fd = folders.get(dst);
-    if (fs && fd && dst && src !== dst && fs.idx.length) pmerges.push({ src: fs, dst: fd });
+    if (fs && fd && dst && src !== dst && fs.idx.length && !decl['pmg:' + src]) pmerges.push({ src: fs, dst: fd });
   }
 
   // 6. las fotos sueltas van al álbum más concreto que cubre su día
@@ -234,7 +248,10 @@ function buildPlan(D) {
       const c = byDay.get(it.dn);
       if (!c) { unassigned.push(i); continue; }
       c.sort((x, y) => x[1] - y[1] || y[0].count - x[0].count);
-      const al = c[0][0];
+      const pk = it.vol + ':' + it.id;
+      const hit = c.find(x => !np[pk + '>' + x[0].key]);
+      if (!hit) { unassigned.push(i); continue; }
+      const al = hit[0];
       if (sigOf(al).has(it.name + '|' + it.size)) { dups.push(i); continue; }
       al.adds.push(i);
     }
@@ -283,7 +300,7 @@ function buildPlan(D) {
   for (const al of albums) {
     if (al.kind !== 'existing' || al.mergeInto) continue;
     const f = folders.get(al.fk);
-    if (f.name !== al.finalName) ops.push({ k: 'ren:' + al.fk, type: 'rename', album: al, fk: al.fk, idx: f.idx });
+    if (f.name !== al.finalName) ops.push({ k: al.renKey, type: 'rename', album: al, fk: al.fk, idx: f.idx });
   }
   for (const al of albums) if (al.kind === 'split') ops.push({ k: 'spl:' + al.id, type: 'split', album: al, fk: al.fk, idx: al.idx });
   for (const al of albums) if (al.kind === 'existing' && al.mergeInto) {
@@ -292,9 +309,23 @@ function buildPlan(D) {
     ops.push({ k: 'mrg:' + al.fk, type: 'merge', album: al, into: al.mergeInto, fk: al.fk, idx: f.idx.filter(i => !out.has(i)) });
   }
   for (const pm of pmerges) ops.push({ k: 'pmg:' + pm.src.fk, type: 'pmerge', src: pm.src, dst: pm.dst, fk: pm.src.fk, idx: pm.src.idx });
-  for (const al of albums) if (!al.mergeInto && al.adds.length) ops.push({ k: (al.kind === 'new' ? 'new:' : 'add:') + al.id, type: al.kind === 'new' ? 'new' : 'add', album: al, idx: al.adds });
+  // fotos sueltas: primero en grupo; si descartas el grupo, por días; si descartas un día, foto a foto
+  for (const al of albums) {
+    if (al.mergeInto || !al.adds.length) continue;
+    const gk = 'add:' + al.key;
+    if (!decl[gk]) { ops.push({ k: gk, type: al.kind === 'new' ? 'new' : 'add', album: al, idx: al.adds }); continue; }
+    const byD = new Map();
+    for (const i of al.adds) { const d = media[i].day; if (!byD.has(d)) byD.set(d, []); byD.get(d).push(i); }
+    const multi = byD.size > 1;
+    for (const d of [...byD.keys()].sort()) {
+      const dk = gk + '@' + d;
+      if (multi && !decl[dk]) ops.push({ k: dk, type: 'addday', album: al, day: d, idx: byD.get(d) });
+      else ops.push({ k: 'pick:' + al.key + '@' + d, type: 'pick', album: al, day: d, idx: byD.get(d) });
+    }
+  }
 
-  return { albums, ops, loose, unassigned, dups, evSug, trips, defParent };
+  const assigned = albums.reduce((s2, a) => s2 + (a.mergeInto ? 0 : a.adds.length), 0);
+  return { albums, ops, loose, unassigned, dups, evSug, trips, defParent, assigned };
 }
 
 /* ---------- de los cambios marcados a la lista de fotos que se mueven ---------- */
@@ -302,7 +333,7 @@ function isOn(plan, cfg, k) { return !(cfg.off && cfg.off[k]); }
 function albumRel(plan, cfg, al, folders) {
   if (!al) return null;
   if (al.mergeInto) return albumRel(plan, cfg, al.mergeInto, folders);
-  if (al.kind === 'existing') return isOn(plan, cfg, 'ren:' + al.fk) && folders.get(al.fk).name !== al.finalName ? al.finalRel : folders.get(al.fk).rel;
+  if (al.kind === 'existing') return !al.noRename && isOn(plan, cfg, al.renKey) && folders.get(al.fk).name !== al.finalName ? al.finalRel : folders.get(al.fk).rel;
   if (al.kind === 'split' && !isOn(plan, cfg, 'spl:' + al.id)) return albumRel(plan, cfg, al.primary, folders);
   return al.finalRel;
 }
@@ -314,7 +345,8 @@ function emptiedFolders(plan, cfg, data) {
 function computeMoves(plan, cfg, data) {
   const { media, folders } = data;
   const dest = new Map();
-  const order = ['rename', 'split', 'merge', 'pmerge', 'add', 'new'];
+  const order = ['rename', 'split', 'merge', 'pmerge', 'add', 'new', 'addday', 'pick'];
+  const pick = cfg.pick || {};
   for (const type of order) {
     for (const op of plan.ops) {
       if (op.type !== type || !isOn(plan, cfg, op.k)) continue;
@@ -324,7 +356,8 @@ function computeMoves(plan, cfg, data) {
       else if (type === 'merge') to = albumRel(plan, cfg, op.into, folders);
       else if (type === 'pmerge') to = op.dst.rel;
       else to = albumRel(plan, cfg, op.album, folders);
-      for (const i of op.idx) dest.set(i, to);
+      const list = type === 'pick' ? op.idx.filter(i => pick[media[i].vol + ':' + media[i].id + '>' + op.album.key] === 1) : op.idx;
+      for (const i of list) dest.set(i, to);
     }
   }
   const out = [];
@@ -338,8 +371,15 @@ const P = () => A().plug ? A().plug('Galeria') : null;
 async function loadCfg() {
   if (G.cfg) return G.cfg;
   const c = (A().kvGet && await A().kvGet('galeria')) || {};
-  G.cfg = Object.assign({ cats: {}, off: {}, names: {}, merge: {}, dismissed: [], homes: [], places: {} }, c);
+  G.cfg = Object.assign({ cats: {}, off: {}, names: {}, merge: {}, dismissed: [], homes: [], places: {}, decl: {}, np: {}, pick: {} }, c);
   return G.cfg;
+}
+function commitDeclines() {
+  const c = G.cfg; if (!c) return;
+  for (const k of Object.keys(c.off || {})) if (c.off[k]) c.decl[k] = 1;
+  c.off = {};
+  for (const [k, v] of Object.entries(c.pick || {})) if (v === -1) { c.np[k] = 1; delete c.pick[k]; }
+  saveCfg();
 }
 function saveCfg() { if (A().kvSet && G.cfg) A().kvSet('galeria', JSON.parse(JSON.stringify(G.cfg))); }
 function homes() {
@@ -388,7 +428,9 @@ async function scan() {
   if (G.busy) return;
   const p = P(); if (!p) return;
   G.busy = true; G.err = ''; G.result = null; G.confirm = null;
+  closeV(false);
   await loadCfg();
+  commitDeclines();
   try {
     G.stage = 'scanning'; setProg('Leyendo tu galería…', 0, 0);
     if (G.status && !G.status.location) { try { await p.requestMedia(); } catch (_) {} await refreshStatus(); }
@@ -445,6 +487,7 @@ async function nameTrips() {
 async function apply() {
   if (G.busy || !G.plan) return;
   const p = P(); if (!p) return;
+  closeV(false);
   const moves = computeMoves(G.plan, G.cfg, G.data);
   if (!moves.length) { G.confirm = null; rerender(); return; }
   G.busy = true; G.confirm = null; G.stage = 'applying';
@@ -465,6 +508,8 @@ async function apply() {
     if (A().kvSet) await A().kvSet('galeria-log', log);
   }
   await clean(srcDirs);
+  commitDeclines();
+  for (const [k, v] of Object.entries(G.cfg.pick)) if (v === 1) delete G.cfg.pick[k];
   G.result = { ok, fail, undo: false };
   G.stage = 'done'; G.busy = false; G.data = null; G.plan = null;
   G.cfg.lastRun = { at: log.at, ok, fail }; saveCfg();
@@ -516,7 +561,34 @@ function injectCSS() {
 .galsum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.galsum div{background:var(--sunk);border-radius:14px;padding:10px 12px}.galsum b{display:block;font-size:21px;font-variant-numeric:tabular-nums}.galsum span{font-size:12.5px;color:var(--muted)}
 .galedit{border:0;background:none;color:var(--muted);font-size:13px;padding:4px 0;text-decoration:underline;margin-top:2px}
 .galh{font-size:13.5px;color:var(--muted);font-weight:600;margin:18px 2px 0;text-transform:none}
-.galbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.galbtns .sec,.galbtns .pri{height:38px;font-size:13.5px;padding:0 12px}`;
+.galbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.galbtns .sec,.galbtns .pri{height:38px;font-size:13.5px;padding:0 12px}
+.gth{align-items:center}.gth button{padding:0;border:0;background:none;border-radius:9px}.gth .gall{margin:0 0 0 4px}
+.galpick .tx{width:100%}
+.galgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}
+.galcell{position:relative}
+.galcell .galimg{display:block;width:100%;padding:0;border:0;background:var(--sunk);border-radius:9px;overflow:hidden;aspect-ratio:1/1}
+.galcell .galimg img{width:100%;height:100%;object-fit:cover;display:block}
+.galcell.no .galimg{opacity:.35}
+.galmark{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:1.5px solid #fff;background:rgba(0,0,0,.35);color:transparent;display:grid;place-items:center;padding:0}
+.galmark[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.galcell .nox,.galcell .vidx{position:absolute;left:5px;bottom:5px;font-size:11.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.6);border-radius:6px;padding:1px 6px}
+.galcell .vidx{left:auto;right:5px}
+.galv{position:fixed;inset:0;z-index:3000;background:#000;display:flex;flex-direction:column;color:#fff}
+.galv[hidden]{display:none}
+.galv-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 8px}
+.galv-top .n{font-size:14px;opacity:.85}
+.galv-x{width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:24px;line-height:1}
+.galv-stage{flex:1;min-height:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;touch-action:none}
+.galv-stage img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;user-select:none;-webkit-user-drag:none}
+.galv-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border:0;border-radius:12px;background:rgba(0,0,0,.4);color:#fff;font-size:30px;line-height:1}
+.galv-prev{left:6px}.galv-next{right:6px}
+.galv-tag{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.6);font-size:12.5px;padding:3px 8px;border-radius:8px}
+.galv-bot{padding:10px 14px calc(env(safe-area-inset-bottom,0px) + 14px)}
+.galv-info{font-size:13.5px;opacity:.85;margin-bottom:10px}
+.galv-acts{display:flex;gap:8px}
+.galv-acts button{flex:1;min-width:0;height:46px;border-radius:12px;border:0;font-weight:700;font-size:14.5px;background:rgba(255,255,255,.16);color:#fff}
+.galv-acts .yes{background:var(--accent);color:var(--on-accent)}
+.galv-acts [aria-pressed="true"]{box-shadow:0 0 0 2px #fff inset}`;
   document.head.appendChild(s);
 }
 function srcSummary(idx) {
@@ -524,11 +596,28 @@ function srcSummary(idx) {
   for (const i of idx) { const f = G.data.folders.get(G.data.media[i].fk); const n = /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : f.name; c[n] = (c[n] || 0) + 1; }
   return Object.entries(c).sort((a, b) => b[1] - a[1]).map(([n, v]) => n + ' ' + fmtN(v)).join(', ');
 }
-function thumbsHTML(idx) {
-  const pick = idx.length <= 4 ? idx : [idx[0], idx[Math.floor(idx.length / 3)], idx[Math.floor(2 * idx.length / 3)], idx[idx.length - 1]];
-  return '<div class="gth">' + pick.map(i => { const it = G.data.media[i]; const k = it.vol + ':' + it.id; const u = G.thumbs.get(k); return `<img alt="" ${u ? `src="${u}"` : `data-galth="${esc(k)}" data-t="${it.t}"`}>`; }).join('') + '</div>';
+const pkOf = it => it.vol + ':' + it.id;
+function imgTag(it) { const k = pkOf(it); const u = G.thumbs.get(k); return `<img alt="" ${u ? `src="${u}"` : `data-galth="${esc(k)}" data-t="${it.t}"`}>`; }
+function thumbsHTML(op) {
+  const n = op.idx.length;
+  const pos = n <= 4 ? op.idx.map((_, j) => j) : [0, Math.floor(n / 3), Math.floor(2 * n / 3), n - 1];
+  return '<div class="gth">' + pos.map(j => `<button data-gal="view" data-k="${esc(op.k)}" data-n="${j}" aria-label="Ver la foto en grande">${imgTag(G.data.media[op.idx[j]])}</button>`).join('') +
+    (n > 4 ? `<button class="galedit gall" data-gal="view" data-k="${esc(op.k)}" data-n="0">Ver las ${fmtN(n)}</button>` : '') + '</div>';
+}
+function pickState(op, i) { return (G.cfg.pick || {})[pkOf(G.data.media[i]) + '>' + op.album.key] || 0; }
+function pickRow(op) {
+  const to = albumRel(G.plan, G.cfg, op.album, G.data.folders);
+  const sel = op.idx.filter(i => pickState(op, i) === 1).length, no = op.idx.filter(i => pickState(op, i) === -1).length;
+  const one = op.idx.length === 1;
+  const q = one ? `¿Va a «${esc(lastSeg(to))}» esta foto del ${esc(fechaLarga(op.day))}?` : `¿Cuáles de estas ${fotos(op.idx.length)} del ${esc(fechaLarga(op.day))} van a «${esc(lastSeg(to))}»?`;
+  const hint = one ? 'Tócala para verla en grande y márcala ✓ si va a este álbum.' : 'Toca una foto para verla en grande. Marca ✓ las que van a este álbum.';
+  const state = sel || no ? [sel ? fmtN(sel) + (sel === 1 ? ' marcada' : ' marcadas') : '', no ? fmtN(no) + (no === 1 ? ' no es de aquí' : ' no son de aquí') : ''].filter(Boolean).join(', ') + '.' : (one ? 'Si no la marcas, se queda suelta.' : 'Las que no marques se quedan sueltas.');
+  return `<div class="galop galpick"><div class="tx"><span class="t">${q}</span><span class="m">${hint} ${state}</span>
+<div class="galgrid">${op.idx.map((i, j) => { const st = pickState(op, i), it = G.data.media[i]; return `<div class="galcell${st === -1 ? ' no' : ''}"><button class="galimg" data-gal="view" data-k="${esc(op.k)}" data-n="${j}" aria-label="Ver la foto en grande">${imgTag(it)}</button><button class="galmark" data-gal="mark" data-k="${esc(op.k)}" data-n="${j}" aria-pressed="${st === 1}" aria-label="Va a este álbum">${CHECK}</button>${st === -1 ? '<span class="nox">No</span>' : ''}${it.t === 3 ? '<span class="vidx">Vídeo</span>' : ''}</div>`; }).join('')}</div>
+${one ? '' : `<div class="galbtns"><button class="sec" data-gal="pickall" data-k="${esc(op.k)}">Marcar todas</button><button class="sec" data-gal="picknone" data-k="${esc(op.k)}">Ninguna es de aquí</button></div>`}</div></div>`;
 }
 function opRow(op) {
+  if (op.type === 'pick') return pickRow(op);
   const on = isOn(G.plan, G.cfg, op.k);
   const F = G.data.folders;
   let t = '', m = '', edit = false;
@@ -555,13 +644,17 @@ function opRow(op) {
     const to = albumRel(G.plan, G.cfg, op.album, F);
     t = `Añadir ${fotos(op.idx.length)} a ${q(lastSeg(to))}`;
     m = 'Desde ' + srcSummary(op.idx) + '.';
+  } else if (op.type === 'addday') {
+    const to = albumRel(G.plan, G.cfg, op.album, F);
+    t = `${op.idx.length === 1 ? 'Añadir la foto' : 'Añadir las ' + fotos(op.idx.length)} del ${esc(fechaLarga(op.day))} a ${op.album.kind === 'new' ? 'un álbum nuevo, ' : ''}${q(lastSeg(to))}`;
+    m = 'Desde ' + srcSummary(op.idx) + '.';
   } else {
     const L = op.album.link;
     t = `Crear ${q(op.album.finalName)} con ${fotos(op.idx.length)}`;
     m = (L.kind === 'viaje' ? 'Viaje' : 'Evento') + ' de Día a día, ' + rango(L.date, L.end) + '. Desde ' + srcSummary(op.idx) + '.';
     edit = true;
   }
-  return `<div class="galop"><button class="galck" data-gal="op" data-k="${esc(op.k)}" aria-pressed="${on}" aria-label="Hacer este cambio">${CHECK}</button><div class="tx"><span class="t">${t}</span><span class="m">${m}</span>${edit ? `<button class="galedit" data-gal="name" data-id="${esc(op.album.id)}">Cambiar el nombre</button>` : ''}${thumbsHTML(op.idx)}</div></div>`;
+  return `<div class="galop"><button class="galck" data-gal="op" data-k="${esc(op.k)}" aria-pressed="${on}" aria-label="Hacer este cambio">${CHECK}</button><div class="tx"><span class="t">${t}</span><span class="m">${m}</span>${edit ? `<button class="galedit" data-gal="name" data-id="${esc(op.album.id)}">Cambiar el nombre</button>` : ''}${thumbsHTML(op)}</div></div>`;
 }
 function masGaleria() {
   injectCSS();
@@ -594,7 +687,7 @@ function masGaleria() {
   const pl = G.plan, F = G.data.folders;
   const cat = fk => G.cfg.cats[fk] || F.get(fk).auto;
   const moves = computeMoves(pl, G.cfg, G.data);
-  const assigned = pl.ops.filter(o => o.type === 'add' || o.type === 'new').reduce((s, o) => s + o.idx.length, 0);
+  const assigned = pl.assigned;
   h += `<div class="galsum"><div><b>${fmtN(G.data.media.length)}</b><span>fotos y vídeos</span></div><div><b>${fmtN(pl.loose.length)}</b><span>sueltas en Cámara, WhatsApp y Descargas</span></div><div><b>${fmtN(assigned)}</b><span>de esas tienen álbum de viaje o evento</span></div><div><b>${fmtN(pl.unassigned.length)}</b><span>son del día a día (fase 2)</span></div></div>`;
 
   const nuevas = [...F.values()].filter(f => cat(f.fk) === 'nueva');
@@ -610,17 +703,21 @@ function masGaleria() {
   const groupsOps = [
     ['Tus álbumes', pl.ops.filter(o => ['rename', 'split', 'merge', 'pmerge'].includes(o.type))],
     ['Fotos sueltas a sus álbumes', pl.ops.filter(o => o.type === 'add')],
-    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new')]
+    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new')],
+    ['Fotos sueltas, por días', pl.ops.filter(o => o.type === 'addday')],
+    ['Fotos sueltas, una a una', pl.ops.filter(o => o.type === 'pick')]
   ].filter(g => g[1].length);
   if (!groupsOps.length) h += `<section class="card"><h2>Todo en orden</h2><p class="sub">No hay nada que mover en viajes y eventos.</p></section>`;
   for (const [title, list] of groupsOps) h += `<p class="galh">${esc(title)}</p><section class="card" style="margin-top:8px">${list.map(opRow).join('')}</section>`;
 
+  const nd = Object.keys(G.cfg.decl || {}).length + Object.keys(G.cfg.np || {}).length;
+  if (nd) h += `<p class="galh">Lo que has descartado</p><section class="card" style="margin-top:8px"><p class="sub">${fmtN(nd)} ${nd === 1 ? 'cambio o foto descartada' : 'cambios o fotos descartados'}. No te los vuelvo a proponer igual.</p><div class="btnrow"><button class="sec" data-gal="restore">Volver a proponerlo todo</button></div>${G.confirm === 'restore' ? `<div class="galbtns" style="margin-top:12px"><span class="sub" style="width:100%;margin:0">¿Vuelvo a proponerte todo lo que descartaste?</span><button class="pri" data-gal="restore-yes">Sí, proponerlo otra vez</button><button class="sec" data-gal="cancel">Cancelar</button></div>` : ''}</section>`;
   h += `<p class="galh">Todas las carpetas</p><section class="card" style="margin-top:8px"><p class="sub">Así he entendido cada carpeta. Cámbialo si algo no cuadra.</p>`;
   if (G.showFolders) h += [...F.values()].sort((a, b) => a.name.localeCompare(b.name, 'es')).map(folderRow).join('') + `<div class="btnrow"><button class="sec" data-gal="folders">Ocultar</button></div>`;
   else h += `<div class="btnrow"><button class="sec" data-gal="folders">Ver las ${fmtN(F.size)} carpetas</button></div>`;
   h += `</section>`;
 
-  h += `<section class="card"><p class="sub">${moves.length ? `Con lo marcado se mueven ${fotos(moves.length)}. No se borra ninguna, y puedes deshacerlo después.` : 'No hay nada marcado.'}</p><div class="btnrow"><button class="pri" data-gal="apply" ${moves.length ? '' : 'disabled'}>Aplicar los cambios</button><button class="sec" data-gal="scan">Volver a analizar</button>${G.cfg.lastRun ? `<button class="sec" data-gal="undo">Deshacer la última vez</button>` : ''}</div>${G.confirm === 'apply' ? confirmHTML('apply', moves.length) : ''}${G.confirm === 'undo' ? confirmHTML('undo') : ''}</section>`;
+  h += `<section class="card"><p class="sub">${moves.length ? `Con lo marcado se mueven ${fotos(moves.length)}. No se borra ninguna, y puedes deshacerlo después.` : 'No hay nada marcado.'}</p><p class="sub">Lo que dejes sin marcar no te lo vuelvo a proponer igual: las fotos sueltas te las propongo por días y, si tampoco, una a una.</p><div class="btnrow"><button class="pri" data-gal="apply" ${moves.length ? '' : 'disabled'}>Aplicar los cambios</button><button class="sec" data-gal="scan">Volver a analizar</button>${G.cfg.lastRun ? `<button class="sec" data-gal="undo">Deshacer la última vez</button>` : ''}</div>${G.confirm === 'apply' ? confirmHTML('apply', moves.length) : ''}${G.confirm === 'undo' ? confirmHTML('undo') : ''}</section>`;
   setTimeout(loadThumbs, 0);
   return h;
 }
@@ -653,6 +750,108 @@ async function loadThumbs() {
   } finally { thumbBusy = false; }
 }
 
+/* ---------- visor para ver las fotos en grande ---------- */
+const V = { open: false, op: null, list: [], i: 0, big: new Map(), backReg: false };
+const Z = { s: 1, x: 0, y: 0 };
+function vEl(id) { return document.getElementById(id); }
+function buildV() {
+  if (vEl('gal-v')) return;
+  const d = document.createElement('div');
+  d.className = 'galv'; d.id = 'gal-v'; d.hidden = true;
+  d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'Foto en grande');
+  d.innerHTML = `<div class="galv-top"><span class="n" id="gal-vn"></span><button class="galv-x" data-gal="v-close" aria-label="Cerrar">×</button></div>
+<div class="galv-stage" id="gal-vs"><img id="gal-vimg" alt=""><span class="galv-tag" id="gal-vtag" hidden>Vídeo</span><button class="galv-nav galv-prev" id="gal-vp" data-gal="v-prev" aria-label="Foto anterior">‹</button><button class="galv-nav galv-next" id="gal-vx" data-gal="v-next" aria-label="Foto siguiente">›</button></div>
+<div class="galv-bot"><div class="galv-info" id="gal-vinfo"></div><div class="galv-acts" id="gal-vacts"></div></div>`;
+  document.body.appendChild(d);
+  const st = vEl('gal-vs'), img = vEl('gal-vimg');
+  const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  let t0 = null, lastTap = 0;
+  const one = (p, moved) => ({ mode: Z.s > 1 ? 'pan' : 'swipe', px: p.clientX, py: p.clientY, x: Z.x, y: Z.y, dx: 0, moved });
+  st.addEventListener('touchstart', e => {
+    if (e.target.closest('button')) { t0 = null; return; }
+    if (e.touches.length === 2) t0 = { mode: 'pinch', d: dist(e.touches), s: Z.s };
+    else if (e.touches.length === 1) t0 = one(e.touches[0], false);
+  }, { passive: true });
+  st.addEventListener('touchmove', e => {
+    if (!t0) return;
+    e.preventDefault();
+    if (t0.mode === 'pinch' && e.touches.length === 2) { Z.s = Math.max(1, Math.min(5, t0.s * dist(e.touches) / t0.d)); if (Z.s === 1) { Z.x = 0; Z.y = 0; } applyZ(); return; }
+    if (e.touches.length !== 1 || t0.mode === 'pinch') return;
+    const p = e.touches[0], dx = p.clientX - t0.px, dy = p.clientY - t0.py;
+    if (Math.abs(dx) + Math.abs(dy) > 8) t0.moved = true;
+    if (t0.mode === 'pan') { Z.x = t0.x + dx; Z.y = t0.y + dy; applyZ(); }
+    else { t0.dx = dx; img.style.transform = 'translateX(' + dx + 'px)'; }
+  }, { passive: false });
+  st.addEventListener('touchend', e => {
+    if (!t0) return;
+    if (t0.mode === 'swipe') {
+      img.style.transform = '';
+      if (t0.dx < -60) stepV(1); else if (t0.dx > 60) stepV(-1); else if (!t0.moved) tapV();
+    } else if (t0.mode === 'pan' && !t0.moved) tapV();
+    t0 = e.touches.length === 1 ? one(e.touches[0], true) : null;
+  });
+  function tapV() {
+    const now = Date.now();
+    if (now - lastTap < 320) { if (Z.s > 1) { Z.s = 1; Z.x = 0; Z.y = 0; } else Z.s = 2.5; applyZ(); lastTap = 0; }
+    else lastTap = now;
+  }
+  document.addEventListener('keydown', e => { if (!V.open) return; if (e.key === 'Escape') closeV(false); else if (e.key === 'ArrowRight') stepV(1); else if (e.key === 'ArrowLeft') stepV(-1); });
+}
+function applyZ() { const img = vEl('gal-vimg'); if (img) img.style.transform = Z.s === 1 ? '' : 'translate(' + Z.x + 'px,' + Z.y + 'px) scale(' + Z.s + ')'; }
+function srcName(it) { const f = G.data.folders.get(it.fk); return /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : f.name; }
+function openV(k, n) {
+  if (!G.plan || !G.data) return;
+  const op = G.plan.ops.find(o => o.k === k); if (!op || !op.idx.length) return;
+  buildV();
+  V.op = op; V.list = op.idx.slice(); V.i = Math.max(0, Math.min(n || 0, V.list.length - 1)); V.open = true;
+  vEl('gal-v').hidden = false;
+  const S = A().S; if (S) S.viewer = { gal: true };
+  document.documentElement.classList.add('locked');
+  if (!V.backReg) {
+    const App = A().plug && A().plug('App');
+    if (App && App.addListener) { V.backReg = true; try { App.addListener('backButton', () => { if (V.open) closeV(true); }); } catch (_) {} }
+  }
+  showV();
+}
+function closeV(fromBack) {
+  if (!V.open) return;
+  V.open = false;
+  const v = vEl('gal-v'); if (v) v.hidden = true;
+  const img = vEl('gal-vimg'); if (img) { img.removeAttribute('src'); img.style.transform = ''; }
+  const S = A().S;
+  if (!fromBack && S && S.viewer && S.viewer.gal) S.viewer = null;
+  if (S && !S.sheet) document.documentElement.classList.remove('locked');
+  rerender();
+}
+function stepV(d) { if (!V.open) return; const n = V.i + d; if (n < 0 || n >= V.list.length) return; V.i = n; showV(); }
+function showV() {
+  const op = V.op, i = V.list[V.i], it = G.data.media[i], k = pkOf(it);
+  Z.s = 1; Z.x = 0; Z.y = 0;
+  const img = vEl('gal-vimg'); img.style.transform = '';
+  img.src = V.big.get(k) || G.thumbs.get(k) || '';
+  vEl('gal-vtag').hidden = it.t !== 3;
+  vEl('gal-vn').textContent = fmtN(V.i + 1) + ' de ' + fmtN(V.list.length);
+  vEl('gal-vp').hidden = V.i === 0; vEl('gal-vx').hidden = V.i >= V.list.length - 1;
+  vEl('gal-vinfo').textContent = (it.day ? fechaLarga(it.day) + ', ' : '') + srcName(it) + (it.t === 3 ? '. Es un vídeo: aquí ves un fotograma.' : '');
+  let acts = '';
+  if (op.type === 'pick') { const st = pickState(op, i); acts = `<button class="yes" data-gal="v-add" aria-pressed="${st === 1}">Va a este álbum</button><button data-gal="v-no" aria-pressed="${st === -1}">No es de aquí</button>`; }
+  else if (['add', 'new', 'addday'].includes(op.type)) acts = `<button data-gal="v-remove">Quitar esta foto del cambio</button>`;
+  vEl('gal-vacts').innerHTML = acts;
+  if (!V.big.has(k)) {
+    const p = P(); if (!p) return;
+    p.thumb({ id: it.id, type: it.t, vol: it.vol, size: 1600 }).then(r => {
+      const u = 'data:image/jpeg;base64,' + r.data;
+      V.big.set(k, u);
+      if (V.big.size > 24) V.big.delete(V.big.keys().next().value);
+      if (V.open && V.list[V.i] === i) vEl('gal-vimg').src = u;
+    }).catch(() => {});
+  }
+}
+function setPick(op, i, v) {
+  const key = pkOf(G.data.media[i]) + '>' + op.album.key;
+  if (v) G.cfg.pick[key] = v; else delete G.cfg.pick[key];
+}
+
 /* ---------- toques ---------- */
 function tripByKey(k) { return G.plan && G.plan.trips.find(t => t.key === k); }
 async function onClick(ev) {
@@ -668,6 +867,39 @@ async function onClick(ev) {
   if (act === 'undo-yes') { undo(); return; }
   if (act === 'cancel') { G.confirm = null; rerender(); return; }
   if (act === 'folders') { G.showFolders = !G.showFolders; rerender(); return; }
+  if (act === 'view') { openV(d.k, +d.n || 0); return; }
+  if (act === 'v-close') { closeV(false); return; }
+  if (act === 'v-prev') { stepV(-1); return; }
+  if (act === 'v-next') { stepV(1); return; }
+  if (act === 'v-add' || act === 'v-no') {
+    if (!V.open || V.op.type !== 'pick') return;
+    const i = V.list[V.i], want = act === 'v-add' ? 1 : -1;
+    setPick(V.op, i, pickState(V.op, i) === want ? 0 : want); saveCfg();
+    if (V.i < V.list.length - 1) stepV(1); else showV();
+    return;
+  }
+  if (act === 'v-remove') {
+    if (!V.open) return;
+    const i = V.list[V.i], al = V.op.album;
+    G.cfg.np[pkOf(G.data.media[i]) + '>' + al.key] = 1; saveCfg();
+    const k = V.op.k;
+    replan();
+    const op = G.plan.ops.find(o => o.k === k);
+    if (!op || !op.idx.length) { closeV(false); return; }
+    V.op = op; V.list = op.idx.slice(); V.i = Math.min(V.i, V.list.length - 1);
+    showV(); return;
+  }
+  if (act === 'mark') {
+    const op = G.plan && G.plan.ops.find(o => o.k === d.k); if (!op) return;
+    const i = op.idx[+d.n]; setPick(op, i, pickState(op, i) === 1 ? 0 : 1); saveCfg(); rerender(); return;
+  }
+  if (act === 'pickall' || act === 'picknone') {
+    const op = G.plan && G.plan.ops.find(o => o.k === d.k); if (!op) return;
+    for (const i of op.idx) { const st = pickState(op, i); if (act === 'pickall' && st !== -1) setPick(op, i, 1); if (act === 'picknone' && st !== 1) setPick(op, i, -1); }
+    saveCfg(); rerender(); return;
+  }
+  if (act === 'restore') { G.confirm = 'restore'; rerender(); return; }
+  if (act === 'restore-yes') { G.cfg.decl = {}; G.cfg.np = {}; G.cfg.off = {}; G.cfg.pick = {}; G.confirm = null; saveCfg(); replan(); rerender(); return; }
   if (act === 'op') { G.cfg.off[d.k] = !G.cfg.off[d.k]; if (!G.cfg.off[d.k]) delete G.cfg.off[d.k]; saveCfg(); rerender(); return; }
   if (act === 'name') {
     const al = G.plan && G.plan.albums.find(a => a.id === d.id); if (!al) return;
