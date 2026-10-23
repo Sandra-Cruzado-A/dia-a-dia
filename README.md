@@ -123,3 +123,14 @@ La primera vez que abras la app necesita internet para descargarse.
 | `vendor/` | Librerías del mapa y de las copias |
 
 El repositorio es público, pero **solo contiene el código y los eventos de Teruel**. Tus apuntes, fotos y claves se quedan en tu móvil.
+
+## 6. Galería (solo en la APK)
+
+En **Más → Galería** la app ordena las fotos del móvil en álbumes con fecha delante (`2025-07-09 Lisboa`) usando tus viajes y eventos.
+
+- **Primero revisas:** analiza la galería y te enseña los cambios con miniaturas. Desmarca lo que no quieras; lo recuerda para la próxima vez.
+- **Nunca borra fotos:** solo las mueve de carpeta. Cada carpeta es un álbum en la Galería. «Deshacer la última vez» lo devuelve todo a su sitio.
+- **Tus álbumes se respetan:** les pone la fecha delante, junta «Budapest» y «Budapest 2», separa los años distintos (La vaquilla 2024 y 2025) y les añade las fotos sueltas de esos días.
+- **Día a día manda:** cada viaje y cada evento marcado con álbum tiene su carpeta. Si un álbum cae dentro de un viaje, gana el más concreto.
+- **Permiso:** la primera vez pide «Permitir acceso para gestionar todos los archivos».
+- El código está en `galeria.js` (la lógica y la pantalla) y `android/java/GaleriaBridge.java` (leer y mover las fotos).

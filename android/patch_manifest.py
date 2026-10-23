@@ -1,4 +1,4 @@
-# Añade al AndroidManifest los widgets, el botón rápido, el icono «Apunta día», compartir y los permisos.
+# Añade al AndroidManifest los widgets, el botón rápido, el icono «Apunta día», compartir y los permisos (también los de la galería).
 import sys, re
 path = sys.argv[1]
 s = open(path, encoding='utf-8').read()
@@ -42,7 +42,7 @@ if 'android.intent.action.SEND' not in s:
                 <data android:mimeType="{t}" />
             </intent-filter>""" for a, t in [('SEND','text/plain'),('SEND','image/*'),('SEND','application/pdf'),('SEND_MULTIPLE','image/*')])
         s = s[:end] + filters + '\n        ' + s[end:]
-perms = ['android.permission.ACCESS_COARSE_LOCATION', 'android.permission.ACCESS_FINE_LOCATION', 'android.permission.RECORD_AUDIO', 'android.permission.READ_MEDIA_IMAGES']
+perms = ['android.permission.ACCESS_COARSE_LOCATION', 'android.permission.ACCESS_FINE_LOCATION', 'android.permission.RECORD_AUDIO', 'android.permission.READ_MEDIA_IMAGES', 'android.permission.READ_MEDIA_VIDEO', 'android.permission.ACCESS_MEDIA_LOCATION', 'android.permission.MANAGE_EXTERNAL_STORAGE']
 for perm in perms:
     if perm not in s:
         s = s.replace('</manifest>', f'    <uses-permission android:name="{perm}" />\n</manifest>', 1)

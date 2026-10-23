@@ -1,6 +1,6 @@
 // Guarda la app en el móvil para que abra sin conexión y recibe los cambios en cuanto hay internet.
-const CACHE = 'dia-a-dia-v6';
-const SHELL = ['./', 'index.html', 'config.js', 'manifest.webmanifest', 'offline.html', 'vendor/d3.min.js', 'vendor/topojson-client.min.js', 'vendor/jszip.min.js', 'vendor/leaflet.js', 'vendor/googlemutant.js', 'vendor/leaflet.css', 'vendor/xlsx.mini.min.js', 'vendor/jspdf.umd.min.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo.svg'];
+const CACHE = 'dia-a-dia-v7';
+const SHELL = ['./', 'index.html', 'config.js', 'galeria.js', 'manifest.webmanifest', 'offline.html', 'vendor/d3.min.js', 'vendor/topojson-client.min.js', 'vendor/jszip.min.js', 'vendor/leaflet.js', 'vendor/googlemutant.js', 'vendor/leaflet.css', 'vendor/xlsx.mini.min.js', 'vendor/jspdf.umd.min.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/logo.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
@@ -16,8 +16,8 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   const url = new URL(req.url);
   if (req.method !== 'GET' || url.origin !== location.origin) return;
-  // La app y su configuración: primero lo último de internet; si no hay conexión, lo guardado.
-  if (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/') || url.pathname.endsWith('config.js')) {
+  // La app, su configuración y la galería: primero lo último de internet; si no hay conexión, lo guardado.
+  if (req.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/') || url.pathname.endsWith('config.js') || url.pathname.endsWith('galeria.js')) {
     e.respondWith(fetch(req, { cache: 'no-cache' }).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
       return res;

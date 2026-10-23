@@ -7,8 +7,9 @@ import com.getcapacitor.BridgeActivity;
 public class MainActivity extends BridgeActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Conecta la app con los widgets, el micrófono rápido y lo que se comparte
+        // Conecta la app con los widgets, el micrófono rápido, lo que se comparte y la galería
         registerPlugin(WidgetBridge.class);
+        registerPlugin(GaleriaBridge.class);
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) LaunchStore.capture(getIntent());
     }
