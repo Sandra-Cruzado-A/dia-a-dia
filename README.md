@@ -132,5 +132,9 @@ En **Más → Galería** la app ordena las fotos del móvil en álbumes con fech
 - **Nunca borra fotos:** solo las mueve de carpeta. Cada carpeta es un álbum en la Galería. «Deshacer la última vez» lo devuelve todo a su sitio.
 - **Tus álbumes se respetan:** les pone la fecha delante, junta «Budapest» y «Budapest 2», separa los años distintos (La vaquilla 2024 y 2025) y les añade las fotos sueltas de esos días.
 - **Día a día manda:** cada viaje y cada evento marcado con álbum tiene su carpeta. Si un álbum cae dentro de un viaje, gana el más concreto.
+- **Álbumes que crea sola:** fotos lejos de Teruel sin viaje apuntado (con el nombre del sitio) y días con muchas fotos de la cámara (con el nombre del evento o cumpleaños de Día a día, si lo hay).
+- **Capturas de pantalla:** las de un viaje van a su álbum; el resto, a «Para borrar», donde decides tú qué borrar.
+- **Nombres:** «Cambiar el nombre» en cualquier álbum, con sugerencias. La fecha se pone delante sola.
+- **Lo que descartas** no vuelve igual: las fotos se proponen por días y después una a una. Toca una miniatura para verla en grande.
 - **Permiso:** la primera vez pide «Permitir acceso para gestionar todos los archivos».
 - El código está en `galeria.js` (la lógica y la pantalla) y `android/java/GaleriaBridge.java` (leer y mover las fotos).

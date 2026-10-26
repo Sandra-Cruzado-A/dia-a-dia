@@ -16,6 +16,7 @@ const fmtN = n => Number(n).toLocaleString('es-ES');
 const fotos = n => fmtN(n) + (n === 1 ? ' foto' : ' fotos');
 const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 const fechaLarga = s => { const [y, m, d] = s.split('-').map(Number); return d + ' de ' + MESES[m - 1] + ' de ' + y; };
+const deL = s => s.length === 7 ? 'de ' + MESES[+s.slice(5, 7) - 1] + ' de ' + s.slice(0, 4) : 'del ' + fechaLarga(s);
 const rango = (a, b) => a === b ? fechaLarga(a) : fechaLarga(a).replace(/ de \d{4}$/, a.slice(0, 4) === b.slice(0, 4) ? '' : ' de ' + a.slice(0, 4)) + ' al ' + fechaLarga(b);
 function km(a, b) { const R = 6371, t = Math.PI / 180; const dLa = (b.lat - a.lat) * t, dLo = (b.lon - a.lon) * t; const x = Math.sin(dLa / 2) ** 2 + Math.cos(a.lat * t) * Math.cos(b.lat * t) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(x)); }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -30,13 +31,14 @@ const CATS = [
   ['fuente', 'Fotos sueltas: se reparten'],
   ['fecha', 'Viaje o evento'],
   ['personas', 'Personas'],
+  ['capturas', 'Capturas: a su viaje o a Para borrar'],
   ['notocar', 'No tocar'],
   ['nueva', 'Sin clasificar']
 ];
 const CAT_LABEL = Object.fromEntries(CATS);
 const RULE_EXACT = {
   'yo': 'personas', 'familia': 'personas', '+': 'personas', 'felix': 'personas', '~': 'personas',
-  'giea': 'notocar', 'erasmus': 'notocar', 'dcim': 'notocar', 'screenshots': 'notocar', 'capturas de pantalla': 'notocar',
+  'giea': 'notocar', 'erasmus': 'notocar', 'dcim': 'notocar', 'screenshots': 'capturas', 'capturas de pantalla': 'capturas', 'para borrar': 'notocar',
   'tfm': 'fecha', 'instagram': 'fuente', 'camera': 'fuente', 'download': 'fuente'
 };
 const RULE_PREFIX = [
@@ -111,15 +113,17 @@ function clusters(media, idx, gap) {
 function buildPlan(D) {
   const { media, folders, cfg } = D;
   const todayN = dnum(D.today);
-  const decl = cfg.decl || {}, np = cfg.np || {};
-  const cat = fk => (cfg.cats && cfg.cats[fk]) || folders.get(fk).auto;
+  const decl = cfg.decl || {}, np = cfg.np || {}, names = cfg.names || {};
+  const cat0 = fk => (cfg.cats && cfg.cats[fk]) || folders.get(fk).auto;
   const albums = [];
   const byFk = new Map();
 
   // carpeta para los álbumes nuevos: donde están casi todos tus álbumes
   const pc = {};
-  for (const f of folders.values()) { const c = cat(f.fk); if ((c === 'fecha' || c === 'personas') && f.parent) pc[f.parent] = (pc[f.parent] || 0) + 1; }
+  for (const f of folders.values()) { const c = cat0(f.fk); if ((c === 'fecha' || c === 'personas') && f.parent) pc[f.parent] = (pc[f.parent] || 0) + 1; }
   const defParent = Object.keys(pc).sort((a, b) => pc[b] - pc[a])[0] || 'DCIM/';
+  const trashRel = defParent + ((names.trash && cleanName(names.trash)) || 'Para borrar') + '/';
+  const cat = fk => { if (cfg.cats && cfg.cats[fk]) return cfg.cats[fk]; const f = folders.get(fk); return f.rel === trashRel ? 'notocar' : f.auto; };
   const defVol = (() => { const vc = {}; for (const f of folders.values()) vc[f.vol] = (vc[f.vol] || 0) + f.idx.length; return Object.keys(vc).sort((a, b) => vc[b] - vc[a])[0] || 'external_primary'; })();
 
   // 1. tus álbumes de viajes y eventos: fechas y años distintos
@@ -198,10 +202,11 @@ function buildPlan(D) {
   for (const al of albums) al.key = al.link ? 'i:' + al.link.id : 'n:' + al.vol + '|' + nrm(stripYear(al.base, al.date)) + '|' + al.date.slice(0, 7);
 
   // nombres finales; si descartaste un nombre, se prueba otra fecha y, si no hay, se deja como está
-  const names = cfg.names || {};
-  for (const al of albums) {
+  function nameAlbum(al) {
     const custom = names[al.id] ? cleanName(names[al.id]) : '';
-    if (al.keep && !custom) { al.label = al.base; al.finalName = folders.get(al.fk).name; }
+    al.custom = !!custom;
+    if (al.auto === 'trash') { al.label = custom || 'Para borrar'; al.finalName = al.label; }
+    else if (al.keep && !custom) { al.label = al.base; al.finalName = folders.get(al.fk).name; }
     else if (al.kind === 'existing') {
       const fname = folders.get(al.fk).name;
       const dates = [al.date];
@@ -214,6 +219,7 @@ function buildPlan(D) {
     al.renKey = al.fk ? 'ren:' + al.fk + '>' + al.finalName : null;
     al.finalRel = al.parent + al.finalName + '/';
   }
+  for (const al of albums) nameAlbum(al);
 
   // 5. personas: «~» se junta con «Félix»
   const pmerges = [];
@@ -257,41 +263,91 @@ function buildPlan(D) {
     }
   }
 
-  // 7. eventos con muchas fotos: ¿álbum?
-  const looseByDay = new Map();
-  for (const i of loose) looseByDay.set(media[i].dn, (looseByDay.get(media[i].dn) || 0) + 1);
-  const evSug = [];
-  for (const e of D.eventCands || []) {
-    const n = looseByDay.get(dnum(e.date)) || 0;
-    if (n >= 8) evSug.push({ id: e.id, title: e.title, date: e.date, count: n });
-  }
-  evSug.sort((a, b) => a.date < b.date ? 1 : -1);
-
-  // 8. fotos lejos de casa sin viaje apuntado
+  // 7. álbumes que crea la app: viajes que no apuntaste y días con muchas fotos de la cámara
+  const pool = unassigned.slice();
   const homes = D.homes || [];
-  const far = [];
-  for (const i of unassigned) {
-    const it = media[i];
-    if (it.t !== 1) continue;
-    const g = D.gps && D.gps.get(it.vol + ':' + it.id);
-    if (!g) continue;
-    const p = { lat: g[0], lon: g[1] };
-    if (homes.every(h => km(h, p) > (h.radio || 50))) far.push({ dn: it.dn, p });
-  }
-  far.sort((a, b) => a.dn - b.dn);
-  const tripSug = [];
-  let cur = null;
-  for (const x of far) {
-    if (!cur || x.dn - cur.b > 1) { cur = { a: x.dn, b: x.dn, pts: [] }; tripSug.push(cur); }
-    cur.b = x.dn; cur.pts.push(x.p);
-  }
   const dismissed = new Set(cfg.dismissed || []);
-  const trips = tripSug.filter(t => t.pts.length >= 5).map(t => {
-    const la = t.pts.map(p => p.lat).sort((a, b) => a - b), lo = t.pts.map(p => p.lon).sort((a, b) => a - b);
-    const m = Math.floor(la.length / 2);
-    const pk = la[m].toFixed(2) + ',' + lo[m].toFixed(2);
-    return { key: dstr(t.a) + '_' + dstr(t.b), from: dstr(t.a), to: dstr(t.b), count: t.pts.length, lat: la[m], lon: lo[m], name: (cfg.places || {})[pk] || '' };
-  }).filter(t => !dismissed.has(t.key));
+  const H = D.hints || {};
+  const places = cfg.places || {};
+  const isWA = i => /whatsapp/i.test(media[i].rel);
+  const gpsOf = i => D.gps && D.gps.get(media[i].vol + ':' + media[i].id);
+  const median = pts => { const la = pts.map(p => p.lat).sort((a, b) => a - b), lo = pts.map(p => p.lon).sort((a, b) => a - b), m = Math.floor(la.length / 2); return { lat: la[m], lon: lo[m] }; };
+  const placeOf = p => places[p.lat.toFixed(2) + ',' + p.lon.toFixed(2)] || '';
+  const hintsOf = dn => { const ds = dstr(dn); return { ev: (H.events || {})[ds] || [], bd: (H.bdays || {})[ds.slice(5)] || [] }; };
+  const taken = new Set();
+  const mkAuto = (kind, a, b, members, extra) => {
+    const key = (kind === 'far' ? 'g:' : 'd:') + defVol + '|' + dstr(a) + '_' + dstr(b);
+    const adds = members.filter(i => !np[media[i].vol + ':' + media[i].id + '>' + key]);
+    if (!adds.length) return null;
+    const al = Object.assign({ id: key, key, kind: 'new', auto: kind, vol: defVol, parent: defParent, date: dstr(a), ranges: [[a, b]], count: adds.length, adds }, extra);
+    nameAlbum(al); albums.push(al);
+    adds.forEach(i => taken.add(i));
+    return al;
+  };
+  // a) lejos de casa sin viaje apuntado
+  const farPts = [];
+  for (const i of pool) { if (media[i].t !== 1) continue; const g = gpsOf(i); if (!g) continue; const p = { lat: g[0], lon: g[1] }; if (homes.every(h => km(h, p) > (h.radio || 50))) farPts.push({ dn: media[i].dn, p }); }
+  farPts.sort((x, y) => x.dn - y.dn);
+  const farCl = [];
+  let cur = null;
+  for (const x of farPts) { if (!cur || x.dn - cur.b > 1) { cur = { a: x.dn, b: x.dn, pts: [] }; farCl.push(cur); } cur.b = x.dn; cur.pts.push(x.p); }
+  for (const t of farCl) {
+    const tk = dstr(t.a) + '_' + dstr(t.b);
+    if (t.pts.length < 5 || dismissed.has(tk)) continue;
+    const c = median(t.pts), place = placeOf(c);
+    mkAuto('far', t.a, t.b, pool.filter(i => media[i].dn >= t.a && media[i].dn <= t.b && !taken.has(i)), { base: place || 'Viaje', place, lat: c.lat, lon: c.lon, trip: { key: tk, from: dstr(t.a), to: dstr(t.b), lat: c.lat, lon: c.lon, count: t.pts.length } });
+  }
+  // b) días con muchas fotos de la cámara (con evento o cumpleaños en Día a día basta con menos)
+  const camDay = new Map();
+  for (const i of pool) { if (taken.has(i) || isWA(i)) continue; const d = media[i].dn; if (!camDay.has(d)) camDay.set(d, []); camDay.get(d).push(i); }
+  const busy = [...camDay.keys()].filter(d => {
+    const h = hintsOf(d);
+    if (h.ev.length && h.ev.every(e => e.no)) return false;
+    return camDay.get(d).length >= (h.ev.some(e => !e.no) || h.bd.length ? 6 : 12);
+  }).sort((x, y) => x - y);
+  const busyCl = [];
+  cur = null;
+  for (const d of busy) { if (!cur || d - cur.b > 1) { cur = { a: d, b: d }; busyCl.push(cur); } cur.b = d; }
+  for (const t of busyCl) {
+    const members = [];
+    for (let d = t.a; d <= t.b; d++) members.push(...(camDay.get(d) || []));
+    let ev = '', bd = '';
+    for (let d = t.a; d <= t.b; d++) { const h = hintsOf(d); if (!ev) ev = (h.ev.find(e => !e.no) || {}).title || ''; if (!bd) bd = h.bd[0] || ''; }
+    const pts = members.map(gpsOf).filter(Boolean).map(g => ({ lat: g[0], lon: g[1] }));
+    const c = pts.length ? median(pts) : null;
+    const away = !!(c && homes.every(h => km(h, c) > 15));
+    const place = away ? placeOf(c) : '';
+    mkAuto('busy', t.a, t.b, members, { base: cleanName(ev) || bd || place || 'Evento', place, lat: away ? c.lat : null, lon: away ? c.lon : null, hint: ev || bd || '' });
+  }
+  const rest = unassigned.filter(i => !taken.has(i));
+  unassigned.length = 0;
+  unassigned.push(...rest);
+
+  // 8. capturas de pantalla: las de un viaje van a su álbum; el resto, a «Para borrar», donde decides tú
+  const caps = [];
+  const trash = { id: 'trash', key: 'trash', kind: 'new', auto: 'trash', vol: defVol, parent: defParent, base: 'Para borrar', date: '', ranges: [], count: 0, adds: [] };
+  nameAlbum(trash);
+  const capDay = new Map();
+  for (const al of albums) {
+    if (al.mergeInto || al.auto === 'busy') continue;
+    const trip = al.auto === 'far' || (al.link && al.link.kind === 'viaje') || al.ranges.some(r => r[1] > r[0]);
+    if (!trip) continue;
+    for (const [a, b] of al.ranges) for (let d = a; d <= Math.min(b, todayN); d++) { if (!capDay.has(d)) capDay.set(d, []); capDay.get(d).push([al, b - a]); }
+  }
+  for (const f of folders.values()) {
+    if (cat(f.fk) !== 'capturas') continue;
+    for (const i of f.idx) {
+      const it = media[i];
+      if (it.dn == null || it.dn > todayN) continue;
+      caps.push(i);
+      const pk = it.vol + ':' + it.id;
+      const hit = (capDay.get(it.dn) || []).slice().sort((x, y) => x[1] - y[1]).find(x => !np[pk + '>' + x[0].key]);
+      if (hit) hit[0].adds.push(i);
+      else if (!np[pk + '>trash']) trash.adds.push(i);
+      else unassigned.push(i);
+    }
+  }
+  if (trash.adds.length) { trash.count = trash.adds.length; albums.push(trash); }
 
   // 9. lista de cambios
   const ops = [];
@@ -315,7 +371,8 @@ function buildPlan(D) {
     const gk = 'add:' + al.key;
     if (!decl[gk]) { ops.push({ k: gk, type: al.kind === 'new' ? 'new' : 'add', album: al, idx: al.adds }); continue; }
     const byD = new Map();
-    for (const i of al.adds) { const d = media[i].day; if (!byD.has(d)) byD.set(d, []); byD.get(d).push(i); }
+    const cut = new Set(al.adds.map(i => media[i].day)).size > 12 ? 7 : 10;
+    for (const i of al.adds) { const d = media[i].day.slice(0, cut); if (!byD.has(d)) byD.set(d, []); byD.get(d).push(i); }
     const multi = byD.size > 1;
     for (const d of [...byD.keys()].sort()) {
       const dk = gk + '@' + d;
@@ -325,7 +382,7 @@ function buildPlan(D) {
   }
 
   const assigned = albums.reduce((s2, a) => s2 + (a.mergeInto ? 0 : a.adds.length), 0);
-  return { albums, ops, loose, unassigned, dups, evSug, trips, defParent, assigned };
+  return { albums, ops, loose, caps, pool, unassigned, dups, defParent, assigned };
 }
 
 /* ---------- de los cambios marcados a la lista de fotos que se mueven ---------- */
@@ -387,9 +444,11 @@ function homes() {
   return [{ name: H.name, lat: H.lat, lon: H.lon }].concat(G.cfg.homes || []);
 }
 function readItems(today) {
-  const S = A().S, out = [], cands = [];
-  if (!S) return { items: out, cands };
+  const S = A().S, out = [], cands = [], hints = { events: {}, bdays: {} };
+  if (!S) return { items: out, cands, hints };
   for (const e of S.entries.values()) {
+    if (e && e.kind === 'persona' && e.cumple) (hints.bdays[e.cumple] = hints.bdays[e.cumple] || []).push(e.id === 'yo' ? 'Mi cumpleaños' : 'Cumpleaños de ' + e.title);
+    if (e && e.kind === 'evento' && e.date && e.title && (!e.repeat || e.repeat === 'none') && !e.teruelId) (hints.events[e.date] = hints.events[e.date] || []).push({ title: e.title, no: e.album === false });
     if (!e || !e.date || !e.title || e.date > today) continue;
     if (e.kind === 'viaje') {
       const end = e.end && e.end >= e.date ? e.end : e.date;
@@ -399,14 +458,15 @@ function readItems(today) {
       else if (e.album === undefined) cands.push({ id: e.id, title: e.title, date: e.date });
     }
   }
-  return { items: out, cands };
+  return { items: out, cands, hints };
 }
 function today() { return A().todayStr ? A().todayStr() : dayOf(Date.now()); }
 function replan() {
   if (!G.data) return;
   const t = today();
   const r = readItems(t);
-  G.plan = buildPlan({ media: G.data.media, folders: G.data.folders, cfg: G.cfg, today: t, items: r.items, eventCands: r.cands, homes: homes(), gps: G.gps });
+  G.hints = r.hints;
+  G.plan = buildPlan({ media: G.data.media, folders: G.data.folders, cfg: G.cfg, today: t, items: r.items, eventCands: r.cands, hints: r.hints, homes: homes(), gps: G.gps });
 }
 function rerender() { const S = A().S; if (S && S.view === 'mas' && S.mas === 'galeria' && A().renderMas) A().renderMas(); }
 function setProg(text, done, total) {
@@ -441,7 +501,7 @@ async function scan() {
     G.gps = new Map();
     for (const it of G.data.media) { const c = cache[it.vol + ':' + it.id + ':' + it.mod]; if (c) G.gps.set(it.vol + ':' + it.id, c); }
     replan();
-    const need = G.plan.unassigned.map(i => G.data.media[i]).filter(it => it.t === 1 && !((it.vol + ':' + it.id + ':' + it.mod) in cache));
+    const need = G.plan.pool.map(i => G.data.media[i]).filter(it => it.t === 1 && !((it.vol + ':' + it.id + ':' + it.mod) in cache));
     G.stage = 'gps';
     for (let k = 0; k < need.length; k += 60) {
       setProg('Mirando dónde se hicieron las fotos sin álbum… ' + fmtN(Math.min(k + 60, need.length)) + ' de ' + fmtN(need.length), k, need.length);
@@ -460,27 +520,34 @@ async function scan() {
     G.stage = 'ready';
     G.busy = false;
     rerender();
-    nameTrips();
+    namePlaces();
   } catch (e) {
     G.stage = 'idle'; G.busy = false; G.err = 'No se ha podido leer la galería. ' + ((e && e.message) || '');
     rerender();
   }
 }
-async function nameTrips() {
-  if (!G.plan) return;
-  for (const t of G.plan.trips) {
-    const k = t.lat.toFixed(2) + ',' + t.lon.toFixed(2);
-    if (G.cfg.places[k]) { t.name = G.cfg.places[k]; continue; }
-    try {
-      const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 8000);
-      const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&accept-language=es&lat=' + t.lat + '&lon=' + t.lon, { signal: ctl.signal });
-      clearTimeout(to);
-      const j = await r.json(); const a = j.address || {};
-      const n = a.city || a.town || a.village || a.municipality || a.county || a.state || j.name || '';
-      if (n) { G.cfg.places[k] = n; t.name = n; saveCfg(); rerender(); }
-    } catch (_) {}
-    await sleep(1100);
-  }
+async function namePlaces() {
+  if (G.placing) return;
+  G.placing = true;
+  try {
+    for (;;) {
+      if (!G.plan) break;
+      const al = G.plan.albums.find(a => a.auto && a.lat != null && !a.place && !G.cfg.places[a.lat.toFixed(2) + ',' + a.lon.toFixed(2)] && !(G.noPlace || new Set()).has(a.id));
+      if (!al) break;
+      const k = al.lat.toFixed(2) + ',' + al.lon.toFixed(2);
+      let n = '';
+      try {
+        const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 8000);
+        const r = await fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&accept-language=es&lat=' + al.lat + '&lon=' + al.lon, { signal: ctl.signal });
+        clearTimeout(to);
+        const j = await r.json(); const a = j.address || {};
+        n = a.city || a.town || a.village || a.municipality || a.county || a.state || j.name || '';
+      } catch (_) {}
+      if (n) { G.cfg.places[k] = n; saveCfg(); replan(); rerender(); }
+      else { G.noPlace = G.noPlace || new Set(); G.noPlace.add(al.id); }
+      await sleep(1100);
+    }
+  } finally { G.placing = false; }
 }
 
 /* ---------- aplicar y deshacer ---------- */
@@ -561,6 +628,7 @@ function injectCSS() {
 .galsum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.galsum div{background:var(--sunk);border-radius:14px;padding:10px 12px}.galsum b{display:block;font-size:21px;font-variant-numeric:tabular-nums}.galsum span{font-size:12.5px;color:var(--muted)}
 .galedit{border:0;background:none;color:var(--muted);font-size:13px;padding:4px 0;text-decoration:underline;margin-top:2px}
 .galh{font-size:13.5px;color:var(--muted);font-weight:600;margin:18px 2px 0;text-transform:none}
+.galname{margin-top:10px;display:flex;flex-direction:column;gap:8px}.galname .chips{margin-top:0}.galname .chip{height:34px;font-size:13.5px}
 .galbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.galbtns .sec,.galbtns .pri{height:38px;font-size:13.5px;padding:0 12px}
 .gth{align-items:center}.gth button{padding:0;border:0;background:none;border-radius:9px}.gth .gall{margin:0 0 0 4px}
 .galpick .tx{width:100%}
@@ -593,7 +661,7 @@ function injectCSS() {
 }
 function srcSummary(idx) {
   const c = {};
-  for (const i of idx) { const f = G.data.folders.get(G.data.media[i].fk); const n = /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : f.name; c[n] = (c[n] || 0) + 1; }
+  for (const i of idx) { const f = G.data.folders.get(G.data.media[i].fk); const n = /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : /screenshots\/$/i.test(f.rel) ? 'Capturas' : f.name; c[n] = (c[n] || 0) + 1; }
   return Object.entries(c).sort((a, b) => b[1] - a[1]).map(([n, v]) => n + ' ' + fmtN(v)).join(', ');
 }
 const pkOf = it => it.vol + ':' + it.id;
@@ -609,18 +677,49 @@ function pickRow(op) {
   const to = albumRel(G.plan, G.cfg, op.album, G.data.folders);
   const sel = op.idx.filter(i => pickState(op, i) === 1).length, no = op.idx.filter(i => pickState(op, i) === -1).length;
   const one = op.idx.length === 1;
-  const q = one ? `¿Va a «${esc(lastSeg(to))}» esta foto del ${esc(fechaLarga(op.day))}?` : `¿Cuáles de estas ${fotos(op.idx.length)} del ${esc(fechaLarga(op.day))} van a «${esc(lastSeg(to))}»?`;
+  const q = one ? `¿Va a «${esc(lastSeg(to))}» esta foto ${esc(deL(op.day))}?` : `¿Cuáles de estas ${fotos(op.idx.length)} ${esc(deL(op.day))} van a «${esc(lastSeg(to))}»?`;
   const hint = one ? 'Tócala para verla en grande y márcala ✓ si va a este álbum.' : 'Toca una foto para verla en grande. Marca ✓ las que van a este álbum.';
   const state = sel || no ? [sel ? fmtN(sel) + (sel === 1 ? ' marcada' : ' marcadas') : '', no ? fmtN(no) + (no === 1 ? ' no es de aquí' : ' no son de aquí') : ''].filter(Boolean).join(', ') + '.' : (one ? 'Si no la marcas, se queda suelta.' : 'Las que no marques se quedan sueltas.');
-  return `<div class="galop galpick"><div class="tx"><span class="t">${q}</span><span class="m">${hint} ${state}</span>
+  return `<div class="galop galpick"><div class="tx"><span class="t">${q}</span><span class="m">${hint} ${state}</span>${nameHTML(op.album)}
 <div class="galgrid">${op.idx.map((i, j) => { const st = pickState(op, i), it = G.data.media[i]; return `<div class="galcell${st === -1 ? ' no' : ''}"><button class="galimg" data-gal="view" data-k="${esc(op.k)}" data-n="${j}" aria-label="Ver la foto en grande">${imgTag(it)}</button><button class="galmark" data-gal="mark" data-k="${esc(op.k)}" data-n="${j}" aria-pressed="${st === 1}" aria-label="Va a este álbum">${CHECK}</button>${st === -1 ? '<span class="nox">No</span>' : ''}${it.t === 3 ? '<span class="vidx">Vídeo</span>' : ''}</div>`; }).join('')}</div>
 ${one ? '' : `<div class="galbtns"><button class="sec" data-gal="pickall" data-k="${esc(op.k)}">Marcar todas</button><button class="sec" data-gal="picknone" data-k="${esc(op.k)}">Ninguna es de aquí</button></div>`}</div></div>`;
+}
+function nameSugs(al) {
+  const out = [];
+  const add = v => { v = cleanName(v); if (v && !out.some(x => nrm(x) === nrm(v))) out.push(v); };
+  add(al.label);
+  if (al.link) add(al.link.title);
+  if (al.base) add(al.date ? stripYear(al.base, al.date) : al.base);
+  if (al.place) { add(al.place); if (al.auto === 'far') add('Viaje a ' + al.place); }
+  const H = G.hints || {}, S = A().S, days = [];
+  for (const [a, b] of (al.ranges || [])) for (let d = a; d <= b && days.length < 10; d++) days.push(dstr(d));
+  for (const ds of days) {
+    ((H.events || {})[ds] || []).forEach(e => add(e.title));
+    ((H.bdays || {})[ds.slice(5)] || []).forEach(add);
+    ((S && S.teruel) || []).filter(ev => ev.date === ds && (!ev.end || ev.end === ev.date)).slice(0, 2).forEach(ev => add(ev.title));
+  }
+  if (al.auto === 'trash') { add('Para borrar'); add('Capturas'); }
+  if (al.auto === 'busy') ['Cumpleaños', 'Comida familiar', 'Fiesta', 'Excursión', 'Boda', 'Concierto'].forEach(add);
+  if (al.auto === 'far' && !al.place) ['Viaje', 'Escapada', 'Excursión'].forEach(add);
+  return out.slice(0, 9);
+}
+function namePreview(al, v) {
+  if (al.auto === 'trash') return v;
+  const m = DATE_PREFIX.exec(al.finalName);
+  return (m ? al.finalName.slice(0, 10) : al.date) + ' ' + v;
+}
+const shownEditors = new Set();
+function nameHTML(al) {
+  if (!G.edit || G.edit.id !== al.id || shownEditors.has(al.id)) return `<button class="galedit" data-gal="name" data-id="${esc(al.id)}">Cambiar el nombre</button>`;
+  shownEditors.add(al.id);
+  const v = G.edit.value;
+  return `<div class="galname"><label class="lbl">Nombre del álbum${al.auto === 'trash' ? '' : ' (la fecha va delante sola)'}<input class="field" id="gal-name" maxlength="80" autocomplete="off" value="${esc(v)}"></label><span class="m" id="gal-nprev">Quedará: «${esc(namePreview(al, cleanName(v) || al.label))}»</span><div class="chips">${nameSugs(al).map(x => `<button class="chip" data-gal="name-chip" data-v="${esc(x)}" aria-pressed="${nrm(x) === nrm(v)}">${esc(x)}</button>`).join('')}</div><div class="galbtns"><button class="pri" data-gal="name-save" data-id="${esc(al.id)}">Guardar</button><button class="sec" data-gal="name-cancel">Cancelar</button>${al.custom ? `<button class="sec" data-gal="name-reset" data-id="${esc(al.id)}">Volver al que sugería</button>` : ''}</div></div>`;
 }
 function opRow(op) {
   if (op.type === 'pick') return pickRow(op);
   const on = isOn(G.plan, G.cfg, op.k);
   const F = G.data.folders;
-  let t = '', m = '', edit = false;
+  let t = '', m = '', edit = false, extra = '';
   const q = s => '«' + esc(s) + '»';
   if (op.type === 'rename') {
     const f = F.get(op.fk);
@@ -644,22 +743,33 @@ function opRow(op) {
     const to = albumRel(G.plan, G.cfg, op.album, F);
     t = `Añadir ${fotos(op.idx.length)} a ${q(lastSeg(to))}`;
     m = 'Desde ' + srcSummary(op.idx) + '.';
+    edit = true;
   } else if (op.type === 'addday') {
     const to = albumRel(G.plan, G.cfg, op.album, F);
-    t = `${op.idx.length === 1 ? 'Añadir la foto' : 'Añadir las ' + fotos(op.idx.length)} del ${esc(fechaLarga(op.day))} a ${op.album.kind === 'new' ? 'un álbum nuevo, ' : ''}${q(lastSeg(to))}`;
+    t = `${op.idx.length === 1 ? 'Añadir la foto' : 'Añadir las ' + fotos(op.idx.length)} ${esc(deL(op.day))} a ${op.album.kind === 'new' && op.album.auto !== 'trash' ? 'un álbum nuevo, ' : ''}${q(lastSeg(to))}`;
     m = 'Desde ' + srcSummary(op.idx) + '.';
+    edit = true;
   } else {
-    const L = op.album.link;
-    t = `Crear ${q(op.album.finalName)} con ${fotos(op.idx.length)}`;
-    m = (L.kind === 'viaje' ? 'Viaje' : 'Evento') + ' de Día a día, ' + rango(L.date, L.end) + '. Desde ' + srcSummary(op.idx) + '.';
+    const al = op.album, L = al.link;
+    if (al.auto === 'trash') {
+      t = `Llevar ${fotos(op.idx.length)} a ${q(al.finalName)}`;
+      m = 'Capturas de pantalla que no son de ningún viaje. Ahí decides tú cuáles borrar desde la Galería.';
+    } else {
+      t = `Crear ${q(al.finalName)} con ${fotos(op.idx.length)}`;
+      const r = al.ranges[0];
+      if (al.auto === 'far') m = `Fotos lejos de Teruel ${rango(dstr(r[0]), dstr(r[1])).replace(/^/, r[0] === r[1] ? 'el ' : 'del ')}. Desde ${srcSummary(op.idx)}.`;
+      else if (al.auto === 'busy') m = `${r[0] === r[1] ? 'Día' : 'Días'} con muchas fotos de la cámara${al.hint ? ', y en Día a día tienes «' + esc(al.hint) + '»' : ''}. ${al.custom || al.hint ? '' : 'Ponle el nombre que quieras. '}Desde ${srcSummary(op.idx)}.`;
+      else m = (L.kind === 'viaje' ? 'Viaje' : 'Evento') + ' de Día a día, ' + rango(L.date, L.end) + '. Desde ' + srcSummary(op.idx) + '.';
+    }
     edit = true;
   }
-  return `<div class="galop"><button class="galck" data-gal="op" data-k="${esc(op.k)}" aria-pressed="${on}" aria-label="Hacer este cambio">${CHECK}</button><div class="tx"><span class="t">${t}</span><span class="m">${m}</span>${edit ? `<button class="galedit" data-gal="name" data-id="${esc(op.album.id)}">Cambiar el nombre</button>` : ''}${thumbsHTML(op)}</div></div>`;
+  extra = op.album && op.album.auto === 'far' && op.album.trip ? `<div class="galbtns"><button class="sec" data-gal="trip" data-k="${esc(op.album.trip.key)}">Apuntar el viaje en Día a día</button><button class="sec" data-gal="home" data-k="${esc(op.album.trip.key)}">Es otra casa</button><button class="sec" data-gal="dismiss" data-k="${esc(op.album.trip.key)}">No es un viaje</button></div>` : '';
+  return `<div class="galop"><button class="galck" data-gal="op" data-k="${esc(op.k)}" aria-pressed="${on}" aria-label="Hacer este cambio">${CHECK}</button><div class="tx"><span class="t">${t}</span><span class="m">${m}</span>${edit ? nameHTML(op.album) : ''}${extra}${thumbsHTML(op)}</div></div>`;
 }
 function masGaleria() {
   injectCSS();
   const back = A().backHTML ? A().backHTML() : '';
-  let h = back + `<h1 class="title t2">Galería</h1><p class="sub" style="margin-top:8px">Ordena tus fotos en álbumes con fecha según tus viajes y eventos. Primero ves los cambios y eliges cuáles hacer. Nunca se borra ninguna foto.</p>`;
+  let h = back + `<h1 class="title t2">Galería</h1><p class="sub" style="margin-top:8px">Ordena las fotos de Cámara, WhatsApp, Descargas y Capturas en álbumes con fecha: tus viajes y eventos, y los que la app crea cuando ve un viaje o un día con muchas fotos. Primero ves los cambios y eliges cuáles hacer. Nunca se borra ninguna foto.</p>`;
   if (!(A().isNative && A().isNative())) return h + `<section class="card"><p class="sub">Esto solo funciona en la app de Android.</p></section>`;
   if (!G.status) { refreshStatus().then(rerender); return h + `<section class="card"><p class="sub">Comprobando permisos…</p></section>`; }
   const st = G.status;
@@ -687,23 +797,19 @@ function masGaleria() {
   const pl = G.plan, F = G.data.folders;
   const cat = fk => G.cfg.cats[fk] || F.get(fk).auto;
   const moves = computeMoves(pl, G.cfg, G.data);
+  shownEditors.clear();
   const assigned = pl.assigned;
-  h += `<div class="galsum"><div><b>${fmtN(G.data.media.length)}</b><span>fotos y vídeos</span></div><div><b>${fmtN(pl.loose.length)}</b><span>sueltas en Cámara, WhatsApp y Descargas</span></div><div><b>${fmtN(assigned)}</b><span>de esas tienen álbum de viaje o evento</span></div><div><b>${fmtN(pl.unassigned.length)}</b><span>son del día a día (fase 2)</span></div></div>`;
+  h += `<div class="galsum"><div><b>${fmtN(G.data.media.length)}</b><span>fotos y vídeos</span></div><div><b>${fmtN(pl.loose.length + pl.caps.length)}</b><span>sueltas en Cámara, WhatsApp, Descargas y Capturas</span></div><div><b>${fmtN(assigned)}</b><span>de esas ya tienen álbum propuesto</span></div><div><b>${fmtN(pl.unassigned.length)}</b><span>del día a día: irán a Familia, Amigas… cuando la app reconozca caras</span></div></div>`;
 
   const nuevas = [...F.values()].filter(f => cat(f.fk) === 'nueva');
   if (nuevas.length) {
     h += `<p class="galh">Carpetas que no conozco</p><section class="card" style="margin-top:8px"><p class="sub">No se tocan hasta que digas qué son.</p>${nuevas.map(folderRow).join('')}</section>`;
   }
-  if (pl.evSug.length) {
-    h += `<p class="galh">Eventos con muchas fotos</p><section class="card" style="margin-top:8px"><p class="sub">¿Les hago álbum? Lo que elijas se queda guardado en el evento.</p>${pl.evSug.map(e => `<div class="galrow"><span class="tx"><span class="t">${esc(e.title)}</span><span class="m">${esc(fechaLarga(e.date))}, ${fotos(e.count)}</span></span><span class="galbtns" style="margin:0;flex:none"><button class="pri" data-gal="ev" data-id="${esc(e.id)}" data-v="1">Sí</button><button class="sec" data-gal="ev" data-id="${esc(e.id)}" data-v="0">No</button></span></div>`).join('')}</section>`;
-  }
-  if (pl.trips.length) {
-    h += `<p class="galh">Fotos lejos de Teruel sin viaje apuntado</p><section class="card" style="margin-top:8px"><p class="sub">Si fue un viaje, apúntalo y sus fotos irán a su álbum. Si es un sitio al que vas a menudo, márcalo como otra casa y no te lo volveré a proponer.</p>${pl.trips.map(t => `<div class="galrow" style="flex-wrap:wrap"><span class="tx"><span class="t">${esc(t.name || 'Lejos de casa')}</span><span class="m">${esc(rango(t.from, t.to))}, ${fotos(t.count)}</span></span><span class="galbtns" style="width:100%;margin-top:6px"><button class="pri" data-gal="trip" data-k="${esc(t.key)}">Apuntar viaje</button><button class="sec" data-gal="home" data-k="${esc(t.key)}">Es otra casa</button><button class="sec" data-gal="dismiss" data-k="${esc(t.key)}">Ignorar</button></span></div>`).join('')}</section>`;
-  }
   const groupsOps = [
     ['Tus álbumes', pl.ops.filter(o => ['rename', 'split', 'merge', 'pmerge'].includes(o.type))],
     ['Fotos sueltas a sus álbumes', pl.ops.filter(o => o.type === 'add')],
-    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new')],
+    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new' && o.album.auto !== 'trash')],
+    ['Para borrar', pl.ops.filter(o => o.type === 'new' && o.album.auto === 'trash')],
     ['Fotos sueltas, por días', pl.ops.filter(o => o.type === 'addday')],
     ['Fotos sueltas, una a una', pl.ops.filter(o => o.type === 'pick')]
   ].filter(g => g[1].length);
@@ -798,7 +904,7 @@ function buildV() {
   document.addEventListener('keydown', e => { if (!V.open) return; if (e.key === 'Escape') closeV(false); else if (e.key === 'ArrowRight') stepV(1); else if (e.key === 'ArrowLeft') stepV(-1); });
 }
 function applyZ() { const img = vEl('gal-vimg'); if (img) img.style.transform = Z.s === 1 ? '' : 'translate(' + Z.x + 'px,' + Z.y + 'px) scale(' + Z.s + ')'; }
-function srcName(it) { const f = G.data.folders.get(it.fk); return /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : f.name; }
+function srcName(it) { const f = G.data.folders.get(it.fk); return /whatsapp/i.test(f.rel) ? 'WhatsApp' : /^dcim\/camera\/$/i.test(f.rel) ? 'Cámara' : /^download/i.test(f.rel) ? 'Descargas' : /screenshots\/$/i.test(f.rel) ? 'Capturas' : f.name; }
 function openV(k, n) {
   if (!G.plan || !G.data) return;
   const op = G.plan.ops.find(o => o.k === k); if (!op || !op.idx.length) return;
@@ -853,7 +959,7 @@ function setPick(op, i, v) {
 }
 
 /* ---------- toques ---------- */
-function tripByKey(k) { return G.plan && G.plan.trips.find(t => t.key === k); }
+function autoByTrip(k) { return G.plan && G.plan.albums.find(a => a.auto === 'far' && a.trip && a.trip.key === k); }
 async function onClick(ev) {
   const b = ev.target.closest && ev.target.closest('[data-gal]');
   if (!b) return;
@@ -903,11 +1009,23 @@ async function onClick(ev) {
   if (act === 'op') { G.cfg.off[d.k] = !G.cfg.off[d.k]; if (!G.cfg.off[d.k]) delete G.cfg.off[d.k]; saveCfg(); rerender(); return; }
   if (act === 'name') {
     const al = G.plan && G.plan.albums.find(a => a.id === d.id); if (!al) return;
-    const v = W.prompt('Nombre del álbum (la fecha se pone sola delante)', al.label);
-    if (v == null) return;
-    const n = cleanName(v);
-    if (n) G.cfg.names[al.id] = n; else delete G.cfg.names[al.id];
-    saveCfg(); replan(); rerender(); return;
+    G.edit = { id: al.id, value: al.label }; rerender();
+    setTimeout(() => { const i = document.getElementById('gal-name'); if (i) { i.focus(); try { i.setSelectionRange(i.value.length, i.value.length); } catch (_) {} } }, 30);
+    return;
+  }
+  if (act === 'name-chip') {
+    if (!G.edit) return;
+    G.edit.value = d.v;
+    const i = document.getElementById('gal-name'); if (i) i.value = d.v;
+    rerender(); return;
+  }
+  if (act === 'name-cancel') { G.edit = null; rerender(); return; }
+  if (act === 'name-save' || act === 'name-reset') {
+    const al = G.plan && G.plan.albums.find(a => a.id === d.id); if (!al) return;
+    const i = document.getElementById('gal-name');
+    const n = act === 'name-reset' ? '' : cleanName(i ? i.value : (G.edit && G.edit.value));
+    if (n && n !== al.label) G.cfg.names[al.id] = n; else if (!n) delete G.cfg.names[al.id];
+    G.edit = null; saveCfg(); replan(); rerender(); return;
   }
   if (act === 'ev') {
     const S = A().S, e = S && S.entries.get(d.id); if (!e) return;
@@ -915,19 +1033,28 @@ async function onClick(ev) {
     replan(); rerender(); return;
   }
   if (act === 'trip') {
-    const t = tripByKey(d.k); if (!t) return;
-    const e = { id: A().newId(), kind: 'viaje', title: t.name || 'Viaje', date: t.from, end: t.to, budget: null, created: Date.now() };
+    const al = autoByTrip(d.k); if (!al) return;
+    const t = al.trip;
+    const e = { id: A().newId(), kind: 'viaje', title: al.label || al.place || 'Viaje', date: t.from, end: t.to, budget: null, created: Date.now() };
     A().persist(e, true);
+    if (G.cfg.names[al.id]) { G.cfg.names['n:' + e.id] = G.cfg.names[al.id]; saveCfg(); }
     try { if (A().linkTripEntries) A().linkTripEntries(e); if (A().queueGeo) A().queueGeo(e.id); } catch (_) {}
     if (A().toast) A().toast('Viaje apuntado en Día a día');
     replan(); rerender(); return;
   }
   if (act === 'home') {
-    const t = tripByKey(d.k); if (!t) return;
-    G.cfg.homes.push({ name: t.name || 'Otra casa', lat: t.lat, lon: t.lon, radio: 30 });
+    const al = autoByTrip(d.k); if (!al) return;
+    G.cfg.homes.push({ name: al.place || 'Otra casa', lat: al.trip.lat, lon: al.trip.lon, radio: 30 });
     saveCfg(); replan(); rerender(); return;
   }
   if (act === 'dismiss') { G.cfg.dismissed.push(d.k); saveCfg(); replan(); rerender(); return; }
+}
+function onInput(ev) {
+  const t = ev.target;
+  if (!t || t.id !== 'gal-name' || !G.edit || !G.plan) return;
+  G.edit.value = t.value;
+  const al = G.plan.albums.find(a => a.id === G.edit.id), pv = document.getElementById('gal-nprev');
+  if (al && pv) pv.textContent = 'Quedará: «' + namePreview(al, cleanName(t.value) || al.label) + '»';
 }
 function onChange(ev) {
   const s = ev.target;
@@ -941,6 +1068,7 @@ function onChange(ev) {
 if (typeof document !== 'undefined' && document.addEventListener) {
   document.addEventListener('click', ev => { onClick(ev).catch(() => {}); });
   document.addEventListener('change', onChange);
+  document.addEventListener('input', onInput);
   document.addEventListener('visibilitychange', () => {
     const S = A().S;
     if (!document.hidden && S && S.view === 'mas' && S.mas === 'galeria' && !G.busy) refreshStatus().then(rerender);
