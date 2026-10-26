@@ -135,6 +135,7 @@ En **Más → Galería** la app ordena las fotos del móvil en álbumes con fech
 - **Álbumes que crea sola:** fotos lejos de Teruel sin viaje apuntado (con el nombre del sitio) y días con muchas fotos de la cámara (con el nombre del evento o cumpleaños de Día a día, si lo hay).
 - **Capturas de pantalla:** las de un viaje van a su álbum; el resto, a «Para borrar», donde decides tú qué borrar.
 - **Nombres:** «Cambiar el nombre» en cualquier álbum, con sugerencias. La fecha se pone delante sola.
+- **Caras:** con «Reconocer caras» la app aprende quién sale en tus álbumes de personas (Yo, Familia, +, Félix…) y reparte las fotos del día a día. Si salen personas de Familia, + y Félix, manda ese orden; si se mezclan otros álbumes, la foto va a «Revisar». Si solo sales tú, va a «Yo». En «Quién es quién» corriges el álbum de cada persona y la app lo recuerda. Todo se hace en el móvil: el reconocimiento (face-api 1.7.15) se descarga una vez de jsDelivr y ninguna foto sale del teléfono.
 - **Lo que descartas** no vuelve igual: las fotos se proponen por días y después una a una. Toca una miniatura para verla en grande.
 - **Permiso:** la primera vez pide «Permitir acceso para gestionar todos los archivos».
 - El código está en `galeria.js` (la lógica y la pantalla) y `android/java/GaleriaBridge.java` (leer y mover las fotos).

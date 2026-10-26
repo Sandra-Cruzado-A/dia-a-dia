@@ -38,7 +38,7 @@ const CATS = [
 const CAT_LABEL = Object.fromEntries(CATS);
 const RULE_EXACT = {
   'yo': 'personas', 'familia': 'personas', '+': 'personas', 'felix': 'personas', '~': 'personas',
-  'giea': 'notocar', 'erasmus': 'notocar', 'dcim': 'notocar', 'screenshots': 'capturas', 'capturas de pantalla': 'capturas', 'para borrar': 'notocar',
+  'giea': 'notocar', 'erasmus': 'notocar', 'dcim': 'notocar', 'screenshots': 'capturas', 'capturas de pantalla': 'capturas', 'para borrar': 'notocar', 'revisar': 'notocar',
   'tfm': 'fecha', 'instagram': 'fuente', 'camera': 'fuente', 'download': 'fuente'
 };
 const RULE_PREFIX = [
@@ -75,6 +75,74 @@ function mediaDay(it) {
   if (m) return m[1] + '-' + m[2] + '-' + m[3];
   if (it.mod > 0) return dayOf(it.mod * 1000);
   return null;
+}
+
+/* ---------- caras: huellas, grupos y a qué álbum va cada persona ---------- */
+const FQ = 250;
+function encD(d) { let s = ''; for (let i = 0; i < 128; i++) { const v = Math.max(-127, Math.min(127, Math.round(d[i] * FQ))); s += String.fromCharCode(v & 255); } return (typeof btoa === 'function' ? btoa : x => Buffer.from(x, 'binary').toString('base64'))(s); }
+function decD(b64) { const bin = (typeof atob === 'function' ? atob : x => Buffer.from(x, 'base64').toString('binary'))(b64); const f = new Float32Array(128); for (let i = 0; i < 128; i++) { let v = bin.charCodeAt(i); if (v > 127) v -= 256; f[i] = v / FQ; } return f; }
+function fdist(a, b) { let s = 0; for (let i = 0; i < 128; i++) { const x = a[i] - b[i]; s += x * x; } return Math.sqrt(s); }
+function clusterFaces(list, T, M) {
+  T = T || 0.5; M = M || 0.42;
+  const cl = [];
+  for (let i = 0; i < list.length; i++) {
+    const d = list[i].d;
+    let best = -1, bd = T;
+    for (let j = 0; j < cl.length; j++) { const x = fdist(d, cl[j].c); if (x < bd) { bd = x; best = j; } }
+    if (best < 0) cl.push({ sum: Float32Array.from(d), c: Float32Array.from(d), n: 1, m: [i] });
+    else { const c = cl[best]; c.n++; for (let q = 0; q < 128; q++) { c.sum[q] += d[q]; c.c[q] = c.sum[q] / c.n; } c.m.push(i); }
+  }
+  let merged = true;
+  while (merged) {
+    merged = false;
+    for (let a = 0; a < cl.length; a++) {
+      if (!cl[a]) continue;
+      for (let b = a + 1; b < cl.length; b++) {
+        if (!cl[b] || fdist(cl[a].c, cl[b].c) >= M) continue;
+        const A = cl[a], B = cl[b];
+        A.n += B.n; for (let q = 0; q < 128; q++) { A.sum[q] += B.sum[q]; A.c[q] = A.sum[q] / A.n; }
+        A.m = A.m.concat(B.m); cl[b] = null; merged = true;
+      }
+    }
+  }
+  // segunda pasada: caras sueltas (pequeñas o de lado) que se parecen claramente a alguien conocido
+  const big = cl.filter(c => c && c.n >= 2);
+  for (const c of cl) {
+    if (!c || c.n !== 1) continue;
+    const d = list[c.m[0]].d;
+    let b1 = 9, b2 = 9, best = null;
+    for (const g of big) {
+      let m = 9;
+      const step = Math.max(1, Math.floor(g.m.length / 40));
+      for (let q = 0; q < g.m.length; q += step) { const x = fdist(d, list[g.m[q]].d); if (x < m) m = x; }
+      if (m < b1) { b2 = b1; b1 = m; best = g; } else if (m < b2) b2 = m;
+    }
+    if (best && b1 < 0.58 && b2 - b1 >= 0.04) { best.m.push(c.m[0]); best.n++; c.gone = true; }
+  }
+  const out = cl.filter(c => c && !c.gone);
+  out.forEach((c, k) => c.m.forEach(i => { list[i].k = k; }));
+  return out;
+}
+/* Quién es cada grupo de caras: con las fotos de tus álbumes de personas se sugiere su álbum. */
+function suggestPeople(list, cls, exCount, yoFk) {
+  const sug = cls.map(() => ({ album: 'no', photos: new Set(), ex: new Map() }));
+  list.forEach(f => { const s = sug[f.k]; s.photos.add(f.pk); if (f.ex) { if (!s.ex.has(f.ex)) s.ex.set(f.ex, new Set()); s.ex.get(f.ex).add(f.pk); } });
+  const frac = (s, a) => (s.ex.get(a) ? s.ex.get(a).size : 0) / Math.max(1, exCount.get(a) || 0);
+  let yoMax = 0;
+  if (yoFk && (exCount.get(yoFk) || 0) >= 2) sug.forEach(s => { yoMax = Math.max(yoMax, frac(s, yoFk)); });
+  sug.forEach(s => {
+    if (yoMax >= 0.3 && frac(s, yoFk) >= 0.6 * yoMax) { s.album = 'yo'; return; }
+    let best = null, bf = 0;
+    for (const [a, set] of s.ex) { if (a === yoFk || set.size < 2) continue; const f = frac(s, a); if (f >= 0.1 && f > bf) { bf = f; best = a; } }
+    if (best) s.album = best;
+  });
+  if (!(yoMax >= 0.3)) {
+    let bi = -1, bn = 0;
+    sug.forEach((s, k) => { let n = 0; for (const set of s.ex.values()) n += set.size; if (n > bn) { bn = n; bi = k; } });
+    let tot = 0; for (const v of exCount.values()) tot += v;
+    if (bi >= 0 && bn >= 0.4 * tot) sug[bi].album = 'yo';
+  }
+  return sug;
 }
 
 /* ---------- prepara lo leído del móvil ---------- */
@@ -123,7 +191,8 @@ function buildPlan(D) {
   for (const f of folders.values()) { const c = cat0(f.fk); if ((c === 'fecha' || c === 'personas') && f.parent) pc[f.parent] = (pc[f.parent] || 0) + 1; }
   const defParent = Object.keys(pc).sort((a, b) => pc[b] - pc[a])[0] || 'DCIM/';
   const trashRel = defParent + ((names.trash && cleanName(names.trash)) || 'Para borrar') + '/';
-  const cat = fk => { if (cfg.cats && cfg.cats[fk]) return cfg.cats[fk]; const f = folders.get(fk); return f.rel === trashRel ? 'notocar' : f.auto; };
+  const revRel = defParent + ((names.revisar && cleanName(names.revisar)) || 'Revisar') + '/';
+  const cat = fk => { if (cfg.cats && cfg.cats[fk]) return cfg.cats[fk]; const f = folders.get(fk); return f.rel === trashRel || f.rel === revRel ? 'notocar' : f.auto; };
   const defVol = (() => { const vc = {}; for (const f of folders.values()) vc[f.vol] = (vc[f.vol] || 0) + f.idx.length; return Object.keys(vc).sort((a, b) => vc[b] - vc[a])[0] || 'external_primary'; })();
 
   // 1. tus álbumes de viajes y eventos: fechas y años distintos
@@ -206,6 +275,8 @@ function buildPlan(D) {
     const custom = names[al.id] ? cleanName(names[al.id]) : '';
     al.custom = !!custom;
     if (al.auto === 'trash') { al.label = custom || 'Para borrar'; al.finalName = al.label; }
+    else if (al.auto === 'revisar') { al.label = custom || 'Revisar'; al.finalName = al.label; }
+    else if (al.kind === 'people') { const f = folders.get(al.fk); al.label = f.name; al.finalName = f.name; }
     else if (al.keep && !custom) { al.label = al.base; al.finalName = folders.get(al.fk).name; }
     else if (al.kind === 'existing') {
       const fname = folders.get(al.fk).name;
@@ -349,6 +420,44 @@ function buildPlan(D) {
   }
   if (trash.adds.length) { trash.count = trash.adds.length; albums.push(trash); }
 
+  // 9. caras: cada foto del día a día va al álbum de las personas que salen
+  //    una sola persona o grupo → su álbum; varios que tienen orden (Familia, +, Félix) → el primero; si no → «Revisar»
+  //    tú no cuentas para el cruce; si solo sales tú (o con desconocidos) → «Yo»
+  if (D.faces && D.personAlbum) {
+    const prio = (D.prio || []).filter(fk => folders.has(fk));
+    const peopleAl = new Map();
+    const pAlbum = fk => {
+      if (!peopleAl.has(fk)) { const f = folders.get(fk); const al = { id: 'p:' + fk, key: 'p:' + fk, kind: 'people', fk, vol: f.vol, parent: f.parent, base: f.name, date: '', ranges: [], count: f.idx.length, adds: [] }; nameAlbum(al); peopleAl.set(fk, al); }
+      return peopleAl.get(fk);
+    };
+    const rev = { id: 'revisar', key: 'revisar', kind: 'new', auto: 'revisar', vol: defVol, parent: defParent, base: 'Revisar', date: '', ranges: [], count: 0, adds: [] };
+    nameAlbum(rev);
+    const left = [];
+    let noFace = 0, strangers = 0;
+    for (const i of unassigned) {
+      const it = media[i], pk = it.vol + ':' + it.id;
+      const ps = D.faces.get(pk);
+      if (!ps) { left.push(i); continue; }
+      if (!ps.length) { noFace++; left.push(i); continue; }
+      const S = new Set();
+      let yo = false;
+      for (const p of ps) { const a = p ? D.personAlbum.get(p) : null; if (a === 'yo') yo = true; else if (a && a !== 'no' && folders.has(a)) S.add(D.mergeTo && D.mergeTo[a] ? D.mergeTo[a] : a); }
+      let target = null;
+      if (S.size === 1) target = [...S][0];
+      else if (S.size > 1) target = [...S].every(a => prio.includes(a)) ? prio.find(a => S.has(a)) : 'revisar';
+      else if (yo && D.yoFk && folders.has(D.yoFk)) target = D.yoFk;
+      if (!target) { strangers++; left.push(i); continue; }
+      const al = target === 'revisar' ? rev : pAlbum(target);
+      if (np[pk + '>' + al.key]) { left.push(i); continue; }
+      al.adds.push(i);
+    }
+    unassigned.length = 0;
+    unassigned.push(...left);
+    for (const al of peopleAl.values()) if (al.adds.length) albums.push(al);
+    if (rev.adds.length) { rev.count = rev.adds.length; albums.push(rev); }
+    var faceStats = { noFace, strangers };
+  }
+
   // 9. lista de cambios
   const ops = [];
   const splitByFk = new Map();
@@ -382,7 +491,7 @@ function buildPlan(D) {
   }
 
   const assigned = albums.reduce((s2, a) => s2 + (a.mergeInto ? 0 : a.adds.length), 0);
-  return { albums, ops, loose, caps, pool, unassigned, dups, defParent, assigned };
+  return { albums, ops, loose, caps, pool, unassigned, dups, defParent, assigned, faceStats: typeof faceStats !== 'undefined' ? faceStats : null };
 }
 
 /* ---------- de los cambios marcados a la lista de fotos que se mueven ---------- */
@@ -390,6 +499,7 @@ function isOn(plan, cfg, k) { return !(cfg.off && cfg.off[k]); }
 function albumRel(plan, cfg, al, folders) {
   if (!al) return null;
   if (al.mergeInto) return albumRel(plan, cfg, al.mergeInto, folders);
+  if (al.kind === 'people') return folders.get(al.fk).rel;
   if (al.kind === 'existing') return !al.noRename && isOn(plan, cfg, al.renKey) && folders.get(al.fk).name !== al.finalName ? al.finalRel : folders.get(al.fk).rel;
   if (al.kind === 'split' && !isOn(plan, cfg, 'spl:' + al.id)) return albumRel(plan, cfg, al.primary, folders);
   return al.finalRel;
@@ -466,7 +576,9 @@ function replan() {
   const t = today();
   const r = readItems(t);
   G.hints = r.hints;
-  G.plan = buildPlan({ media: G.data.media, folders: G.data.folders, cfg: G.cfg, today: t, items: r.items, eventCands: r.cands, hints: r.hints, homes: homes(), gps: G.gps });
+  const pp = G.people;
+  G.plan = buildPlan({ media: G.data.media, folders: G.data.folders, cfg: G.cfg, today: t, items: r.items, eventCands: r.cands, hints: r.hints, homes: homes(), gps: G.gps,
+    faces: pp ? pp.byPk : null, personAlbum: pp ? new Map((G.cfg.persons || []).map(x => [x.id, x.album])) : null, prio: pp ? pp.pf.prio : [], yoFk: pp ? pp.pf.yoFk : null, mergeTo: pp ? pp.pf.mergeTo : {} });
 }
 function rerender() { const S = A().S; if (S && S.view === 'mas' && S.mas === 'galeria' && A().renderMas) A().renderMas(); }
 function setProg(text, done, total) {
@@ -491,6 +603,7 @@ async function scan() {
   closeV(false);
   await loadCfg();
   commitDeclines();
+  G.people = null; G.faceData = null;
   try {
     G.stage = 'scanning'; setProg('Leyendo tu galería…', 0, 0);
     if (G.status && !G.status.location) { try { await p.requestMedia(); } catch (_) {} await refreshStatus(); }
@@ -521,6 +634,7 @@ async function scan() {
     G.busy = false;
     rerender();
     namePlaces();
+    if (G.cfg.facesOn) analyzeFaces();
   } catch (e) {
     G.stage = 'idle'; G.busy = false; G.err = 'No se ha podido leer la galería. ' + ((e && e.message) || '');
     rerender();
@@ -548,6 +662,181 @@ async function namePlaces() {
       await sleep(1100);
     }
   } finally { G.placing = false; }
+}
+
+/* ---------- reconocer caras dentro del móvil ---------- */
+const FACE_CDN = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15';
+let faceP = null;
+function loadFaceApi(cb) {
+  if (faceP) return faceP;
+  faceP = (async () => {
+    if (!W.faceapi) {
+      cb && cb('Descargando el reconocimiento de caras (solo la primera vez)…');
+      await new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = FACE_CDN + '/dist/face-api.js'; sc.async = true; sc.onload = res; sc.onerror = () => rej(new Error('No he podido descargar el reconocimiento de caras. La primera vez necesita internet.')); document.head.appendChild(sc); });
+    }
+    const fa = W.faceapi;
+    try { await fa.tf.setBackend('webgl'); } catch (_) {}
+    await fa.tf.ready();
+    cb && cb('Cargando el reconocimiento de caras…');
+    const M = FACE_CDN + '/model';
+    await fa.nets.ssdMobilenetv1.loadFromUri(M);
+    await fa.nets.faceLandmark68Net.loadFromUri(M);
+    await fa.nets.faceRecognitionNet.loadFromUri(M);
+    return fa;
+  })();
+  faceP.catch(() => { faceP = null; });
+  return faceP;
+}
+function loadImg(b64) {
+  return new Promise((res, rej) => { const img = new Image(); img.onload = () => res(img); img.onerror = () => rej(new Error('img')); img.src = 'data:image/jpeg;base64,' + b64; });
+}
+async function facesOf(fa, it) {
+  const r = await P().thumb({ id: it.id, type: it.t, vol: it.vol, size: 720 });
+  const img = await loadImg(r.data);
+  const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+  const det = await fa.detectAllFaces(img, new fa.SsdMobilenetv1Options({ minConfidence: 0.5 })).withFaceLandmarks().withFaceDescriptors();
+  return det.filter(x => x.detection.box.width >= 24).map(x => ({ d: x.descriptor, b: [x.detection.box.x / w, x.detection.box.y / h, x.detection.box.width / w, x.detection.box.height / h] }));
+}
+function personFolders() {
+  const F = G.data.folders, cat = fk => (G.cfg.cats || {})[fk] || F.get(fk).auto;
+  const list = [...F.values()].filter(f => cat(f.fk) === 'personas');
+  const byName = n => list.find(f => nrm(f.name) === n);
+  const yo = byName('yo'), fam = byName('familia'), mas = byName('+'), fel = byName('felix'), tilde = list.find(f => f.name === '~');
+  const m = Object.assign({}, G.cfg.merge || {});
+  if (tilde && fel && !(tilde.fk in m)) m[tilde.fk] = fel.fk;
+  const mergeTo = {};
+  for (const [a, b] of Object.entries(m)) if (b && F.has(b) && !(G.cfg.decl || {})['pmg:' + a]) mergeTo[a] = b;
+  return { list, yoFk: yo ? yo.fk : null, prio: [fam, mas, fel].filter(Boolean).map(f => f.fk), mergeTo };
+}
+function faceCandidates() {
+  const keep = G.people;
+  G.people = null; replan();
+  const cand = G.plan.unassigned.filter(i => G.data.media[i].t === 1);
+  G.people = keep; replan();
+  return cand;
+}
+function faceExamples(pf) {
+  const media = G.data.media, ex = [];
+  for (const f of pf.list) {
+    const imgs = f.idx.filter(i => media[i].t === 1 && media[i].dn != null).sort((a, b) => media[a].dn - media[b].dn);
+    const n = Math.min(60, imgs.length);
+    for (let q = 0; q < n; q++) ex.push({ i: imgs[Math.floor(q * imgs.length / n)], album: pf.mergeTo[f.fk] || f.fk });
+  }
+  return ex;
+}
+async function analyzeFaces() {
+  if (G.busy || !G.data) return;
+  const p = P(); if (!p) return;
+  G.busy = true; G.stopFaces = false; G.err = ''; G.cfg.facesOn = true; saveCfg();
+  G.stage = 'faces';
+  try {
+    setProg('Preparando el reconocimiento de caras…', 0, 0);
+    const media = G.data.media;
+    const cache = (A().kvGet && await A().kvGet('galeria-caras')) || {};
+    const pf = personFolders();
+    const ex = faceExamples(pf);
+    const cand = faceCandidates();
+    const todo = [...new Set(ex.map(x => x.i).concat(cand))].filter(i => { const e = cache[pkOf(media[i])]; return !e || e.m !== media[i].mod; });
+    if (todo.length) {
+      const fa = await loadFaceApi(t => setProg(t, 0, 0));
+      const slow = fa.tf && fa.tf.getBackend && fa.tf.getBackend() !== 'webgl' ? ' Tu móvil no deja usar la tarjeta gráfica, así que irá más lento.' : '';
+      let n = 0;
+      const t0 = Date.now();
+      for (const i of todo) {
+        if (G.stopFaces) break;
+        let eta = '';
+        if (n >= 5) { const min = Math.round((Date.now() - t0) / n * (todo.length - n) / 60000); eta = min >= 1 ? ' Quedan unos ' + fmtN(min) + (min === 1 ? ' minuto.' : ' minutos.') : ' Queda menos de un minuto.'; }
+        setProg('Buscando caras en tus fotos… ' + fmtN(n + 1) + ' de ' + fmtN(todo.length) + '.' + eta + slow, n, todo.length);
+        const it = media[i];
+        try { const r = await facesOf(fa, it); cache[pkOf(it)] = { m: it.mod, f: r.map(x => [encD(x.d)].concat(x.b.map(v => Math.round(v * 1e4) / 1e4))) }; } catch (_) {}
+        n++;
+        if (n % 25 === 0 && A().kvSet) await A().kvSet('galeria-caras', cache);
+      }
+      if (A().kvSet) await A().kvSet('galeria-caras', cache);
+    }
+    G.faceData = { ex, cand, cache };
+    resolvePeople();
+    replan();
+  } catch (e) {
+    G.err = (e && e.message) || 'No se han podido reconocer las caras.';
+  }
+  G.stage = 'ready'; G.busy = false;
+  rerender();
+}
+function resolvePeople() {
+  const fd = G.faceData;
+  if (!fd || !G.data) { G.people = null; return; }
+  const media = G.data.media, pf = personFolders();
+  const list = [], exCount = new Map(), exPk = new Set();
+  for (const x of fd.ex) {
+    const pk = pkOf(media[x.i]), e = fd.cache[pk];
+    if (!e || !e.f.length || exPk.has(pk)) continue;
+    exPk.add(pk);
+    exCount.set(x.album, (exCount.get(x.album) || 0) + 1);
+    e.f.forEach(f => list.push({ pk, i: x.i, ex: x.album, d: decD(f[0]), b: f.slice(1) }));
+  }
+  for (const i of fd.cand) {
+    const pk = pkOf(media[i]), e = fd.cache[pk];
+    if (!e || exPk.has(pk)) continue;
+    e.f.forEach(f => list.push({ pk, i, ex: null, d: decD(f[0]), b: f.slice(1) }));
+  }
+  const cls = clusterFaces(list);
+  const sug = suggestPeople(list, cls, exCount, pf.yoFk);
+  const stored = (G.cfg.persons || []).map(x => ({ x, c: decD(x.c) }));
+  const used = new Set(), persons = [];
+  cls.forEach((c, k) => {
+    let best = null, bd = 0.45;
+    for (const st of stored) { if (used.has(st.x.id)) continue; const v = fdist(c.c, st.c); if (v < bd) { bd = v; best = st; } }
+    const n = sug[k].photos.size;
+    if (!best && n < 2) { persons.push(null); return; }
+    const per = best ? Object.assign({}, best.x) : { id: 'q' + Date.now().toString(36) + k, src: 'auto' };
+    if (best) used.add(per.id);
+    per.c = encD(c.c); per.n = n; per.k = k;
+    if (per.src !== 'user') per.album = sug[k].album;
+    persons.push(per);
+  });
+  const keepUser = (G.cfg.persons || []).filter(x => !used.has(x.id) && x.src === 'user');
+  G.cfg.persons = persons.filter(Boolean).map(x => ({ id: x.id, c: x.c, album: x.album, src: x.src, n: x.n, crop: x.crop || '' })).concat(keepUser).slice(0, 400);
+  saveCfg();
+  const byPk = new Map();
+  for (const i of fd.cand) { const pk = pkOf(media[i]); if (fd.cache[pk]) byPk.set(pk, []); }
+  list.forEach(f => { if (f.ex || !byPk.has(f.pk)) return; const per = persons[f.k]; byPk.get(f.pk).push(per ? per.id : null); });
+  G.people = { list, cls, persons: persons.filter(Boolean), byPk, pf };
+}
+async function cropFace(per) {
+  if (!G.people) return '';
+  const fs = G.people.cls[per.k] ? G.people.cls[per.k].m.map(i => G.people.list[i]) : [];
+  if (!fs.length) return '';
+  const f = fs.slice().sort((a, b) => (b.b[2] || 0) - (a.b[2] || 0))[0];
+  const it = G.data.media[f.i];
+  const r = await P().thumb({ id: it.id, type: it.t, vol: it.vol, size: 720 });
+  const img = await loadImg(r.data);
+  const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+  const [x, y, bw, bh] = f.b, m = 0.3;
+  const sx = Math.max(0, (x - bw * m) * w), sy = Math.max(0, (y - bh * m) * h), sw = Math.min(w - sx, bw * (1 + 2 * m) * w), sh = Math.min(h - sy, bh * (1 + 2 * m) * h);
+  const cv = document.createElement('canvas'); cv.width = 96; cv.height = 96;
+  const ctx = cv.getContext && cv.getContext('2d'); if (!ctx) return '';
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, 96, 96);
+  return cv.toDataURL('image/jpeg', 0.8);
+}
+let cropBusy = false;
+async function loadCrops() {
+  if (cropBusy || !G.people) return;
+  cropBusy = true;
+  try {
+    for (;;) {
+      const img = document.querySelector('img[data-galface]');
+      if (!img) break;
+      const id = img.dataset.galface; img.removeAttribute('data-galface');
+      const per = G.people.persons.find(x => x.id === id); if (!per) continue;
+      let u = '';
+      try { u = await cropFace(per); } catch (_) {}
+      if (u) {
+        img.src = u; per.crop = u;
+        const st = (G.cfg.persons || []).find(x => x.id === id); if (st) { st.crop = u; saveCfg(); }
+      }
+    }
+  } finally { cropBusy = false; }
 }
 
 /* ---------- aplicar y deshacer ---------- */
@@ -628,6 +917,10 @@ function injectCSS() {
 .galsum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.galsum div{background:var(--sunk);border-radius:14px;padding:10px 12px}.galsum b{display:block;font-size:21px;font-variant-numeric:tabular-nums}.galsum span{font-size:12.5px;color:var(--muted)}
 .galedit{border:0;background:none;color:var(--muted);font-size:13px;padding:4px 0;text-decoration:underline;margin-top:2px}
 .galh{font-size:13.5px;color:var(--muted);font-weight:600;margin:18px 2px 0;text-transform:none}
+.galppl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 8px;margin-top:12px}
+.galp{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;min-width:0}
+.galface{width:72px;height:72px;border-radius:50%;overflow:hidden;background:var(--sunk);display:block}.galface img{width:100%;height:100%;object-fit:cover;display:block}
+.galp .m{font-size:12.5px;color:var(--muted)}.galp .galsel{max-width:100%;width:100%;height:36px;font-size:13px}
 .galname{margin-top:10px;display:flex;flex-direction:column;gap:8px}.galname .chips{margin-top:0}.galname .chip{height:34px;font-size:13.5px}
 .galbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.galbtns .sec,.galbtns .pri{height:38px;font-size:13.5px;padding:0 12px}
 .gth{align-items:center}.gth button{padding:0;border:0;background:none;border-radius:9px}.gth .gall{margin:0 0 0 4px}
@@ -680,7 +973,7 @@ function pickRow(op) {
   const q = one ? `¿Va a «${esc(lastSeg(to))}» esta foto ${esc(deL(op.day))}?` : `¿Cuáles de estas ${fotos(op.idx.length)} ${esc(deL(op.day))} van a «${esc(lastSeg(to))}»?`;
   const hint = one ? 'Tócala para verla en grande y márcala ✓ si va a este álbum.' : 'Toca una foto para verla en grande. Marca ✓ las que van a este álbum.';
   const state = sel || no ? [sel ? fmtN(sel) + (sel === 1 ? ' marcada' : ' marcadas') : '', no ? fmtN(no) + (no === 1 ? ' no es de aquí' : ' no son de aquí') : ''].filter(Boolean).join(', ') + '.' : (one ? 'Si no la marcas, se queda suelta.' : 'Las que no marques se quedan sueltas.');
-  return `<div class="galop galpick"><div class="tx"><span class="t">${q}</span><span class="m">${hint} ${state}</span>${nameHTML(op.album)}
+  return `<div class="galop galpick"><div class="tx"><span class="t">${q}</span><span class="m">${hint} ${state}</span>${op.album.kind === 'people' ? '' : nameHTML(op.album)}
 <div class="galgrid">${op.idx.map((i, j) => { const st = pickState(op, i), it = G.data.media[i]; return `<div class="galcell${st === -1 ? ' no' : ''}"><button class="galimg" data-gal="view" data-k="${esc(op.k)}" data-n="${j}" aria-label="Ver la foto en grande">${imgTag(it)}</button><button class="galmark" data-gal="mark" data-k="${esc(op.k)}" data-n="${j}" aria-pressed="${st === 1}" aria-label="Va a este álbum">${CHECK}</button>${st === -1 ? '<span class="nox">No</span>' : ''}${it.t === 3 ? '<span class="vidx">Vídeo</span>' : ''}</div>`; }).join('')}</div>
 ${one ? '' : `<div class="galbtns"><button class="sec" data-gal="pickall" data-k="${esc(op.k)}">Marcar todas</button><button class="sec" data-gal="picknone" data-k="${esc(op.k)}">Ninguna es de aquí</button></div>`}</div></div>`;
 }
@@ -742,16 +1035,20 @@ function opRow(op) {
   } else if (op.type === 'add') {
     const to = albumRel(G.plan, G.cfg, op.album, F);
     t = `Añadir ${fotos(op.idx.length)} a ${q(lastSeg(to))}`;
-    m = 'Desde ' + srcSummary(op.idx) + '.';
-    edit = true;
+    if (op.album.kind === 'people') m = (G.people && op.album.fk === G.people.pf.yoFk ? 'Fotos en las que sales tú sin nadie de tus otros álbumes. ' : 'Fotos del día a día en las que sale alguien de este álbum. ') + 'Desde ' + srcSummary(op.idx) + '.';
+    else m = 'Desde ' + srcSummary(op.idx) + '.';
+    edit = op.album.kind !== 'people';
   } else if (op.type === 'addday') {
     const to = albumRel(G.plan, G.cfg, op.album, F);
     t = `${op.idx.length === 1 ? 'Añadir la foto' : 'Añadir las ' + fotos(op.idx.length)} ${esc(deL(op.day))} a ${op.album.kind === 'new' && op.album.auto !== 'trash' ? 'un álbum nuevo, ' : ''}${q(lastSeg(to))}`;
     m = 'Desde ' + srcSummary(op.idx) + '.';
-    edit = true;
+    edit = op.album.kind !== 'people';
   } else {
     const al = op.album, L = al.link;
-    if (al.auto === 'trash') {
+    if (al.auto === 'revisar') {
+      t = `Llevar ${fotos(op.idx.length)} a ${q(al.finalName)}`;
+      m = 'Salen personas de álbumes distintos que no tienen un orden entre ellos (por ejemplo, de Amigos máster y de Familia). Ahí decides tú adónde va cada una.';
+    } else if (al.auto === 'trash') {
       t = `Llevar ${fotos(op.idx.length)} a ${q(al.finalName)}`;
       m = 'Capturas de pantalla que no son de ningún viaje. Ahí decides tú cuáles borrar desde la Galería.';
     } else {
@@ -779,9 +1076,10 @@ function masGaleria() {
     return h + `<section class="card"><h2>Un permiso antes de empezar</h2><p class="sub">Para mover fotos entre álbumes, Android pide que actives «Permitir acceso para gestionar todos los archivos» para Día a día. Se activa una vez.</p><div class="btnrow"><button class="pri" data-gal="perm">Abrir el permiso</button><button class="sec" data-gal="recheck">Ya lo he activado</button></div></section>`;
   }
   if (G.err) h += `<p class="err">${esc(G.err)}</p>`;
-  if (G.stage === 'scanning' || G.stage === 'gps' || G.stage === 'applying') {
+  if (G.stage === 'scanning' || G.stage === 'gps' || G.stage === 'applying' || G.stage === 'faces') {
     const pr = G.prog || { text: '', done: 0, total: 0 };
-    return h + `<section class="card"><p class="sub" id="gal-ptx">${esc(pr.text)}</p><span class="prog"><i id="gal-prog" style="width:${pr.total ? Math.round(100 * pr.done / pr.total) : 0}%"></i></span><p class="sub" style="margin-top:10px">No cierres la app hasta que termine.</p></section>`;
+    const faces = G.stage === 'faces';
+    return h + `<section class="card"><p class="sub" id="gal-ptx">${esc(pr.text)}</p><span class="prog"><i id="gal-prog" style="width:${pr.total ? Math.round(100 * pr.done / pr.total) : 0}%"></i></span><p class="sub" style="margin-top:10px">${faces ? 'Todo se hace dentro del móvil. Puedes parar cuando quieras: lo que ya ha mirado se guarda y la próxima vez sigue por donde iba.' : 'No cierres la app hasta que termine.'}</p>${faces ? `<div class="btnrow"><button class="sec" data-gal="faces-stop"${G.stopFaces ? ' disabled' : ''}>${G.stopFaces ? 'Parando…' : 'Parar'}</button></div>` : ''}</section>`;
   }
   if (G.stage === 'done' && G.result) {
     const r = G.result;
@@ -799,16 +1097,24 @@ function masGaleria() {
   const moves = computeMoves(pl, G.cfg, G.data);
   shownEditors.clear();
   const assigned = pl.assigned;
-  h += `<div class="galsum"><div><b>${fmtN(G.data.media.length)}</b><span>fotos y vídeos</span></div><div><b>${fmtN(pl.loose.length + pl.caps.length)}</b><span>sueltas en Cámara, WhatsApp, Descargas y Capturas</span></div><div><b>${fmtN(assigned)}</b><span>de esas ya tienen álbum propuesto</span></div><div><b>${fmtN(pl.unassigned.length)}</b><span>del día a día: irán a Familia, Amigas… cuando la app reconozca caras</span></div></div>`;
+  h += `<div class="galsum"><div><b>${fmtN(G.data.media.length)}</b><span>fotos y vídeos</span></div><div><b>${fmtN(pl.loose.length + pl.caps.length)}</b><span>sueltas en Cámara, WhatsApp, Descargas y Capturas</span></div><div><b>${fmtN(assigned)}</b><span>de esas ya tienen álbum propuesto</span></div><div><b>${fmtN(pl.unassigned.length)}</b><span>${G.people ? 'siguen sueltas: sin caras o con gente que no está en tus álbumes' : 'del día a día: para repartirlas, reconoce caras'}</span></div></div>`;
 
   const nuevas = [...F.values()].filter(f => cat(f.fk) === 'nueva');
   if (nuevas.length) {
     h += `<p class="galh">Carpetas que no conozco</p><section class="card" style="margin-top:8px"><p class="sub">No se tocan hasta que digas qué son.</p>${nuevas.map(folderRow).join('')}</section>`;
   }
+  if (!G.people && !G.cfg.facesOn) {
+    const n = pl.unassigned.filter(i => G.data.media[i].t === 1).length;
+    const min = Math.max(1, Math.round((n + 300) * 0.8 / 60));
+    h += `<p class="galh">Fotos del día a día</p><section class="card" style="margin-top:8px"><h2>Reconocer caras</h2><p class="sub">Para repartir ${fotos(n)} del día a día en Familia, +, Félix… la app aprende las caras de tus álbumes de personas y busca quién sale en cada foto.</p><p class="sub">Todo se hace dentro del móvil: no se sube ninguna foto. La primera vez descarga el reconocimiento (unos 12 MB) y tarda unos ${fmtN(min)} minutos, mejor con el móvil cargando. Las siguientes veces solo mira las fotos nuevas.</p><div class="btnrow"><button class="pri" data-gal="faces">Reconocer caras</button></div></section>`;
+  }
+  if (G.people) h += peopleHTML();
   const groupsOps = [
     ['Tus álbumes', pl.ops.filter(o => ['rename', 'split', 'merge', 'pmerge'].includes(o.type))],
-    ['Fotos sueltas a sus álbumes', pl.ops.filter(o => o.type === 'add')],
-    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new' && o.album.auto !== 'trash')],
+    ['Fotos sueltas a sus álbumes', pl.ops.filter(o => o.type === 'add' && o.album.kind !== 'people')],
+    ['Fotos a tus álbumes de personas', pl.ops.filter(o => o.type === 'add' && o.album.kind === 'people')],
+    ['Revisar', pl.ops.filter(o => o.type === 'new' && o.album.auto === 'revisar')],
+    ['Álbumes nuevos', pl.ops.filter(o => o.type === 'new' && o.album.auto !== 'trash' && o.album.auto !== 'revisar')],
     ['Para borrar', pl.ops.filter(o => o.type === 'new' && o.album.auto === 'trash')],
     ['Fotos sueltas, por días', pl.ops.filter(o => o.type === 'addday')],
     ['Fotos sueltas, una a una', pl.ops.filter(o => o.type === 'pick')]
@@ -825,7 +1131,23 @@ function masGaleria() {
 
   h += `<section class="card"><p class="sub">${moves.length ? `Con lo marcado se mueven ${fotos(moves.length)}. No se borra ninguna, y puedes deshacerlo después.` : 'No hay nada marcado.'}</p><p class="sub">Lo que dejes sin marcar no te lo vuelvo a proponer igual: las fotos sueltas te las propongo por días y, si tampoco, una a una.</p><div class="btnrow"><button class="pri" data-gal="apply" ${moves.length ? '' : 'disabled'}>Aplicar los cambios</button><button class="sec" data-gal="scan">Volver a analizar</button>${G.cfg.lastRun ? `<button class="sec" data-gal="undo">Deshacer la última vez</button>` : ''}</div>${G.confirm === 'apply' ? confirmHTML('apply', moves.length) : ''}${G.confirm === 'undo' ? confirmHTML('undo') : ''}</section>`;
   setTimeout(loadThumbs, 0);
+  setTimeout(loadCrops, 0);
   return h;
+}
+function faceImg(per) {
+  if (per.crop) return `<img alt="" src="${per.crop}">`;
+  return `<img alt="" data-galface="${esc(per.id)}">`;
+}
+function peopleHTML() {
+  const pf = G.people.pf;
+  const opts = [['yo', 'Soy yo']].concat(pf.list.filter(f => !pf.mergeTo[f.fk] && f.fk !== pf.yoFk).map(f => [f.fk, f.name]), [['no', 'No repartir']]);
+  const ps = G.people.persons.filter(x => x.n >= 3 || x.src === 'user').sort((a, b) => b.n - a.n);
+  if (!ps.length) return `<p class="galh">Quién es quién</p><section class="card" style="margin-top:8px"><p class="sub">No he encontrado caras que se repitan lo suficiente.</p></section>`;
+  const shown = G.showAllPeople ? ps : ps.slice(0, 18);
+  const order = pf.prio.map(fk => G.data.folders.get(fk).name).join(', ');
+  return `<p class="galh">Quién es quién</p><section class="card" style="margin-top:8px"><p class="sub">Las personas que más salen en tus fotos. Te sugiero su álbum según tus álbumes de personas; cámbialo si no acierto y la app lo recordará.${order ? ` Si en una foto salen personas de varios álbumes, manda este orden: ${esc(order)}. Si se mezclan otros, va a «Revisar».` : ''}</p>
+<div class="galppl">${shown.map(x => `<div class="galp"><span class="galface">${faceImg(x)}</span><span class="m">${fotos(x.n)}${x.src === 'user' ? '' : ', sugerido'}</span><select class="field galsel" data-galperson="${esc(x.id)}" aria-label="Álbum de esta persona">${opts.map(([v, l]) => `<option value="${esc(v)}"${v === x.album ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></div>`).join('')}</div>
+${ps.length > 18 ? `<div class="btnrow"><button class="sec" data-gal="ppl-all">${G.showAllPeople ? 'Ver menos' : 'Ver las ' + fmtN(ps.length) + ' personas'}</button></div>` : ''}</section>`;
 }
 function confirmHTML(kind, n) {
   if (kind === 'apply') return `<div class="galbtns" style="margin-top:12px"><span class="sub" style="width:100%;margin:0">¿Muevo ${fotos(n)} ahora?</span><button class="pri" data-gal="apply-yes">Sí, moverlas</button><button class="sec" data-gal="cancel">Cancelar</button></div>`;
@@ -1004,6 +1326,9 @@ async function onClick(ev) {
     for (const i of op.idx) { const st = pickState(op, i); if (act === 'pickall' && st !== -1) setPick(op, i, 1); if (act === 'picknone' && st !== 1) setPick(op, i, -1); }
     saveCfg(); rerender(); return;
   }
+  if (act === 'faces') { analyzeFaces(); return; }
+  if (act === 'faces-stop') { G.stopFaces = true; rerender(); return; }
+  if (act === 'ppl-all') { G.showAllPeople = !G.showAllPeople; rerender(); return; }
   if (act === 'restore') { G.confirm = 'restore'; rerender(); return; }
   if (act === 'restore-yes') { G.cfg.decl = {}; G.cfg.np = {}; G.cfg.off = {}; G.cfg.pick = {}; G.confirm = null; saveCfg(); replan(); rerender(); return; }
   if (act === 'op') { G.cfg.off[d.k] = !G.cfg.off[d.k]; if (!G.cfg.off[d.k]) delete G.cfg.off[d.k]; saveCfg(); rerender(); return; }
@@ -1058,6 +1383,13 @@ function onInput(ev) {
 }
 function onChange(ev) {
   const s = ev.target;
+  if (s && s.dataset && s.dataset.galperson && G.people) {
+    const id = s.dataset.galperson;
+    const st = (G.cfg.persons || []).find(x => x.id === id), per = G.people.persons.find(x => x.id === id);
+    if (st) { st.album = s.value; st.src = 'user'; }
+    if (per) { per.album = s.value; per.src = 'user'; }
+    saveCfg(); replan(); rerender(); return;
+  }
   if (!s || !s.dataset || !s.dataset.galcat) return;
   const f = G.data && G.data.folders.get(s.dataset.galcat);
   if (!f) return;
@@ -1076,5 +1408,5 @@ if (typeof document !== 'undefined' && document.addEventListener) {
 }
 
 W.masGaleria = masGaleria;
-W.GaleriaCore = { classifyFolder, mediaDay, prepare, buildPlan, computeMoves, albumRel, dnum, dstr };
+W.GaleriaCore = { classifyFolder, mediaDay, prepare, buildPlan, computeMoves, albumRel, dnum, dstr, encD, decD, fdist, clusterFaces, suggestPeople };
 })();
