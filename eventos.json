@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-26",
+ "updatedAt": "2026-10-27",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,18 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "taller-prensa-sin-edad-2026-10-19",
-   "title": "Taller Prensa sin edad",
-   "date": "2026-10-19",
-   "place": "Biblioteca municipal de Híjar",
-   "zona": "provincia",
-   "cat": "Charlas",
-   "desc": "Taller gratuito y participativo de la DPT y Periodistas de Aragón para aprender a identificar noticias falsas y bulos.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
-   "end": "2026-10-26"
   },
   {
    "id": "taller-prensa-sin-edad-2026-10-22",
@@ -62,6 +50,18 @@
    "time": "19:30"
   },
   {
+   "id": "presentacion-de-viaje-a-la-libertad-2026-10-28",
+   "title": "Presentación de 'Viaje a la libertad'",
+   "date": "2026-10-28",
+   "place": "Casino de Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Asunción Vicente Valls presenta su novela 'Viaje a la libertad', sobre Sophie de Marbois.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/entrevistas/asuncion-vicente-valls-escritora-quiza-con-las-humanidades-no-sea-facil-ganarse-la-vida-pero-ayudan-a-no-perdersela",
+   "time": "19:30"
+  },
+  {
    "id": "taller-prensa-sin-edad-2026-10-28",
    "title": "Taller Prensa sin edad",
    "date": "2026-10-28",
@@ -80,7 +80,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Espectáculo de danza organizado por Heraldo de Aragón. Acceso gratuito con invitación.",
+   "desc": "Espectáculo organizado por Heraldo Aragón. Entrada gratuita con invitación.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -102,10 +102,33 @@
    "date": "2026-10-29",
    "place": "Mazaleón",
    "zona": "provincia",
-   "cat": "Charlas",
-   "desc": "Jornada del proyecto para recopilar vivencias de los mayores y conectarlas con los jóvenes del municipio.",
+   "cat": "Otros",
+   "desc": "Proyecto para conectar las historias y vivencias de las personas mayores con los jóvenes de la localidad.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/mazaleon-acogera-el-29-de-octubre-el-proyecto-bibliotecas-humanas-para-conectar-las-historias-de-los-mayores-con-los-jovenes-del-municipio/"
+  },
+  {
+   "id": "fiesta-familiar-de-halloween-2026-10-30",
+   "title": "Fiesta familiar de Halloween",
+   "date": "2026-10-30",
+   "place": "Plaza del Torico, Teruel",
+   "zona": "ciudad",
+   "cat": "Fiestas",
+   "desc": "Celebración de Halloween organizada por el CCA con pintacaras, caramelos, cuentacuentos, exhibición de baile y desfile de disfraces.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/el-centro-comercial-abierto-celebrara-la-fiesta-familiar-de-halloween-este-este-viernes-30-de-octubre",
+   "time": "17:30"
+  },
+  {
+   "id": "tarde-de-halloween-y-tradicion-2026-10-30",
+   "title": "Tarde de Halloween y tradición",
+   "date": "2026-10-30",
+   "place": "Valderrobres",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Actividad de Halloween y tradición organizada por las Antenas Informativas del Matarraña.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/tarde-de-halloween-y-tradicion-organizada-por-las-antenas-informativas-del-matarrana-el-proximo-viernes-30-de-octubre-en-valderrobres/"
   },
   {
    "id": "fiesta-de-la-cerveza-2026-10-31",
@@ -114,7 +137,7 @@
    "place": "Torre de las Arcas",
    "zona": "provincia",
    "cat": "Fiestas",
-   "desc": "Celebración con cerveza, gastronomía y ambiente festivo en Torre de las Arcas.",
+   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo.",
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
@@ -142,6 +165,18 @@
    "source": "irdeocio.es",
    "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
    "time": "13:00"
+  },
+  {
+   "id": "el-ultimo-sueno-de-goya-2026-10-31",
+   "title": "El último sueño de Goya",
+   "date": "2026-10-31",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Obra escrita y dirigida por Olga Larrubia sobre los últimos momentos del pintor. Gratuita con previa inscripción en Fundación Ibercaja.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-ultimo-sueno-de-goya-de-olga-larrubia-llega-al-teatro-marin-de-teruel",
+   "time": "19:30"
   },
   {
    "id": "xxix-autoclassic-2026-10-31",
@@ -186,7 +221,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo que aborda en clave de comedia una nueva etapa de la vida. Entrada: 18 € (gastos de gestión incluidos).",
+   "desc": "La fiesta de bienvenida a una etapa inevitable de la vida. Entrada: 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -211,7 +246,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Espectáculo musical en el que Kala presenta a Metamorfosis, un grupo de pop lírico en crisis creativa. Entrada: 15 € más gastos de gestión.",
+   "desc": "Presentación de Metamorfosis, grupo de pop lírico en crisis creativa. Entradas a 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -257,7 +292,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Representación del clásico ballet de Tchaikovsky. Entradas entre 25 € y 38 € + gg.",
+   "desc": "Ballet clásico de Tchaikovsky interpretado por la International Ballet Company. Entradas desde 25 € a 38 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
@@ -293,9 +328,9 @@
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Paseo escénico y musical para toda la familia basado en 'Cuadros de una exposición' de Músorgski. Entrada: 6 € (gastos incluidos).",
+   "desc": "Espectáculo infantil a cargo de Caleidoscopio Teatro. Entrada: 6 €.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/promenade-caleidoscopio-teatro-2",
+   "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
   },
   {
@@ -384,7 +419,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta escénica inteligente y provocadora con un final totalmente inesperado. Entrada: 18 € (gastos de gestión incluidos).",
+   "desc": "Propuesta teatral de humor inteligente y desenlace sorprendente. Entrada: 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
