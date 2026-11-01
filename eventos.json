@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-31",
+ "updatedAt": "2026-11-01",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,66 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "fiesta-de-la-cerveza-2026-10-31",
-   "title": "Fiesta de la Cerveza",
-   "date": "2026-10-31",
-   "place": "Torre de las Arcas",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo desde las 13:00 horas.",
-   "source": "irdeocio.es",
-   "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
-   "time": "13:00"
-  },
-  {
-   "id": "fiesta-de-la-cerveza-de-torre-de-las-arcas-2026-10-31",
-   "title": "Fiesta de la Cerveza de Torre de las Arcas",
-   "date": "2026-10-31",
-   "place": "Torre de las Arcas",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Celebración con cerveza, gastronomía y ambiente festivo durante toda la jornada.",
-   "source": "irdeocio.es",
-   "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
-   "time": "13:00"
-  },
-  {
-   "id": "fiesta-de-la-cerveza-en-torre-de-las-arcas-2026-10-31",
-   "title": "Fiesta de la Cerveza en Torre de las Arcas",
-   "date": "2026-10-31",
-   "place": "Torre de las Arcas",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Celebración popular con cerveza, gastronomía y ambiente festivo en el municipio de Torre de las Arcas.",
-   "source": "irdeocio.es",
-   "url": "https://irdeocio.es/agenda-cultural-y-ocio-de-teruel.html",
-   "time": "13:00"
-  },
-  {
-   "id": "el-ultimo-sueno-de-goya-2026-10-31",
-   "title": "El último sueño de Goya",
-   "date": "2026-10-31",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Teatro",
-   "desc": "Espectáculo teatral. Actividad gratuita previa inscripción en fundacionibercaja.es.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:30"
-  },
-  {
-   "id": "jornada-de-rap-con-chocabeat-clara-gg-y-kruger-rap-2026-10-31",
-   "title": "Jornada de rap con Chocabeat, Clara GG y Kruger Rap",
-   "date": "2026-10-31",
-   "place": "Pub Lebowski, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Proyección del LP conceptual 'A fuego' de Chocabeat en formato vermut y conciertos nocturnos de Clara GG y Kruger Rap.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/jornada-para-el-rap-en-lebowski-con-chocabeats-clara-gg-y-kruger-rap",
-   "time": "22:00"
   },
   {
    "id": "xxix-autoclassic-2026-10-31",
@@ -146,6 +86,28 @@
    "time": "18:00"
   },
   {
+   "id": "jornada-taurina-con-cuatro-disciplinas-y-toro-embolado-2026-11-01",
+   "title": "Jornada taurina con cuatro disciplinas y toro embolado",
+   "date": "2026-11-01",
+   "place": "Plaza de Toros de Teruel",
+   "zona": "ciudad",
+   "cat": "Otros",
+   "desc": "Jornada taurina que combina cuatro disciplinas y toro embolado, organizada por la Asociación Taurina Turolense El Ruedo y el Ayuntamiento.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/la-plaza-de-toros-de-teruel-acoge-esta-tarde-una-nueva-jornada-taurina-con-cuatro-disciplinas-y-toro-embolado/"
+  },
+  {
+   "id": "expocalamocha-2026-11-01",
+   "title": "ExpoCalamocha",
+   "date": "2026-11-01",
+   "place": "Recinto ferial de Calamocha",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "43ª edición de la feria con 90 expositores agroalimentarios, maquinaria, artesanía y el I Concurso de Perros Pastores.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/comarcas/el-buen-tiempo-y-la-gran-oferta-comercial-llenan-expocalamocha-de-expositores-y-publico"
+  },
+  {
    "id": "taller-prensa-sin-edad-2026-11-04",
    "title": "Taller Prensa sin edad",
    "date": "2026-11-04",
@@ -159,12 +121,12 @@
   },
   {
    "id": "perimenoparty-2026-11-05",
-   "title": "PERIMENOPARTY",
+   "title": "Perimenoparty",
    "date": "2026-11-05",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Otros",
-   "desc": "Espectáculo que celebra la bienvenida a una etapa vital ineludible. Entrada: 18 € con gastos de gestión incluidos.",
+   "desc": "Espectáculo que da la bienvenida con tono festivo a una etapa natural e ineludible de la vida. Entrada: 18 € (gastos de gestión incluidos).",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -195,13 +157,37 @@
    "time": "19:00"
   },
   {
+   "id": "la-vida-que-no-esperabamos-con-patricia-ramirez-y-javier-vaz-2026-11-06",
+   "title": "'La vida que no esperábamos' con Patricia Ramírez y Javier Vázquez",
+   "date": "2026-11-06",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Encuentro del ciclo 'Seguimos Aquí' de Fundación Ibercaja para conversar sobre aspectos vitales de forma cercana. Gratuito con invitación.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "19:00"
+  },
+  {
+   "id": "recogida-de-basuraleza-del-proyecto-libera-2026-11-07",
+   "title": "Recogida de basuraleza del Proyecto Libera",
+   "date": "2026-11-07",
+   "place": "Plaza de España, Valderrobres",
+   "zona": "provincia",
+   "cat": "Otros",
+   "desc": "Ruta a pie de voluntariado ambiental para limpiar espacios naturales del Matarraña, con almuerzo final. Gratuita con inscripción previa.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/el-matarrana-se-suma-a-la-campana-de-recogida-de-basuraleza-en-noviembre",
+   "time": "10:00"
+  },
+  {
    "id": "kala-la-guru-del-pop-2026-11-07",
    "title": "Kala - La gurú del Pop",
    "date": "2026-11-07",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Kala presenta al grupo Metamorfosis en plena crisis creativa y personal. Precio: 15 € + gastos.",
+   "desc": "Espectáculo que presenta a Metamorfosis, un conjunto de pop lírico en pleno proceso de crisis artística. Entrada: 15 € + gg.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:30"
@@ -230,12 +216,12 @@
   },
   {
    "id": "concierto-de-pipo-moraleda-la-sed-2026-11-07",
-   "title": "Concierto de Pipo Moraleda: La sed",
+   "title": "Concierto de Pipo Moraleda: 'La sed'",
    "date": "2026-11-07",
    "place": "CSA l’Argilaga, Mazaleón",
    "zona": "provincia",
    "cat": "Música",
-   "desc": "Presentación del primer disco en solitario de Pipo Moraleda, fusionando rumba, música urbana y rap.",
+   "desc": "Presentación en directo de 'La sed', primer álbum en solitario del cantante murciano con fusión de rumba y música urbana.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/pipo-moraleda-presenta-la-sed-en-el-csa-largilaga-de-mazaleon"
   },
@@ -268,9 +254,9 @@
    "place": "MotorLand Aragón, Alcañiz",
    "zona": "provincia",
    "cat": "Deporte",
-   "desc": "Gran final decisiva del CERX Loterías en el circuito off-road. Acceso libre a grada natural y paddock.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/deportes/motorland-aragon-se-prepara-para-recibir-la-gran-final-del-campeonato-de-espana-de-rallycross",
+   "desc": "El circuito de MotorLand Aragón acoge la gran final de la temporada del Campeonato de España de Rallycross.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/motorland-aragon-se-prepara-para-recibir-la-gran-final-del-campeonato-de-espana-de-rallycross-cerx-los-dias-7-y-8-de-noviembr/",
    "end": "2026-11-08"
   },
   {
@@ -280,21 +266,21 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Espectáculo de jota aragonesa organizado por Heraldo de Aragón. Gratuito con invitación.",
+   "desc": "Espectáculo de jota aragonesa impulsado por Heraldo de Aragón. Acceso gratuito mediante invitación.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
   },
   {
    "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
-   "title": "El lago de los cisnes - International Ballet Company",
+   "title": "El Lago de los Cisnes - International Ballet Company",
    "date": "2026-11-12",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Danza",
-   "desc": "Ballet clásico de Chaikovski a cargo de la International Ballet Company con solistas internacionales. Entradas de 25 € a 38 € más gastos.",
+   "desc": "Representación de la célebre obra clásica de ballet de Tchaikovsky. Entradas desde 25 € hasta 38 € + gg.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/international-ballet-company-lago-de-los-cisnes",
+   "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
   },
   {
@@ -335,12 +321,12 @@
   },
   {
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
-   "title": "Promenade. Caleidoscopio Teatro",
+   "title": "Promenade - Caleidoscopio Teatro",
    "date": "2026-11-14",
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de Caleidoscopio Teatro. Entrada: 6 € gastos incluidos.",
+   "desc": "Espectáculo escénico para público infantil presentado por Caleidoscopio Teatro en San Julián. Entrada: 6 € con gastos de gestión incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -364,7 +350,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Recital clásico de la Orquesta y Camerata Santa Cecilia de Teruel. Entrada gratuita con invitación previa.",
+   "desc": "Concierto conjunto de la orquesta y camerata de la Escuela de Música turolense. Entrada gratuita con invitación previa.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -422,10 +408,21 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Fiestas",
-   "desc": "Recreaciones modernistas y actos dedicados a la arquitectura local y al centenario de Antoni Gaudí.",
+   "desc": "Edición dedicada a la arquitectura modernista de Teruel y a conmemorar el centenario del fallecimiento de Antoni Gaudí.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
    "end": "2026-11-22"
+  },
+  {
+   "id": "gala-de-las-placas-al-merito-turistico-de-aragon-2026-2026-11-17",
+   "title": "Gala de las Placas al Mérito Turístico de Aragón 2026",
+   "date": "2026-11-17",
+   "place": "Castillo de Mora de Rubielos",
+   "zona": "provincia",
+   "cat": "Otros",
+   "desc": "Ceremonia institucional de entrega de las Placas al Mérito Turístico de Aragón correspondientes a la edición 2026.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/el-castillo-de-mora-de-rubielos-acogera-el-17-de-noviembre-la-gala-de-entrega-de-las-placas-al-merito-turistico-de-aragon-2026/"
   },
   {
    "id": "concierto-quique-gonzalez-toni-brunet-2026-11-18",
@@ -435,6 +432,18 @@
    "zona": "ciudad",
    "cat": "Música",
    "desc": "Gira del nuevo álbum '1973', galardonado en los Premios de la Música Independiente. Entradas de 14 € a 18 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "19:00"
+  },
+  {
+   "id": "concierto-de-quique-gonzalez-toni-brunet-2026-11-18",
+   "title": "Concierto de Quique González & Toni Brunet",
+   "date": "2026-11-18",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Gira del nuevo álbum '1973', galardonado en los Premios de la Música Independiente. Entrada: entre 14,00 € y 18,00 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -479,7 +488,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Comedia inteligente, provocadora y con final sorprendente. Entrada: 18 € gastos de gestión incluidos.",
+   "desc": "Propuesta teatral de humor inteligente, provocador y con desenlace imprevisible. Entrada: 18 € (gastos de gestión incluidos).",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -554,13 +563,25 @@
    "url": "https://www.diariodeteruel.es/teruel/abierto-el-plazo-para-inscribirse-en-la-vi-carrera-contra-la-violencia-de-genero"
   },
   {
+   "id": "i-congreso-internacional-semilla-tejer-la-tierra-2026-11-24",
+   "title": "I Congreso Internacional Semilla. Tejer la tierra",
+   "date": "2026-11-24",
+   "place": "Campus de Teruel (Facultad de Ciencias Sociales y Humanas)",
+   "zona": "ciudad",
+   "cat": "Congresos",
+   "desc": "Congreso en formato híbrido centrado en la investigación sobre mujeres rurales, saberes tradicionales y ruralidades.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/teruel/teruel-sera-la-sede-del-i-congreso-internacional-de-saber-y-ruralidad-a-celebrar-en-el-campus",
+   "end": "2026-11-25"
+  },
+  {
    "id": "congreso-del-bienestar-y-el-amor-2026-11-27",
    "title": "Congreso del Bienestar y el Amor",
    "date": "2026-11-27",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Congresos",
-   "desc": "Tres jornadas dedicadas a reflexionar y debatir sobre las relaciones, el afecto y el amor.",
+   "desc": "Tres jornadas de reflexión, diálogo y debate sobre el amor, las relaciones y los afectos en el mundo contemporáneo.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "end": "2026-11-29",
