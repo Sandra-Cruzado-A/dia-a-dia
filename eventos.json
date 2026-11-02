@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-01",
+ "updatedAt": "2026-11-02",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -48,64 +48,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/comarcas/expocalamocha-suspende-la-inauguracion-pero-mantiene-el-resto-de-su-programacion",
    "end": "2026-11-02"
-  },
-  {
-   "id": "homenaje-a-pepe-vicente-lapuente-y-jornada-taurina-2026-11-01",
-   "title": "Homenaje a Pepe Vicente Lapuente y jornada taurina",
-   "date": "2026-11-01",
-   "place": "Plaza de Toros de Teruel",
-   "zona": "ciudad",
-   "cat": "Fiestas",
-   "desc": "Reconocimiento a Pepe Vicente Lapuente, exhibición de Pedro Domínguez y toro embolado organizado por El Ruedo.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/la-plaza-de-toros-de-teruel-rendira-homenaje-a-pepe-vicente-lapuente-el-proximo-1-de-noviembre",
-   "time": "16:15"
-  },
-  {
-   "id": "festival-de-animas-en-singra-2026-11-01",
-   "title": "Festival de Ánimas en Singra",
-   "date": "2026-11-01",
-   "place": "Pabellón municipal y calles de Singra",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Pasacalles mágico con Pepín Banzo y Helena Perdomo a las 19:00 h, seguido de fiesta con la discomóvil Scream a las 21:00 h.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/singra-trasciende-de-la-fiesta-de-halloween-y-celebrara-el-festival-de-animas-con-musica-y-fuego",
-   "time": "18:00"
-  },
-  {
-   "id": "festival-de-animas-2026-11-01",
-   "title": "Festival de Ánimas",
-   "date": "2026-11-01",
-   "place": "Pabellón municipal y calles de Singra",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Pasacalles mágico con Pepín Banzo y Helena Perdomo a las 19:00 h, y discomóvil Scream a las 21:00 h.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/singra-trasciende-de-la-fiesta-de-halloween-y-celebrara-el-festival-de-animas-con-musica-y-fuego",
-   "time": "18:00"
-  },
-  {
-   "id": "jornada-taurina-con-cuatro-disciplinas-y-toro-embolado-2026-11-01",
-   "title": "Jornada taurina con cuatro disciplinas y toro embolado",
-   "date": "2026-11-01",
-   "place": "Plaza de Toros de Teruel",
-   "zona": "ciudad",
-   "cat": "Otros",
-   "desc": "Jornada taurina que combina cuatro disciplinas y toro embolado, organizada por la Asociación Taurina Turolense El Ruedo y el Ayuntamiento.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/la-plaza-de-toros-de-teruel-acoge-esta-tarde-una-nueva-jornada-taurina-con-cuatro-disciplinas-y-toro-embolado/"
-  },
-  {
-   "id": "expocalamocha-2026-11-01",
-   "title": "ExpoCalamocha",
-   "date": "2026-11-01",
-   "place": "Recinto ferial de Calamocha",
-   "zona": "provincia",
-   "cat": "Ferias",
-   "desc": "43ª edición de la feria con 90 expositores agroalimentarios, maquinaria, artesanía y el I Concurso de Perros Pastores.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/el-buen-tiempo-y-la-gran-oferta-comercial-llenan-expocalamocha-de-expositores-y-publico"
   },
   {
    "id": "taller-prensa-sin-edad-2026-11-04",
