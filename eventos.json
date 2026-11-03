@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-02",
+ "updatedAt": "2026-11-03",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,42 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "xxix-autoclassic-2026-10-31",
-   "title": "XXIX AutoClassic",
-   "date": "2026-10-31",
-   "place": "Recinto ferial, Alcañiz",
-   "zona": "provincia",
-   "cat": "Ferias",
-   "desc": "Feria del Vehículo Clásico con exposición comercial, venta de recambios, vehículos históricos y coleccionismo.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/autoclassic-adelanta-su-celebracion-y-llegara-a-alcaniz-el-31-de-octubre",
-   "end": "2026-11-02"
-  },
-  {
-   "id": "autoclassic-alcaniz-2026-10-31",
-   "title": "AutoClassic Alcañiz",
-   "date": "2026-10-31",
-   "place": "Alcañiz",
-   "zona": "provincia",
-   "cat": "Ferias",
-   "desc": "Feria de vehículos clásicos con más de 80 expositores, piezas de colección y homenajes al Renault 4/4 y a Ignacio Sáez.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/autoclassic-reunira-a-mas-de-80-expositores-en-alcaniz-en-el-puente-de-todos-los-santos",
-   "end": "2026-11-02"
-  },
-  {
-   "id": "expocalamocha-2026-10-31",
-   "title": "ExpoCalamocha",
-   "date": "2026-10-31",
-   "place": "Recinto Ferial de Calamocha",
-   "zona": "provincia",
-   "cat": "Ferias",
-   "desc": "Feria generalista con 90 expositores en 7.000 m², maquinaria agrícola, comercios y atracciones infantiles.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/expocalamocha-suspende-la-inauguracion-pero-mantiene-el-resto-de-su-programacion",
-   "end": "2026-11-02"
   },
   {
    "id": "taller-prensa-sin-edad-2026-11-04",
