@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-05",
+ "updatedAt": "2026-11-06",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,30 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "taller-prensa-sin-edad-2026-11-04",
-   "title": "Taller Prensa sin edad",
-   "date": "2026-11-04",
-   "place": "Biblioteca municipal de Muniesa",
-   "zona": "provincia",
-   "cat": "Charlas",
-   "desc": "Taller abierto al público financiado por la DPT para aprender a discernir noticias veraces de bulos.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/los-talleres-de-la-dpt-y-periodistas-de-aragon-sobre-desinformacion-y-bulos-ya-estan-programados-en-las-diez-comarcas",
-   "end": "2026-11-05"
-  },
-  {
-   "id": "perimenoparty-2026-11-05",
-   "title": "Perimenoparty",
-   "date": "2026-11-05",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Otros",
-   "desc": "Espectáculo que da la bienvenida con tono festivo a una etapa natural e ineludible de la vida. Entrada: 18 € (gastos de gestión incluidos).",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:30"
   },
   {
    "id": "lakuerter-ibera-2026-11-06",
