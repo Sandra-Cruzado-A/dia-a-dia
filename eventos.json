@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-06",
+ "updatedAt": "2026-11-07",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -25,30 +25,6 @@
    "url": "https://www.diariodeteruel.es/bajoaragon/la-fundacion-bodas-de-isabel-pregonera-de-la-xviii-edicion-de-lakuerter-ibera-de-andorra",
    "end": "2026-11-08",
    "time": "18:00"
-  },
-  {
-   "id": "la-vida-que-no-esperabamos-2026-11-06",
-   "title": "La vida que no esperábamos",
-   "date": "2026-11-06",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Ciclo 'Seguimos Aquí' de Fundación Ibercaja con Patricia Ramírez y Javier Vázquez. Gratuito con invitación.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
-  },
-  {
-   "id": "la-vida-que-no-esperabamos-con-patricia-ramirez-y-javier-vaz-2026-11-06",
-   "title": "'La vida que no esperábamos' con Patricia Ramírez y Javier Vázquez",
-   "date": "2026-11-06",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Encuentro del ciclo 'Seguimos Aquí' de Fundación Ibercaja para conversar sobre aspectos vitales de forma cercana. Gratuito con invitación.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
   },
   {
    "id": "recogida-de-basuraleza-del-proyecto-libera-2026-11-07",
