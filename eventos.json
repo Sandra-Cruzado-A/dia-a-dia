@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-07",
+ "updatedAt": "2026-11-08",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -25,85 +25,6 @@
    "url": "https://www.diariodeteruel.es/bajoaragon/la-fundacion-bodas-de-isabel-pregonera-de-la-xviii-edicion-de-lakuerter-ibera-de-andorra",
    "end": "2026-11-08",
    "time": "18:00"
-  },
-  {
-   "id": "recogida-de-basuraleza-del-proyecto-libera-2026-11-07",
-   "title": "Recogida de basuraleza del Proyecto Libera",
-   "date": "2026-11-07",
-   "place": "Plaza de España, Valderrobres",
-   "zona": "provincia",
-   "cat": "Otros",
-   "desc": "Ruta a pie de voluntariado ambiental para limpiar espacios naturales del Matarraña, con almuerzo final. Gratuita con inscripción previa.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/el-matarrana-se-suma-a-la-campana-de-recogida-de-basuraleza-en-noviembre",
-   "time": "10:00"
-  },
-  {
-   "id": "kala-la-guru-del-pop-2026-11-07",
-   "title": "Kala - La gurú del Pop",
-   "date": "2026-11-07",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Espectáculo que presenta a Metamorfosis, un conjunto de pop lírico en pleno proceso de crisis artística. Entrada: 15 € + gg.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "18:30"
-  },
-  {
-   "id": "media-maraton-caja-rural-de-teruel-2026-11-07",
-   "title": "Media Maratón Caja Rural de Teruel",
-   "date": "2026-11-07",
-   "place": "Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Prueba atlética abierta al público con tres distancias que recorre el patrimonio mudéjar de la ciudad.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/la-media-maraton-caja-rural-de-teruel-recorrera-el-arte-mudejar-el-proximo-7-de-noviembre-con-tres-distancias/"
-  },
-  {
-   "id": "ii-trail-argente-2026-11-07",
-   "title": "II Trail Argente",
-   "date": "2026-11-07",
-   "place": "Argente",
-   "zona": "provincia",
-   "cat": "Deporte",
-   "desc": "Prueba deportiva por montaña con trail largo (22 km), trail corto (13 km), marcha senderista (12 km), comida popular y tardeo.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/deportes/argente-ultima-preparativos-para-la-segunda-edicion-de-su-carrera-por-montana"
-  },
-  {
-   "id": "concierto-de-pipo-moraleda-la-sed-2026-11-07",
-   "title": "Concierto de Pipo Moraleda: 'La sed'",
-   "date": "2026-11-07",
-   "place": "CSA l’Argilaga, Mazaleón",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "Presentación en directo de 'La sed', primer álbum en solitario del cantante murciano con fusión de rumba y música urbana.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/pipo-moraleda-presenta-la-sed-en-el-csa-largilaga-de-mazaleon"
-  },
-  {
-   "id": "pipo-moraleda-presenta-la-sed-2026-11-07",
-   "title": "Pipo Moraleda presenta 'La sed'",
-   "date": "2026-11-07",
-   "place": "CSA l’Argilaga, Mazaleón",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "Concierto de presentación del primer disco en solitario de Pipo Moraleda, aunando rumba, rap y música urbana.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/pipo-moraleda-presenta-la-sed-en-el-csa-largilaga-de-mazaleon"
-  },
-  {
-   "id": "campana-de-apoyo-a-la-recogida-de-basuraleza-2026-11-07",
-   "title": "Campaña de apoyo a la recogida de basuraleza",
-   "date": "2026-11-07",
-   "place": "Comarca del Matarraña",
-   "zona": "provincia",
-   "cat": "Otros",
-   "desc": "Jornada ambiental organizada por las Antenas Informativas del Matarraña.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/"
   },
   {
    "id": "final-del-campeonato-de-espana-de-rallycross-cerx-2026-11-07",
