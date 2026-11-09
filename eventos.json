@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-08",
+ "updatedAt": "2026-11-09",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,31 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "lakuerter-ibera-2026-11-06",
-   "title": "Lakuerter Íbera",
-   "date": "2026-11-06",
-   "place": "Andorra",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "XVIII edición de la fiesta de recreación histórica, con pregón inaugural a cargo de la Fundación Bodas de Isabel.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/la-fundacion-bodas-de-isabel-pregonera-de-la-xviii-edicion-de-lakuerter-ibera-de-andorra",
-   "end": "2026-11-08",
-   "time": "18:00"
-  },
-  {
-   "id": "final-del-campeonato-de-espana-de-rallycross-cerx-2026-11-07",
-   "title": "Final del Campeonato de España de Rallycross (CERX)",
-   "date": "2026-11-07",
-   "place": "MotorLand Aragón, Alcañiz",
-   "zona": "provincia",
-   "cat": "Deporte",
-   "desc": "El circuito de MotorLand Aragón acoge la gran final de la temporada del Campeonato de España de Rallycross.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/motorland-aragon-se-prepara-para-recibir-la-gran-final-del-campeonato-de-espana-de-rallycross-cerx-los-dias-7-y-8-de-noviembr/",
-   "end": "2026-11-08"
   },
   {
    "id": "aragon-tierra-de-jota-2026-11-09",
