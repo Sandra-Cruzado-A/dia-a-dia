@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09",
+ "updatedAt": "2026-11-10",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,18 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "aragon-tierra-de-jota-2026-11-09",
-   "title": "Aragón - Tierra de Jota",
-   "date": "2026-11-09",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Danza",
-   "desc": "Espectáculo de jota aragonesa impulsado por Heraldo de Aragón. Acceso gratuito mediante invitación.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
   },
   {
    "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
