@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-12",
+ "updatedAt": "2026-11-13",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -12,42 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
    "end": "2026-11-15"
-  },
-  {
-   "id": "el-lago-de-los-cisnes-international-ballet-company-2026-11-12",
-   "title": "El Lago de los Cisnes - International Ballet Company",
-   "date": "2026-11-12",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Danza",
-   "desc": "Representación de la célebre obra clásica de ballet de Tchaikovsky. Entradas desde 25 € hasta 38 € + gg.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:00"
-  },
-  {
-   "id": "lago-de-los-cisnes-international-ballet-company-2026-11-12",
-   "title": "Lago de los Cisnes - International Ballet Company",
-   "date": "2026-11-12",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Danza",
-   "desc": "Ballet clásico de Chaikovski interpretado por solistas internacionales. Entradas entre 25 € y 38 € + gastos de gestión.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/international-ballet-company-lago-de-los-cisnes",
-   "time": "20:00"
-  },
-  {
-   "id": "el-lago-de-los-cisnes-2026-11-12",
-   "title": "El Lago de los Cisnes",
-   "date": "2026-11-12",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Danza",
-   "desc": "Ballet clásico de Tchaikovsky interpretado por la International Ballet Company. Entradas desde 25 € hasta 38 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:00"
   },
   {
    "id": "ii-congreso-aragon-justicia-y-empresa-2026-11-12",
