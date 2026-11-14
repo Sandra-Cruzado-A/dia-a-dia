@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13",
+ "updatedAt": "2026-11-14",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -14,16 +14,17 @@
    "end": "2026-11-15"
   },
   {
-   "id": "ii-congreso-aragon-justicia-y-empresa-2026-11-12",
-   "title": "II Congreso Aragón, Justicia y Empresa",
-   "date": "2026-11-12",
-   "place": "Teruel",
-   "zona": "ciudad",
-   "cat": "Congresos",
-   "desc": "Segunda edición del congreso con la participación de ponentes como Albert Rivera.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/albert-rivera-estara-en-el-ii-congreso-aragon-justicia-y-empresa-de-teruel/",
-   "end": "2026-11-13"
+   "id": "31-feria-de-productos-y-servicios-del-medio-rural-de-aguaviv-2026-11-14",
+   "title": "31ª Feria de Productos y Servicios del Medio Rural de Aguaviva",
+   "date": "2026-11-14",
+   "place": "Pabellón polideportivo y Cooperativa San Lorenzo, Aguaviva",
+   "zona": "provincia",
+   "cat": "Ferias",
+   "desc": "Feria con exhibición de trashumancia con 70 jinetes, 50 lotes de ganado, expositores de alimentación, artesanía y puestos ambulantes.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/bajoaragon/aguaviva-recupera-la-ganaderia-y-exalta-la-trashumancia-con-70-jinetes-en-la-feria",
+   "end": "2026-11-15",
+   "time": "11:00"
   },
   {
    "id": "promenade-caleidoscopio-teatro-2026-11-14",
@@ -32,7 +33,7 @@
    "place": "Auditorio de San Julián, Teruel",
    "zona": "ciudad",
    "cat": "Infantil",
-   "desc": "Espectáculo escénico para público infantil presentado por Caleidoscopio Teatro en San Julián. Entrada: 6 € con gastos de gestión incluidos.",
+   "desc": "Espectáculo infantil a cargo de la compañía Caleidoscopio Teatro. Entrada: 6 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "18:00"
@@ -56,7 +57,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Concierto conjunto de la orquesta y camerata de la Escuela de Música turolense. Entrada gratuita con invitación previa.",
+   "desc": "Concierto conjunto en homenaje a la patrona de la música bajo la dirección de Alberto Navas. Gratuito con invitación.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -72,6 +73,18 @@
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
+  },
+  {
+   "id": "donde-esta-alicia-marea-danza-2026-11-14",
+   "title": "¿Dónde está Alicia? - Marea Danza",
+   "date": "2026-11-14",
+   "place": "Teatro Municipal de Alcañiz",
+   "zona": "provincia",
+   "cat": "Danza",
+   "desc": "Adaptación contemporánea de Alicia a través del flamenco y la danza, dentro del ciclo Escenas de Otoño. Entradas: 12 €.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-pais-de-las-maravillas-transformado-en-una-trampa-esclavizadora",
+   "time": "20:30"
   },
   {
    "id": "concierto-en-honor-de-santa-cecilia-2026-11-14",
@@ -94,6 +107,53 @@
    "desc": "Jornada del Centro de Estudios del Jiloca con desayuno solidario, excursión por la ribera del Cantalera, demostración de escamonda y exposiciones.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/comarcas/la-hoz-de-la-vieja-sera-la-sede-el-14-de-noviembre-la-xvi-fiesta-del-chopo-cabecero-del-cej"
+  },
+  {
+   "id": "dia-universal-del-orgullo-rural-en-martin-del-rio-2026-11-14",
+   "title": "Día Universal del Orgullo Rural en Martín del Río",
+   "date": "2026-11-14",
+   "place": "Martín del Río",
+   "zona": "provincia",
+   "cat": "Fiestas",
+   "desc": "Jornada festiva y reivindicativa en celebración del Día Universal del Orgullo Rural.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/martin-del-rio-acoge-la-celebracion-del-dia-universal-del-orgullo-rural-el-proximo-14-de-noviembre/"
+  },
+  {
+   "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
+   "title": "Exposición 'Flors i Paisatges' de Montse Boix",
+   "date": "2026-11-14",
+   "place": "La Fábrica de Solfa, Beceite",
+   "zona": "provincia",
+   "cat": "Arte",
+   "desc": "Muestra de acuarelas de flores y paisajes de la artista beceitana Montse Boix.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/entrevistas/montse-boix-pintora-de-beceite-la-acuarela-es-como-la-vida-tu-lo-planificas-todo-pero-el-agua-a-veces-decide-por-su-cuenta",
+   "end": "2027-01-03"
+  },
+  {
+   "id": "ix-festival-titirimora-jornada-inaugural-2026-11-15",
+   "title": "IX Festival Titirimora - Jornada inaugural",
+   "date": "2026-11-15",
+   "place": "Cine Teatro de Mora, Mora de Rubielos",
+   "zona": "provincia",
+   "cat": "Teatro",
+   "desc": "Taller de Teatro Terapéutico (10:00 h), danza con 'S.O.L.E.S.' (13:00 h) y teatro familiar con 'Basura de calidad' (17:30 h).",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-festival-titirimora-convocara-un-encuentro-entre-agentes-culturales-en-el-mundo-rural",
+   "time": "10:00"
+  },
+  {
+   "id": "misa-cantada-del-coro-de-santa-cecilia-2026-11-15",
+   "title": "Misa cantada del Coro de Santa Cecilia",
+   "date": "2026-11-15",
+   "place": "Catedral de Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Misa cantada ofrecida por el Coro de Santa Cecilia en honor a su patrona.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-sinfonica-y-la-camerata-santa-cecilia-celebran-su-patrona-con-un-concierto",
+   "time": "12:00"
   },
   {
    "id": "escape-room-familiar-lo-que-nunca-te-han-contado-2026-11-15",
@@ -131,13 +191,25 @@
    "url": "https://ecodeteruel.tv/el-castillo-de-mora-de-rubielos-acogera-el-17-de-noviembre-la-gala-de-entrega-de-las-placas-al-merito-turistico-de-aragon-2026/"
   },
   {
+   "id": "fiesta-de-santa-cecilia-en-la-escuela-de-musica-2026-11-18",
+   "title": "Fiesta de Santa Cecilia en la Escuela de Música",
+   "date": "2026-11-18",
+   "place": "Escuela de Música y Plaza de Mansuetos, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Actuación de alumnos a las 16:30 h y posterior chocolatada popular a las 17:30 h con música tradicional.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-sinfonica-y-la-camerata-santa-cecilia-celebran-su-patrona-con-un-concierto",
+   "time": "16:30"
+  },
+  {
    "id": "concierto-quique-gonzalez-toni-brunet-2026-11-18",
    "title": "Concierto Quique González & Toni Brunet",
    "date": "2026-11-18",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Gira del nuevo álbum '1973', galardonado en los Premios de la Música Independiente. Entradas de 14 € a 18 €.",
+   "desc": "Presentación acústica del nuevo álbum '1973' dentro del ciclo 19 a las 19 de la Fundación Amantes. Entradas: 14 € - 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "19:00"
@@ -194,7 +266,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Propuesta teatral de humor inteligente, provocador y con desenlace imprevisible. Entrada: 18 € (gastos de gestión incluidos).",
+   "desc": "Montaje teatral de humor inteligente, provocador y con final inesperado. Entrada: 18 € con gastos incluidos.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -209,6 +281,18 @@
    "desc": "Proyección gratuita de la ópera de Puccini dentro del programa El Real en Pantalla, previa inscripción en la Fundación Ibercaja.",
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/cultura/el-teatro-real-regresa-a-la-gran-pantalla-en-teruel-con-la-traviata-de-verdi"
+  },
+  {
+   "id": "festival-titirimora-entremimbres-y-encuentro-tecnico-2026-11-21",
+   "title": "Festival Titirimora: 'Entremimbres' y encuentro técnico",
+   "date": "2026-11-21",
+   "place": "Teatro de Mora de Rubielos, Mora de Rubielos",
+   "zona": "provincia",
+   "cat": "Teatro",
+   "desc": "Encuentro de agentes culturales rurales y representación del espectáculo familiar itinerante 'Entremimbres' de Proyecto Caravana.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/el-festival-titirimora-convocara-un-encuentro-entre-agentes-culturales-en-el-mundo-rural",
+   "time": "13:00"
   },
   {
    "id": "concierto-de-hevia-y-la-banda-santa-cecilia-2026-11-21",
@@ -287,7 +371,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Congresos",
-   "desc": "Tres jornadas de reflexión, diálogo y debate sobre el amor, las relaciones y los afectos en el mundo contemporáneo.",
+   "desc": "Tres jornadas de reflexión, debate y ponencias en torno al amor y las relaciones en el mundo actual.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "end": "2026-11-29",
@@ -304,6 +388,29 @@
    "source": "festivalesdeespana.com",
    "url": "https://www.festivalesdeespana.com/festival/congreso-del-bienestar-y-el-amor-cadena-ser-teruel",
    "end": "2026-11-30"
+  },
+  {
+   "id": "xxi-carrera-solidaria-por-la-discapacidad-2026-12-13",
+   "title": "XXI Carrera Solidaria por la Discapacidad",
+   "date": "2026-12-13",
+   "place": "Teruel",
+   "zona": "ciudad",
+   "cat": "Deporte",
+   "desc": "Celebración de la vigesimoprimera edición de la carrera popular solidaria por la discapacidad en Teruel capital.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/la-xxi-carrera-solidaria-por-la-discapacidad-se-celebrara-el-13-de-diciembre-en-teruel/"
+  },
+  {
+   "id": "edu-soto-mas-vale-solo-que-ciento-volando-revolution-2027-01-09",
+   "title": "Edu Soto - Más vale solo que ciento volando Revolution",
+   "date": "2027-01-09",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Teatro",
+   "desc": "Show de humor e improvisación a cargo de Edu Soto. Entradas: 20 € + GG en giglon.com.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "20:00"
   }
  ]
 }
