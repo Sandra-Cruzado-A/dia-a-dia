@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-14",
+ "updatedAt": "2026-11-15",
  "eventos": [
   {
    "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
@@ -25,99 +25,6 @@
    "url": "https://www.diariodeteruel.es/bajoaragon/aguaviva-recupera-la-ganaderia-y-exalta-la-trashumancia-con-70-jinetes-en-la-feria",
    "end": "2026-11-15",
    "time": "11:00"
-  },
-  {
-   "id": "promenade-caleidoscopio-teatro-2026-11-14",
-   "title": "Promenade - Caleidoscopio Teatro",
-   "date": "2026-11-14",
-   "place": "Auditorio de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Infantil",
-   "desc": "Espectáculo infantil a cargo de la compañía Caleidoscopio Teatro. Entrada: 6 € con gastos incluidos.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "18:00"
-  },
-  {
-   "id": "promenade-2026-11-14",
-   "title": "Promenade",
-   "date": "2026-11-14",
-   "place": "Auditorio de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Infantil",
-   "desc": "Propuesta escénica para público familiar a cargo de Caleidoscopio Teatro. Entrada: 6 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "18:00"
-  },
-  {
-   "id": "concierto-orquesta-y-camerata-santa-cecilia-de-teruel-2026-11-14",
-   "title": "Concierto Orquesta y Camerata Santa Cecilia de Teruel",
-   "date": "2026-11-14",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto conjunto en homenaje a la patrona de la música bajo la dirección de Alberto Navas. Gratuito con invitación.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
-  },
-  {
-   "id": "concierto-orquesta-camerata-santa-cecilia-de-teruel-2026-11-14",
-   "title": "Concierto Orquesta & Camerata Santa Cecilia de Teruel",
-   "date": "2026-11-14",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto de música clásica. Gratuito con invitación a recoger en la Escuela de Música.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
-  },
-  {
-   "id": "donde-esta-alicia-marea-danza-2026-11-14",
-   "title": "¿Dónde está Alicia? - Marea Danza",
-   "date": "2026-11-14",
-   "place": "Teatro Municipal de Alcañiz",
-   "zona": "provincia",
-   "cat": "Danza",
-   "desc": "Adaptación contemporánea de Alicia a través del flamenco y la danza, dentro del ciclo Escenas de Otoño. Entradas: 12 €.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-pais-de-las-maravillas-transformado-en-una-trampa-esclavizadora",
-   "time": "20:30"
-  },
-  {
-   "id": "concierto-en-honor-de-santa-cecilia-2026-11-14",
-   "title": "Concierto en honor de Santa Cecilia",
-   "date": "2026-11-14",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto con la Orquesta Sinfónica y la Camerata Santa Cecilia dirigidas por Alberto Navas. Entrada gratuita con invitación.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
-  },
-  {
-   "id": "xvi-fiesta-del-chopo-cabecero-2026-11-14",
-   "title": "XVI Fiesta del Chopo Cabecero",
-   "date": "2026-11-14",
-   "place": "Plaza Mayor y parajes de La Hoz de la Vieja",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Jornada del Centro de Estudios del Jiloca con desayuno solidario, excursión por la ribera del Cantalera, demostración de escamonda y exposiciones.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/comarcas/la-hoz-de-la-vieja-sera-la-sede-el-14-de-noviembre-la-xvi-fiesta-del-chopo-cabecero-del-cej"
-  },
-  {
-   "id": "dia-universal-del-orgullo-rural-en-martin-del-rio-2026-11-14",
-   "title": "Día Universal del Orgullo Rural en Martín del Río",
-   "date": "2026-11-14",
-   "place": "Martín del Río",
-   "zona": "provincia",
-   "cat": "Fiestas",
-   "desc": "Jornada festiva y reivindicativa en celebración del Día Universal del Orgullo Rural.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/martin-del-rio-acoge-la-celebracion-del-dia-universal-del-orgullo-rural-el-proximo-14-de-noviembre/"
   },
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -168,6 +75,31 @@
    "time": "17:00"
   },
   {
+   "id": "conciertos-de-santa-cecilia-en-alcaniz-2026-11-16",
+   "title": "Conciertos de Santa Cecilia en Alcañiz",
+   "date": "2026-11-16",
+   "place": "Vestíbulo del Liceo, Alcañiz",
+   "zona": "provincia",
+   "cat": "Música",
+   "desc": "Cuatro conciertos gratuitos de 15 minutos ofrecidos por alumnado y profesorado de la Escuela de Música con repertorio de los años 30 y Manuel de Falla.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-escuela-de-musica-de-alcaniz-celebra-santa-cecilia-con-musica",
+   "end": "2026-11-19",
+   "time": "17:30"
+  },
+  {
+   "id": "exposicion-de-dibujos-sobre-la-musica-de-los-anos-30-2026-11-16",
+   "title": "Exposición de dibujos sobre la música de los años 30",
+   "date": "2026-11-16",
+   "place": "Vestíbulo de la sede del Liceo, Alcañiz",
+   "zona": "provincia",
+   "cat": "Arte",
+   "desc": "Muestra de dibujos realizados por alumnos de la Escuela Municipal de Música y Danza de Alcañiz dedicados a la música de los años 30.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/la-escuela-de-musica-de-alcaniz-celebra-santa-cecilia-con-musica",
+   "end": "2026-11-22"
+  },
+  {
    "id": "xv-semana-modernista-de-teruel-2026-11-17",
    "title": "XV Semana Modernista de Teruel",
    "date": "2026-11-17",
@@ -209,9 +141,9 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Presentación acústica del nuevo álbum '1973' dentro del ciclo 19 a las 19 de la Fundación Amantes. Entradas: 14 € - 18 €.",
+   "desc": "Presentación en acústico de su álbum «1973» junto al guitarrista Toni Brunet dentro del ciclo '19 a las 19'. Entradas de 14 € a 18 €.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
+   "url": "https://teatromarin.es/eventos/concierto-quique-gonzalez-toni-brunet",
    "time": "19:00"
   },
   {
@@ -260,13 +192,25 @@
    "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
   },
   {
+   "id": "charla-sobre-el-arquitecto-antonio-rubio-2026-11-19",
+   "title": "Charla sobre el arquitecto Antonio Rubio",
+   "date": "2026-11-19",
+   "place": "Sala noble del Casino del Círculo de Recreo Turolense, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Conferencia a cargo del historiador Jorge Rodríguez García enmarcada dentro de las actividades de la Semana Modernista.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/entrevistas/jorge-rodriguez-garcia-investigador-predoctoral-teruel-se-convirtio-en-un-modelo-a-seguir-para-la-arquitectura-regionalista-de-antonio-rubio",
+   "time": "20:00"
+  },
+  {
    "id": "locuras-paralelas-2026-11-19",
    "title": "Locuras Paralelas",
    "date": "2026-11-19",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Montaje teatral de humor inteligente, provocador y con final inesperado. Entrada: 18 € con gastos incluidos.",
+   "desc": "Espectáculo de humor provocador y sorprendente con desenlace inesperado. Entradas por 18 € (gastos de gestión incluidos).",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -371,9 +315,9 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Congresos",
-   "desc": "Tres jornadas de reflexión, debate y ponencias en torno al amor y las relaciones en el mundo actual.",
+   "desc": "Tres jornadas de debate sobre el amor y las relaciones con invitados como Fernandisco, Loles León, Gonzalo Miró, Pedro Casablanc y Dani Mateo.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
+   "url": "https://teatromarin.es/eventos/congreso-del-bienestar-y-el-amor",
    "end": "2026-11-29",
    "time": "20:00"
   },
@@ -396,7 +340,7 @@
    "place": "Teruel",
    "zona": "ciudad",
    "cat": "Deporte",
-   "desc": "Celebración de la vigesimoprimera edición de la carrera popular solidaria por la discapacidad en Teruel capital.",
+   "desc": "Vigésimo primera edición de la carrera popular y solidaria por la discapacidad celebrada en la capital turolense.",
    "source": "Eco de Teruel",
    "url": "https://ecodeteruel.tv/la-xxi-carrera-solidaria-por-la-discapacidad-se-celebrara-el-13-de-diciembre-en-teruel/"
   },
@@ -407,7 +351,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Show de humor e improvisación a cargo de Edu Soto. Entradas: 20 € + GG en giglon.com.",
+   "desc": "Espectáculo de comedia e improvisación protagonizado por Edu Soto. Entradas a 20 € más gastos de gestión.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
