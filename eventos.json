@@ -1,31 +1,6 @@
 {
- "updatedAt": "2026-11-15",
+ "updatedAt": "2026-11-16",
  "eventos": [
-  {
-   "id": "exposicion-apuntes-estudios-y-bocetos-de-salvador-gisbert-2026-10-10",
-   "title": "Exposición 'Apuntes, estudios y bocetos' de Salvador Gisbert",
-   "date": "2026-10-10",
-   "place": "Museo de Teruel, Teruel",
-   "zona": "ciudad",
-   "cat": "Arte",
-   "desc": "Muestra del cuaderno con cerca de 300 dibujos de Salvador Gisbert y el proceso de restauración de la obra.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-museo-de-teruel-muestra-en-una-exposicion-la-historia-que-esconde-un-cuaderno-de-salvador-gisbert",
-   "end": "2026-11-15"
-  },
-  {
-   "id": "31-feria-de-productos-y-servicios-del-medio-rural-de-aguaviv-2026-11-14",
-   "title": "31ª Feria de Productos y Servicios del Medio Rural de Aguaviva",
-   "date": "2026-11-14",
-   "place": "Pabellón polideportivo y Cooperativa San Lorenzo, Aguaviva",
-   "zona": "provincia",
-   "cat": "Ferias",
-   "desc": "Feria con exhibición de trashumancia con 70 jinetes, 50 lotes de ganado, expositores de alimentación, artesanía y puestos ambulantes.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/bajoaragon/aguaviva-recupera-la-ganaderia-y-exalta-la-trashumancia-con-70-jinetes-en-la-feria",
-   "end": "2026-11-15",
-   "time": "11:00"
-  },
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
    "title": "Exposición 'Flors i Paisatges' de Montse Boix",
@@ -37,42 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/montse-boix-pintora-de-beceite-la-acuarela-es-como-la-vida-tu-lo-planificas-todo-pero-el-agua-a-veces-decide-por-su-cuenta",
    "end": "2027-01-03"
-  },
-  {
-   "id": "ix-festival-titirimora-jornada-inaugural-2026-11-15",
-   "title": "IX Festival Titirimora - Jornada inaugural",
-   "date": "2026-11-15",
-   "place": "Cine Teatro de Mora, Mora de Rubielos",
-   "zona": "provincia",
-   "cat": "Teatro",
-   "desc": "Taller de Teatro Terapéutico (10:00 h), danza con 'S.O.L.E.S.' (13:00 h) y teatro familiar con 'Basura de calidad' (17:30 h).",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-festival-titirimora-convocara-un-encuentro-entre-agentes-culturales-en-el-mundo-rural",
-   "time": "10:00"
-  },
-  {
-   "id": "misa-cantada-del-coro-de-santa-cecilia-2026-11-15",
-   "title": "Misa cantada del Coro de Santa Cecilia",
-   "date": "2026-11-15",
-   "place": "Catedral de Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Misa cantada ofrecida por el Coro de Santa Cecilia en honor a su patrona.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/la-sinfonica-y-la-camerata-santa-cecilia-celebran-su-patrona-con-un-concierto",
-   "time": "12:00"
-  },
-  {
-   "id": "escape-room-familiar-lo-que-nunca-te-han-contado-2026-11-15",
-   "title": "Escape Room familiar: Lo que nunca te han contado",
-   "date": "2026-11-15",
-   "place": "Mausoleo de los Amantes, Teruel",
-   "zona": "ciudad",
-   "cat": "Infantil",
-   "desc": "Actividad de escape room para familias organizada por la iniciativa Educamante de la Fundación Amantes de Teruel.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/",
-   "time": "17:00"
   },
   {
    "id": "conciertos-de-santa-cecilia-en-alcaniz-2026-11-16",
@@ -165,9 +104,10 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Música",
-   "desc": "Concierto en formato de dúo acústico para presentar el disco «1973» y repasar grandes temas de su carrera musical.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
+   "desc": "Quique González presenta en directo su nuevo disco «1973» junto a Toni Brunet. Entradas de 14 € a 18 €.",
+   "source": "Teatro Marín",
+   "url": "https://teatromarin.es/programacion/",
+   "time": "19:00"
   },
   {
    "id": "quique-gonzalez-y-toni-brunet-2026-11-18",
@@ -204,13 +144,25 @@
    "time": "20:00"
   },
   {
+   "id": "charla-sobre-antonio-rubio-por-jorge-rodriguez-garcia-2026-11-19",
+   "title": "Charla sobre Antonio Rubio por Jorge Rodríguez García",
+   "date": "2026-11-19",
+   "place": "Sala noble del Casino del Círculo de Recreo Turolense, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Conferencia sobre el arquitecto Antonio Rubio y su influencia en Teruel, dentro de los actos de la Semana Modernista.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/entrevistas/jorge-rodriguez-garcia-investigador-predoctoral-teruel-se-convirtio-en-un-modelo-a-seguir-para-la-arquitectura-regionalista-de-antonio-rubio",
+   "time": "20:00"
+  },
+  {
    "id": "locuras-paralelas-2026-11-19",
    "title": "Locuras Paralelas",
    "date": "2026-11-19",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Espectáculo de humor provocador y sorprendente con desenlace inesperado. Entradas por 18 € (gastos de gestión incluidos).",
+   "desc": "Espectáculo de humor inteligente y sorprendente con un final inesperado. Entradas por 18 €.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:30"
@@ -309,15 +261,37 @@
    "end": "2026-11-25"
   },
   {
+   "id": "concierto-50-aniversario-del-conservatorio-de-teruel-2026-11-25",
+   "title": "Concierto 50 aniversario del Conservatorio de Teruel",
+   "date": "2026-11-25",
+   "place": "Teatro Marín, Teruel",
+   "zona": "ciudad",
+   "cat": "Música",
+   "desc": "Concierto solidario en honor a Santa Cecilia con motivo del 50 aniversario del Conservatorio Profesional de Música de Teruel.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/el-conservatorio-de-teruel-celebra-su-50-aniversario-con-un-concierto-solidario-en-el-teatro-marin/"
+  },
+  {
+   "id": "presentacion-de-la-revista-turia-con-sergio-del-molino-2026-11-25",
+   "title": "Presentación de la revista Turia con Sergio del Molino",
+   "date": "2026-11-25",
+   "place": "Salón de actos de la Delegación Territorial del Gobierno de Aragón, Teruel",
+   "zona": "ciudad",
+   "cat": "Charlas",
+   "desc": "Presentación del monográfico dedicado al español con una entrevista al escritor y periodista Sergio del Molino.",
+   "source": "Diario de Teruel",
+   "url": "https://www.diariodeteruel.es/cultura/soledad-puertolas-protagoniza-el-19-de-noviembre-la-presentacion-de-la-revista-turia-en-logrono"
+  },
+  {
    "id": "congreso-del-bienestar-y-el-amor-2026-11-27",
    "title": "Congreso del Bienestar y el Amor",
    "date": "2026-11-27",
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Congresos",
-   "desc": "Tres jornadas de debate sobre el amor y las relaciones con invitados como Fernandisco, Loles León, Gonzalo Miró, Pedro Casablanc y Dani Mateo.",
+   "desc": "Duodécima edición bajo el lema 'Amor y deseo', con ponencias, debates y actuaciones de Fernandisco y Sole Giménez.",
    "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/congreso-del-bienestar-y-el-amor",
+   "url": "https://teatromarin.es/programacion/",
    "end": "2026-11-29",
    "time": "20:00"
   },
@@ -332,6 +306,17 @@
    "source": "festivalesdeespana.com",
    "url": "https://www.festivalesdeespana.com/festival/congreso-del-bienestar-y-el-amor-cadena-ser-teruel",
    "end": "2026-11-30"
+  },
+  {
+   "id": "encendido-de-las-luces-de-navidad-2026-12-03",
+   "title": "Encendido de las luces de Navidad",
+   "date": "2026-12-03",
+   "place": "Teruel",
+   "zona": "ciudad",
+   "cat": "Fiestas",
+   "desc": "Acto de encendido de la iluminación navideña de Teruel con chocolatada popular y villancicos escolares.",
+   "source": "Eco de Teruel",
+   "url": "https://ecodeteruel.tv/teruel-encendera-sus-luces-de-navidad-el-3-de-diciembre-con-una-chocolatada-y-villancicos-escolares/"
   },
   {
    "id": "xxi-carrera-solidaria-por-la-discapacidad-2026-12-13",
@@ -351,7 +336,7 @@
    "place": "Teatro Marín, Teruel",
    "zona": "ciudad",
    "cat": "Teatro",
-   "desc": "Espectáculo de comedia e improvisación protagonizado por Edu Soto. Entradas a 20 € más gastos de gestión.",
+   "desc": "Espectáculo de humor improvisado protagonizado por Edu Soto. Entradas por 20 € + GG.",
    "source": "Teatro Marín",
    "url": "https://teatromarin.es/programacion/",
    "time": "20:00"
