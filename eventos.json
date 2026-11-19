@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-18",
+ "updatedAt": "2026-11-19",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -49,76 +49,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
    "end": "2026-11-22"
-  },
-  {
-   "id": "fiesta-de-santa-cecilia-en-la-escuela-de-musica-2026-11-18",
-   "title": "Fiesta de Santa Cecilia en la Escuela de Música",
-   "date": "2026-11-18",
-   "place": "Escuela de Música y Plaza de Mansuetos, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Actuación de alumnos a las 16:30 h y posterior chocolatada popular a las 17:30 h con música tradicional.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/la-sinfonica-y-la-camerata-santa-cecilia-celebran-su-patrona-con-un-concierto",
-   "time": "16:30"
-  },
-  {
-   "id": "concierto-quique-gonzalez-toni-brunet-2026-11-18",
-   "title": "Concierto Quique González & Toni Brunet",
-   "date": "2026-11-18",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Presentación en acústico de su álbum «1973» junto al guitarrista Toni Brunet dentro del ciclo '19 a las 19'. Entradas de 14 € a 18 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/eventos/concierto-quique-gonzalez-toni-brunet",
-   "time": "19:00"
-  },
-  {
-   "id": "concierto-de-quique-gonzalez-toni-brunet-2026-11-18",
-   "title": "Concierto de Quique González & Toni Brunet",
-   "date": "2026-11-18",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Gira del nuevo álbum '1973', galardonado en los Premios de la Música Independiente. Entrada: entre 14,00 € y 18,00 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
-  },
-  {
-   "id": "concierto-de-quique-gonzalez-y-toni-brunet-2026-11-18",
-   "title": "Concierto de Quique González y Toni Brunet",
-   "date": "2026-11-18",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Quique González presenta en directo su nuevo disco «1973» junto a Toni Brunet. Entradas de 14 € a 18 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "19:00"
-  },
-  {
-   "id": "quique-gonzalez-y-toni-brunet-2026-11-18",
-   "title": "Quique González y Toni Brunet",
-   "date": "2026-11-18",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto en formato de dúo acústico para presentar el disco '1973' y repasar grandes éxitos.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
-  },
-  {
-   "id": "quique-gonzalez-y-toni-brunet-en-concierto-2026-11-18",
-   "title": "Quique González y Toni Brunet en concierto",
-   "date": "2026-11-18",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto en formato de dúo acústico donde presentan su disco «1973» y repasan temas de su trayectoria.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/quique-gonzalez-y-toni-brunet-actuaran-en-teruel-el-proximo-18-de-noviembre-para-presentar-su-aclamado-disco-1973/"
   },
   {
    "id": "charla-sobre-el-arquitecto-antonio-rubio-2026-11-19",
