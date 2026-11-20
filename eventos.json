@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19",
+ "updatedAt": "2026-11-20",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -12,19 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/montse-boix-pintora-de-beceite-la-acuarela-es-como-la-vida-tu-lo-planificas-todo-pero-el-agua-a-veces-decide-por-su-cuenta",
    "end": "2027-01-03"
-  },
-  {
-   "id": "conciertos-de-santa-cecilia-en-alcaniz-2026-11-16",
-   "title": "Conciertos de Santa Cecilia en Alcañiz",
-   "date": "2026-11-16",
-   "place": "Vestíbulo del Liceo, Alcañiz",
-   "zona": "provincia",
-   "cat": "Música",
-   "desc": "Cuatro conciertos gratuitos de 15 minutos ofrecidos por alumnado y profesorado de la Escuela de Música con repertorio de los años 30 y Manuel de Falla.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/la-escuela-de-musica-de-alcaniz-celebra-santa-cecilia-con-musica",
-   "end": "2026-11-19",
-   "time": "17:30"
   },
   {
    "id": "exposicion-de-dibujos-sobre-la-musica-de-los-anos-30-2026-11-16",
@@ -49,42 +36,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
    "end": "2026-11-22"
-  },
-  {
-   "id": "charla-sobre-el-arquitecto-antonio-rubio-2026-11-19",
-   "title": "Charla sobre el arquitecto Antonio Rubio",
-   "date": "2026-11-19",
-   "place": "Sala noble del Casino del Círculo de Recreo Turolense, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Conferencia a cargo del historiador Jorge Rodríguez García enmarcada dentro de las actividades de la Semana Modernista.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/entrevistas/jorge-rodriguez-garcia-investigador-predoctoral-teruel-se-convirtio-en-un-modelo-a-seguir-para-la-arquitectura-regionalista-de-antonio-rubio",
-   "time": "20:00"
-  },
-  {
-   "id": "charla-sobre-antonio-rubio-por-jorge-rodriguez-garcia-2026-11-19",
-   "title": "Charla sobre Antonio Rubio por Jorge Rodríguez García",
-   "date": "2026-11-19",
-   "place": "Sala noble del Casino del Círculo de Recreo Turolense, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Conferencia sobre el arquitecto Antonio Rubio y su influencia en Teruel, dentro de los actos de la Semana Modernista.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/entrevistas/jorge-rodriguez-garcia-investigador-predoctoral-teruel-se-convirtio-en-un-modelo-a-seguir-para-la-arquitectura-regionalista-de-antonio-rubio",
-   "time": "20:00"
-  },
-  {
-   "id": "locuras-paralelas-2026-11-19",
-   "title": "Locuras Paralelas",
-   "date": "2026-11-19",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Teatro",
-   "desc": "Espectáculo de humor inteligente y sorprendente con un final inesperado. Entradas por 18 €.",
-   "source": "Teatro Marín",
-   "url": "https://teatromarin.es/programacion/",
-   "time": "20:30"
   },
   {
    "id": "proyeccion-de-la-opera-turandot-2026-11-20",
