@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-20",
+ "updatedAt": "2026-11-21",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -36,17 +36,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
    "end": "2026-11-22"
-  },
-  {
-   "id": "proyeccion-de-la-opera-turandot-2026-11-20",
-   "title": "Proyección de la ópera Turandot",
-   "date": "2026-11-20",
-   "place": "Auditorio de San Julián, Teruel",
-   "zona": "ciudad",
-   "cat": "Cine",
-   "desc": "Proyección gratuita de la ópera de Puccini dentro del programa El Real en Pantalla, previa inscripción en la Fundación Ibercaja.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-teatro-real-regresa-a-la-gran-pantalla-en-teruel-con-la-traviata-de-verdi"
   },
   {
    "id": "festival-titirimora-entremimbres-y-encuentro-tecnico-2026-11-21",
