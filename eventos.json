@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-21",
+ "updatedAt": "2026-11-22",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -36,53 +36,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
    "end": "2026-11-22"
-  },
-  {
-   "id": "festival-titirimora-entremimbres-y-encuentro-tecnico-2026-11-21",
-   "title": "Festival Titirimora: 'Entremimbres' y encuentro técnico",
-   "date": "2026-11-21",
-   "place": "Teatro de Mora de Rubielos, Mora de Rubielos",
-   "zona": "provincia",
-   "cat": "Teatro",
-   "desc": "Encuentro de agentes culturales rurales y representación del espectáculo familiar itinerante 'Entremimbres' de Proyecto Caravana.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-festival-titirimora-convocara-un-encuentro-entre-agentes-culturales-en-el-mundo-rural",
-   "time": "13:00"
-  },
-  {
-   "id": "concierto-de-hevia-y-la-banda-santa-cecilia-2026-11-21",
-   "title": "Concierto de Hevia y la Banda Santa Cecilia",
-   "date": "2026-11-21",
-   "place": "Palacio de Exposiciones y Congresos, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto único del gaitero Hevia junto a 140 músicos de la Banda Santa Cecilia por el 25 aniversario del disco 'Tierra de nadie'.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/hevia-y-140-musicos-de-la-banda-santa-cecilia-ofreceran-en-teruel-un-concierto-unico-coincidiendo-con-el-25-aniversario-del-exito-internacional-de-tierra-de-nadie",
-   "time": "19:00"
-  },
-  {
-   "id": "hevia-y-la-banda-santa-cecilia-de-teruel-2026-11-21",
-   "title": "Hevia y la Banda Santa Cecilia de Teruel",
-   "date": "2026-11-21",
-   "place": "Palacio de Exposiciones y Congresos, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Estreno de un espectáculo inédito con 145 músicos turolenses y la banda de Hevia. Entradas desde 6 euros.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/hevia-estrenara-un-espectaculo-inedito-junto-a-la-banda-de-santa-cecilia-de-teruel",
-   "time": "19:00"
-  },
-  {
-   "id": "concierto-de-hevia-y-la-banda-de-musica-santa-cecilia-2026-11-21",
-   "title": "Concierto de Hevia y la Banda de Música Santa Cecilia",
-   "date": "2026-11-21",
-   "place": "Palacio de Exposiciones y Congresos, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto conjunto del gaitero Hevia y la Banda Santa Cecilia con motivo del 25 aniversario del Platinum Europe Award.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/el-otono-cultural-de-teruel-reunira-por-primera-vez-a-hevia-y-la-banda-santa-cecilia"
   },
   {
    "id": "vii-carrera-contra-la-violencia-de-genero-2026-11-22",
