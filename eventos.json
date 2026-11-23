@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-22",
+ "updatedAt": "2026-11-23",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -12,53 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/montse-boix-pintora-de-beceite-la-acuarela-es-como-la-vida-tu-lo-planificas-todo-pero-el-agua-a-veces-decide-por-su-cuenta",
    "end": "2027-01-03"
-  },
-  {
-   "id": "exposicion-de-dibujos-sobre-la-musica-de-los-anos-30-2026-11-16",
-   "title": "Exposición de dibujos sobre la música de los años 30",
-   "date": "2026-11-16",
-   "place": "Vestíbulo de la sede del Liceo, Alcañiz",
-   "zona": "provincia",
-   "cat": "Arte",
-   "desc": "Muestra de dibujos realizados por alumnos de la Escuela Municipal de Música y Danza de Alcañiz dedicados a la música de los años 30.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/la-escuela-de-musica-de-alcaniz-celebra-santa-cecilia-con-musica",
-   "end": "2026-11-22"
-  },
-  {
-   "id": "xv-semana-modernista-de-teruel-2026-11-17",
-   "title": "XV Semana Modernista de Teruel",
-   "date": "2026-11-17",
-   "place": "Teruel",
-   "zona": "ciudad",
-   "cat": "Fiestas",
-   "desc": "Edición dedicada a la arquitectura modernista de Teruel y a conmemorar el centenario del fallecimiento de Antoni Gaudí.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/la-ilustracion-belleza-en-cada-rincon-imagen-de-la-xv-semana-modernista",
-   "end": "2026-11-22"
-  },
-  {
-   "id": "vii-carrera-contra-la-violencia-de-genero-2026-11-22",
-   "title": "VII Carrera Contra la Violencia de Género",
-   "date": "2026-11-22",
-   "place": "Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Séptima edición de la carrera deportiva solidaria en Teruel contra la violencia de género.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/teruel-celebrara-la-vii-carrera-contra-la-violencia-de-genero-el-22-de-noviembre/",
-   "time": "12:00"
-  },
-  {
-   "id": "carrera-contra-la-violencia-de-genero-2026-11-22",
-   "title": "Carrera Contra la Violencia de Género",
-   "date": "2026-11-22",
-   "place": "Plaza del Torico, Teruel",
-   "zona": "ciudad",
-   "cat": "Deporte",
-   "desc": "Carrera solidaria y no competitiva de 2,5K y 5K convocada por la Coordinadora Feminista. Inscripción a 6 euros.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/abierto-el-plazo-para-inscribirse-en-la-vi-carrera-contra-la-violencia-de-genero"
   },
   {
    "id": "i-congreso-internacional-semilla-tejer-la-tierra-2026-11-24",
