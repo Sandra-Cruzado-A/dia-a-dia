@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25",
+ "updatedAt": "2026-11-26",
  "eventos": [
   {
    "id": "exposicion-flors-i-paisatges-de-montse-boix-2026-11-14",
@@ -12,40 +12,6 @@
    "source": "Diario de Teruel",
    "url": "https://www.diariodeteruel.es/entrevistas/montse-boix-pintora-de-beceite-la-acuarela-es-como-la-vida-tu-lo-planificas-todo-pero-el-agua-a-veces-decide-por-su-cuenta",
    "end": "2027-01-03"
-  },
-  {
-   "id": "i-congreso-internacional-semilla-tejer-la-tierra-2026-11-24",
-   "title": "I Congreso Internacional Semilla. Tejer la tierra",
-   "date": "2026-11-24",
-   "place": "Campus de Teruel (Facultad de Ciencias Sociales y Humanas)",
-   "zona": "ciudad",
-   "cat": "Congresos",
-   "desc": "Congreso en formato híbrido centrado en la investigación sobre mujeres rurales, saberes tradicionales y ruralidades.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/teruel/teruel-sera-la-sede-del-i-congreso-internacional-de-saber-y-ruralidad-a-celebrar-en-el-campus",
-   "end": "2026-11-25"
-  },
-  {
-   "id": "concierto-50-aniversario-del-conservatorio-de-teruel-2026-11-25",
-   "title": "Concierto 50 aniversario del Conservatorio de Teruel",
-   "date": "2026-11-25",
-   "place": "Teatro Marín, Teruel",
-   "zona": "ciudad",
-   "cat": "Música",
-   "desc": "Concierto solidario en honor a Santa Cecilia con motivo del 50 aniversario del Conservatorio Profesional de Música de Teruel.",
-   "source": "Eco de Teruel",
-   "url": "https://ecodeteruel.tv/el-conservatorio-de-teruel-celebra-su-50-aniversario-con-un-concierto-solidario-en-el-teatro-marin/"
-  },
-  {
-   "id": "presentacion-de-la-revista-turia-con-sergio-del-molino-2026-11-25",
-   "title": "Presentación de la revista Turia con Sergio del Molino",
-   "date": "2026-11-25",
-   "place": "Salón de actos de la Delegación Territorial del Gobierno de Aragón, Teruel",
-   "zona": "ciudad",
-   "cat": "Charlas",
-   "desc": "Presentación del monográfico dedicado al español con una entrevista al escritor y periodista Sergio del Molino.",
-   "source": "Diario de Teruel",
-   "url": "https://www.diariodeteruel.es/cultura/soledad-puertolas-protagoniza-el-19-de-noviembre-la-presentacion-de-la-revista-turia-en-logrono"
   },
   {
    "id": "congreso-del-bienestar-y-el-amor-2026-11-27",
